@@ -1,6 +1,8 @@
 import Foundation
 import SwiftUI
 import Contacts
+import ViewComponents
+import Interfaces
 
 public struct ContactsListView: View {
     @ObservedObject public var viewModel: ContactsListViewModel

@@ -20,7 +20,11 @@ let package = Package(
             branch: "master"
         ),
         .package(
-            url: "https://github.com/leviouwendijk/plate.git",
+            url: "https://github.com/leviouwendijk/ViewComponents.git",
+            branch: "master"
+        ),
+        .package(
+            url: "https://github.com/leviouwendijk/Interfaces.git",
             branch: "master"
         ),
     ],
@@ -30,14 +34,21 @@ let package = Package(
         .target(
             name: "Compositions",
             dependencies: [
-                .product(name: "plate", package: "plate")
+                .product(name: "plate", package: "plate"),
+                .product(name: "ViewComponents", package: "ViewComponents"),
+                .product(name: "Interfaces", package: "Interfaces"),
+            ],
+            resources: [
+                .process("Resources")
             ]
         ),
         .testTarget(
             name: "CompositionsTests",
             dependencies: [
                 "Compositions",
-                .product(name: "plate", package: "plate")
+                .product(name: "plate", package: "plate"),
+                .product(name: "ViewComponents", package: "ViewComponents"),
+                .product(name: "Interfaces", package: "Interfaces"),
             ]
         ),
     ]

@@ -1,4 +1,6 @@
 import SwiftUI
+import ViewComponents
+import Interfaces
 
 public struct MailerAPIPathSelectionView: View {
     @ObservedObject public var viewModel: MailerAPISelectionViewModel

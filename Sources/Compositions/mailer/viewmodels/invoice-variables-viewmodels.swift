@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import Interfaces
 
 @MainActor
 public class MailerAPIInvoiceVariablesViewModel: ObservableObject {

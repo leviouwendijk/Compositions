@@ -1,6 +1,8 @@
 import Foundation
 import SwiftUI
 import Combine
+import ViewComponents
+import Interfaces
 
 public struct MailerAPIInvoiceVariablesView: View {
     @ObservedObject public var viewModel: MailerAPIInvoiceVariablesViewModel

@@ -1,5 +1,7 @@
 import SwiftUI
 import Combine
+import ViewComponents
+import Interfaces
 
 /// A reusable weekly schedule view that binds to a shared ViewModel
 public struct WeeklyScheduleView: View {

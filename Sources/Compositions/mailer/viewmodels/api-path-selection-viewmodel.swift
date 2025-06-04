@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import Interfaces
 
 public class MailerAPISelectionViewModel: ObservableObject {
     @Published public var selectedRoute: MailerAPIRoute? {
