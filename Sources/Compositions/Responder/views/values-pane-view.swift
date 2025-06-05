@@ -287,7 +287,7 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                     else if let quota = quotaVm.loadedQuota {
                         QuotaTierListView(quota: quota)
                             .padding(.top, 12)
-                            .padding(.bottom, 12)
+                            .padding(.bottom, 16)
 
                         QuotaTierActionsView(quota: quota, clientIdentifier: clientIdentifier)
                     }
