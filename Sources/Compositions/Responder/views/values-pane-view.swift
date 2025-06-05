@@ -455,6 +455,8 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                                 quota: quota,
                                 clientIdentifier: clientIdentifier
                             )
+
+                            Spacer()
                         }
 
                     }
