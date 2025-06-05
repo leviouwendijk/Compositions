@@ -288,173 +288,175 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                         QuotaTierListView(quota: quota)
                             .padding(.top, 16)
 
-                        HStack(alignment: .center, spacing: 45) {
-                            // Spacer()
+                        VStack {
+                            HStack(alignment: .center, spacing: 45) {
+                                Spacer()
+
+                                VStack {
+                                    StandardButton(
+                                        type: .execute,
+                                        title: "Render Local",
+                                        action: {
+                                            do {
+                                                withAnimation {
+                                                    localPdfNotifier.show = false
+                                                }
+
+                                                try renderTier(quota: quota, for: .local)
+
+                                                localPdfNotifier.message = "quota pdf rendered"
+                                                localPdfNotifier.style = .success
+                                                withAnimation {
+                                                    localPdfNotifier.show = true
+                                                }
+
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                                    withAnimation { 
+                                                        localPdfNotifier.show = false
+                                                    }
+                                                }
+                                            } catch {
+                                                withAnimation {
+                                                    localPdfNotifier.show = false
+                                                }
+
+                                                localPdfNotifier.message = "render failed: \(error)"
+                                                localPdfNotifier.style = .error
+                                                withAnimation {
+                                                    localPdfNotifier.show = true
+                                                }
+
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                                    withAnimation { 
+                                                        localPdfNotifier.show = false 
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    )
+                                    .disabled((quotaVm.loadedQuota == nil))
+                                    .padding(.top, 8)
+
+                                    NotificationBanner(
+                                        type: localPdfNotifier.style,
+                                        message: localPdfNotifier.message
+                                    )
+                                    .hide(when: localPdfNotifier.hide)
+                                }
+
+                                VStack {
+                                    StandardButton(
+                                        type: .execute,
+                                        title: "Render Combined",
+                                        action: {
+                                            do {
+                                                withAnimation {
+                                                    combinedPdfNotifier.show = false
+                                                }
+
+                                                try renderTier(quota: quota, for: .combined)
+
+                                                combinedPdfNotifier.message = "quota pdf rendered"
+                                                combinedPdfNotifier.style = .success
+                                                withAnimation {
+                                                    combinedPdfNotifier.show = true
+                                                }
+
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                                    withAnimation { 
+                                                        combinedPdfNotifier.show = false
+                                                    }
+                                                }
+                                            } catch {
+                                                withAnimation {
+                                                    combinedPdfNotifier.show = false
+                                                }
+
+                                                combinedPdfNotifier.message = "render failed: \(error)"
+                                                combinedPdfNotifier.style = .error
+                                                withAnimation {
+                                                    combinedPdfNotifier.show = true
+                                                }
+
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                                    withAnimation { 
+                                                        combinedPdfNotifier.show = false 
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    )
+                                    .disabled((quotaVm.loadedQuota == nil))
+                                    .padding(.top, 8)
+
+                                    NotificationBanner(
+                                        type: combinedPdfNotifier.style,
+                                        message: combinedPdfNotifier.message
+                                    )
+                                    .hide(when: combinedPdfNotifier.hide)
+                                }
+
+                                VStack {
+                                    StandardButton(
+                                        type: .execute,
+                                        title: "Render Remote",
+                                        action: {
+                                            do {
+                                                withAnimation {
+                                                    remotePdfNotifier.show = false
+                                                }
+
+                                                try renderTier(quota: quota, for: .remote)
+
+                                                remotePdfNotifier.message = "quota pdf rendered"
+                                                remotePdfNotifier.style = .success
+                                                withAnimation {
+                                                    remotePdfNotifier.show = true
+                                                }
+
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                                    withAnimation { 
+                                                        remotePdfNotifier.show = false
+                                                    }
+                                                }
+                                            } catch {
+                                                withAnimation {
+                                                    remotePdfNotifier.show = false
+                                                }
+
+                                                remotePdfNotifier.message = "render failed: \(error)"
+                                                remotePdfNotifier.style = .error
+                                                withAnimation {
+                                                    remotePdfNotifier.show = true
+                                                }
+
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                                    withAnimation { 
+                                                        remotePdfNotifier.show = false 
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    )
+                                    .disabled((quotaVm.loadedQuota == nil))
+                                    .padding(.top, 8)
+
+                                    NotificationBanner(
+                                        type: remotePdfNotifier.style,
+                                        message: remotePdfNotifier.message
+                                    )
+                                    .hide(when: remotePdfNotifier.hide)
+                                }
+                                .padding(.trailing, 40)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .center)
 
                             SelectableTierView(
                                 quota: quota,
                                 clientIdentifier: clientIdentifier
                             )
-
-
-                            VStack {
-                                StandardButton(
-                                    type: .execute,
-                                    title: "Render Local",
-                                    action: {
-                                        do {
-                                            withAnimation {
-                                                localPdfNotifier.show = false
-                                            }
-
-                                            try renderTier(quota: quota, for: .local)
-
-                                            localPdfNotifier.message = "quota pdf rendered"
-                                            localPdfNotifier.style = .success
-                                            withAnimation {
-                                                localPdfNotifier.show = true
-                                            }
-
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                                withAnimation { 
-                                                    localPdfNotifier.show = false
-                                                }
-                                            }
-                                        } catch {
-                                            withAnimation {
-                                                localPdfNotifier.show = false
-                                            }
-
-                                            localPdfNotifier.message = "render failed: \(error)"
-                                            localPdfNotifier.style = .error
-                                            withAnimation {
-                                                localPdfNotifier.show = true
-                                            }
-
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                                withAnimation { 
-                                                    localPdfNotifier.show = false 
-                                                }
-                                            }
-                                        }
-                                    }
-                                )
-                                .disabled((quotaVm.loadedQuota == nil))
-                                .padding(.top, 8)
-
-                                NotificationBanner(
-                                    type: localPdfNotifier.style,
-                                    message: localPdfNotifier.message
-                                )
-                                .hide(when: localPdfNotifier.hide)
-                            }
-
-                            VStack {
-                                StandardButton(
-                                    type: .execute,
-                                    title: "Render Combined",
-                                    action: {
-                                        do {
-                                            withAnimation {
-                                                combinedPdfNotifier.show = false
-                                            }
-
-                                            try renderTier(quota: quota, for: .combined)
-
-                                            combinedPdfNotifier.message = "quota pdf rendered"
-                                            combinedPdfNotifier.style = .success
-                                            withAnimation {
-                                                combinedPdfNotifier.show = true
-                                            }
-
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                                withAnimation { 
-                                                    combinedPdfNotifier.show = false
-                                                }
-                                            }
-                                        } catch {
-                                            withAnimation {
-                                                combinedPdfNotifier.show = false
-                                            }
-
-                                            combinedPdfNotifier.message = "render failed: \(error)"
-                                            combinedPdfNotifier.style = .error
-                                            withAnimation {
-                                                combinedPdfNotifier.show = true
-                                            }
-
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                                withAnimation { 
-                                                    combinedPdfNotifier.show = false 
-                                                }
-                                            }
-                                        }
-                                    }
-                                )
-                                .disabled((quotaVm.loadedQuota == nil))
-                                .padding(.top, 8)
-
-                                NotificationBanner(
-                                    type: combinedPdfNotifier.style,
-                                    message: combinedPdfNotifier.message
-                                )
-                                .hide(when: combinedPdfNotifier.hide)
-                            }
-
-                            VStack {
-                                StandardButton(
-                                    type: .execute,
-                                    title: "Render Remote",
-                                    action: {
-                                        do {
-                                            withAnimation {
-                                                remotePdfNotifier.show = false
-                                            }
-
-                                            try renderTier(quota: quota, for: .remote)
-
-                                            remotePdfNotifier.message = "quota pdf rendered"
-                                            remotePdfNotifier.style = .success
-                                            withAnimation {
-                                                remotePdfNotifier.show = true
-                                            }
-
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                                withAnimation { 
-                                                    remotePdfNotifier.show = false
-                                                }
-                                            }
-                                        } catch {
-                                            withAnimation {
-                                                remotePdfNotifier.show = false
-                                            }
-
-                                            remotePdfNotifier.message = "render failed: \(error)"
-                                            remotePdfNotifier.style = .error
-                                            withAnimation {
-                                                remotePdfNotifier.show = true
-                                            }
-
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                                withAnimation { 
-                                                    remotePdfNotifier.show = false 
-                                                }
-                                            }
-                                        }
-                                    }
-                                )
-                                .disabled((quotaVm.loadedQuota == nil))
-                                .padding(.top, 8)
-
-                                NotificationBanner(
-                                    type: remotePdfNotifier.style,
-                                    message: remotePdfNotifier.message
-                                )
-                                .hide(when: remotePdfNotifier.hide)
-                            }
-                            .padding(.trailing, 40)
                         }
-                        .frame(maxWidth: .infinity, alignment: .center)
+
                     }
                     else {
                         NotificationBanner(
