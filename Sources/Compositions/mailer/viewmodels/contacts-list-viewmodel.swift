@@ -7,18 +7,45 @@ import ViewComponents
 
 @MainActor
 public class ContactsListViewModel: ObservableObject {
-    @Published public var contacts: [CNContact] = []
-    @Published public var searchQuery: String = ""
+    // @Published public var contacts: [CNContact] = []
+    // @Published public var searchQuery: String = ""
     @Published public var isLoading = false
     @Published public var errorMessage: String?
-    @Published public var searchStrictness: SearchStrictness = .strict
+    // @Published public var searchStrictness: SearchStrictness = .strict
 
-    @Published public var selectedContactId: String? = nil
 
-    @Published public private(set) var filteredContacts: [CNContact] = []
+    /// When these change, we’ll “debounce” and then re‐filter.
+    @Published public var contacts: [CNContact] = [] {
+        didSet { scheduleFilterIfNeeded() }
+    }
+    @Published public var searchQuery: String = "" {
+        didSet { scheduleFilterIfNeeded() }
+    }
+    @Published public var searchStrictness: SearchStrictness = .strict {
+        didSet { scheduleFilterIfNeeded() }
+    }
+
+    // @Published public private(set) var filteredContacts: [CNContact] = []
+    @Published public private(set) var filteredContacts: [CNContact] = [] {
+        didSet {
+            // Run “after filter is done” logic here, exactly once per new array:
+            withAnimation(.easeInOut(duration: 0.20)) {
+                isFuzzyFiltering = false
+            }
+            scrollToFirstID = filteredContacts.first?.identifier
+        }
+    }
+
     @Published public var isFuzzyFiltering = false
 
+    @Published public var selectedContactId: String? = nil
     @Published public var scrollToFirstID: String? = nil
+
+    /// A DispatchWorkItem that we cancel+reschedule whenever any input changes.
+    private var pendingFilterWorkItem: DispatchWorkItem?
+
+    /// How long to wait after the “last change” before actually filtering.
+    private let debounceInterval: TimeInterval = 0.2
 
     public init() {
         Task { 
@@ -100,5 +127,44 @@ public class ContactsListViewModel: ObservableObject {
                 self.scrollToFirstID = results.first?.identifier
             }
         }
+    }
+
+    public func scheduleFilterIfNeeded() {
+        guard !contacts.isEmpty else {
+            return
+        }
+
+        pendingFilterWorkItem?.cancel()
+
+        // snapshot all Main-Actor‐isolated inputs before going off to a background queue:
+        let snapshotContacts   = self.contacts            // [CNContact]
+        let snapshotQuery      = self.searchQuery          // String
+        let snapshotStrictness = self.searchStrictness     // SearchStrictness
+
+        if !isLoading {
+            withAnimation(.easeInOut(duration: 0.25)) {
+                isFuzzyFiltering = true
+            }
+        }
+
+        let work = DispatchWorkItem { [weak self] in
+            let normalized = snapshotQuery.normalizedForClientDogSearch
+
+            let results = snapshotContacts.filteredClientContacts(
+                matching: normalized,
+                fuzzyTolerance: snapshotStrictness.tolerance
+            )
+
+            // return to the Main Actor (via DispatchQueue.main) to assign `filteredContacts`:
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.filteredContacts = results
+                // The `didSet` on `filteredContacts` will run next,
+                // clearing `isFuzzyFiltering` and setting `scrollToFirstID`.
+            }
+        }
+
+        pendingFilterWorkItem = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + debounceInterval, execute: work)
     }
 }

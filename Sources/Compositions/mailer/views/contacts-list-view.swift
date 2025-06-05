@@ -151,21 +151,26 @@ public struct ContactsListView: View {
                     //         }
                     //     }
                     // }
-                    .onAppear {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
-                            viewModel.fuzzyFilterListener()
-                        }
-                    }
 
-                    .onReceive(viewModel.$scrollToFirstID.compactMap { $0 }) { firstID in
-                        guard autoScrollToTop else { return }
 
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
-                            withAnimation(.linear(duration: 0.05)) {
-                                proxy.scrollTo(firstID, anchor: .top)
-                            }
-                        }
-                    }
+// mute this for experimental didSet replacement
+                    // .onAppear {
+                    //     DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                    //         viewModel.fuzzyFilterListener()
+                    //     }
+                    // }
+
+                    // .onReceive(viewModel.$scrollToFirstID.compactMap { $0 }) { firstID in
+                    //     guard autoScrollToTop else { return }
+
+                    //     DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                    //         withAnimation(.linear(duration: 0.05)) {
+                    //             proxy.scrollTo(firstID, anchor: .top)
+                    //         }
+                    //     }
+                    // }
+
+
                 }
 
                 if showWarning {
