@@ -36,6 +36,8 @@ public class ContactsListViewModel: ObservableObject {
     private var pendingFilterWorkItem: DispatchWorkItem?
     private let debounceInterval: TimeInterval = 0.2
 
+    private var debounceFilterTask: Task<Void, Never>? = nil
+
     public init() {
         Task { 
             await loadAllContacts()
@@ -118,16 +120,16 @@ public class ContactsListViewModel: ObservableObject {
         }
     }
 
-    public func scheduleFilterIfNeeded() {
+    private func scheduleFilterIfNeeded() {
         guard !contacts.isEmpty else {
             return
         }
 
-        pendingFilterWorkItem?.cancel()
+        debounceFilterTask?.cancel()
 
-        let snapshotContacts = self.contacts               // [CNContact]
-        let snapshotQuery = self.searchQuery               // String
-        let snapshotStrictness = self.searchStrictness     // SearchStrictness
+        let snapshotContacts   = self.contacts
+        let snapshotQuery      = self.searchQuery
+        let snapshotStrictness = self.searchStrictness
 
         if !isLoading {
             withAnimation(.easeInOut(duration: 0.25)) {
@@ -135,30 +137,48 @@ public class ContactsListViewModel: ObservableObject {
             }
         }
 
-        let work = DispatchWorkItem { [weak self] in
-            let normalized = snapshotQuery.normalizedForClientDogSearch
+        debounceFilterTask = Task { [weak self] in
+            guard let self = self else { return }
 
-            let results = snapshotContacts.filteredClientContacts(
-                matching: normalized,
-                fuzzyTolerance: snapshotStrictness.tolerance
+            try? await Task.sleep(nanoseconds: UInt64(self.debounceInterval * 1_000_000_000))
+
+            guard !Task.isCancelled else { return }
+
+            let results = await self.filterContacts(
+                allContacts: snapshotContacts,
+                query:       snapshotQuery,
+                tolerance:   snapshotStrictness.tolerance
             )
 
+            guard !Task.isCancelled else { return }
+
+            self.filteredContacts = results
+
+            let newFirstID = results.first?.identifier
             DispatchQueue.main.async {
-                guard let self = self else { return }
-
-                self.filteredContacts = results
-
-                let newFirstID = results.first?.identifier
-                DispatchQueue.main.async {
-                    withAnimation(.easeInOut(duration: 0.20)) {
-                        self.isFuzzyFiltering = false
-                    }
-                    self.scrollToFirstID = newFirstID
+                withAnimation(.easeInOut(duration: 0.20)) {
+                    self.isFuzzyFiltering = false
                 }
+                self.scrollToFirstID = newFirstID
             }
         }
+    }
 
-        pendingFilterWorkItem = work
-        DispatchQueue.main.asyncAfter(deadline: .now() + debounceInterval, execute: work)
+    @Sendable
+    private func filterContacts(
+        allContacts: [CNContact],
+        query: String,
+        tolerance: Int
+    ) async -> [CNContact] {
+        return await withCheckedContinuation { continuation in
+            DispatchQueue.global(qos: .userInitiated).async {
+                let normalized = query.normalizedForClientDogSearch
+                let results = allContacts.filteredClientContacts(
+                    matching: normalized,
+                    fuzzyTolerance: tolerance
+                )
+                continuation.resume(returning: results)
+            }
+        }
     }
 }
