@@ -51,7 +51,7 @@ public struct QuotaTierListSubView: View {
 
     public var body: some View {
         ScrollView {
-            VStack(spacing: 24) {
+            VStack(spacing: 12) {
                 // ─── HEADER ROW ──────────────────────────────────────────────────
                 HStack(spacing: 0) {
                     // 1st cell is empty, to align with row labels below
