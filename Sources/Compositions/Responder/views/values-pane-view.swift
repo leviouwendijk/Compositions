@@ -295,7 +295,7 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                                 VStack {
                                     StandardButton(
                                         type: .execute,
-                                        title: "Render Local",
+                                        title: "Local",
                                         action: {
                                             do {
                                                 withAnimation {
@@ -347,7 +347,7 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                                 VStack {
                                     StandardButton(
                                         type: .execute,
-                                        title: "Render Combined",
+                                        title: "Combined",
                                         action: {
                                             do {
                                                 withAnimation {
@@ -399,7 +399,7 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                                 VStack {
                                     StandardButton(
                                         type: .execute,
-                                        title: "Render Remote",
+                                        title: "Remote",
                                         action: {
                                             do {
                                                 withAnimation {
