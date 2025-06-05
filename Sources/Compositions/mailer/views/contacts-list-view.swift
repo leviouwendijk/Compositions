@@ -3,6 +3,7 @@ import SwiftUI
 import Contacts
 import ViewComponents
 import Interfaces
+import Implementations
 
 public struct ContactsListView: View {
     @ObservedObject public var viewModel: ContactsListViewModel

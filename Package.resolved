@@ -1,5 +1,5 @@
 {
-  "originHash" : "9e44de3b1941407c6b6c953a1d8db14f6f7d6dcc3c592f978d775430fc20bc9a",
+  "originHash" : "e6cc3fdaacc206f2545494a85e3177995354277ebc7aaa7040a5988b7e116fa2",
   "pins" : [
     {
       "identity" : "economics",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/leviouwendijk/Implementations.git",
       "state" : {
         "branch" : "master",
-        "revision" : "d0d10652ccd9f930fb2093cfaf95c2c8f89b6c1a"
+        "revision" : "52c083ce8f084f3f03509791dae42ffdc48934ce"
       }
     },
     {
@@ -25,7 +25,7 @@
       "location" : "https://github.com/leviouwendijk/Interfaces.git",
       "state" : {
         "branch" : "master",
-        "revision" : "8419803eb3a3139d17e04810a8f0945710123573"
+        "revision" : "a98c25f2b5d34130ef5615915b43f9342b91d594"
       }
     },
     {
