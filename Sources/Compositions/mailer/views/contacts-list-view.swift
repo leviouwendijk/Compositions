@@ -184,15 +184,15 @@ public struct ContactsListView: View {
             }
             .opacity(viewModel.isFuzzyFiltering ? 0 : 1)
 
-            .overlay(
-                Group {
-                    if viewModel.isFuzzyFiltering {
-                        Color(NSColor.windowBackgroundColor)
-                        .opacity(0.9)
-                        .cornerRadius(6)
-                    }
-                }
-            )
+            // .overlay(
+            //     Group {
+            //         if viewModel.isFuzzyFiltering {
+            //             Color(NSColor.windowBackgroundColor)
+            //             .opacity(0.9)
+            //             .cornerRadius(6)
+            //         }
+            //     }
+            // )
 
             .overlay(
                 Group {
