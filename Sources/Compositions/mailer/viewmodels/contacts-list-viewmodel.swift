@@ -26,19 +26,7 @@ public class ContactsListViewModel: ObservableObject {
     }
 
     // @Published public private(set) var filteredContacts: [CNContact] = []
-    @Published public private(set) var filteredContacts: [CNContact] = [] {
-        didSet {
-            let newFirstID = filteredContacts.first?.identifier
-
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                withAnimation(.easeInOut(duration: 0.20)) {
-                    self.isFuzzyFiltering = false
-                }
-                self.scrollToFirstID = newFirstID
-            }
-        }
-    }
+    @Published public private(set) var filteredContacts: [CNContact] = []
 
     @Published public var isFuzzyFiltering = false
 
@@ -137,14 +125,13 @@ public class ContactsListViewModel: ObservableObject {
 
         pendingFilterWorkItem?.cancel()
 
-        // snapshot all Main-Actor‐isolated inputs before going off to a background queue:
-        let snapshotContacts   = self.contacts            // [CNContact]
-        let snapshotQuery      = self.searchQuery          // String
+        let snapshotContacts = self.contacts               // [CNContact]
+        let snapshotQuery = self.searchQuery               // String
         let snapshotStrictness = self.searchStrictness     // SearchStrictness
 
         if !isLoading {
             withAnimation(.easeInOut(duration: 0.25)) {
-                isFuzzyFiltering = true
+                self.isFuzzyFiltering = true
             }
         }
 
@@ -156,12 +143,18 @@ public class ContactsListViewModel: ObservableObject {
                 fuzzyTolerance: snapshotStrictness.tolerance
             )
 
-            // return to the Main Actor (via DispatchQueue.main) to assign `filteredContacts`:
             DispatchQueue.main.async {
                 guard let self = self else { return }
+
                 self.filteredContacts = results
-                // The `didSet` on `filteredContacts` will run next,
-                // clearing `isFuzzyFiltering` and setting `scrollToFirstID`.
+
+                let newFirstID = results.first?.identifier
+                DispatchQueue.main.async {
+                    withAnimation(.easeInOut(duration: 0.20)) {
+                        self.isFuzzyFiltering = false
+                    }
+                    self.scrollToFirstID = newFirstID
+                }
             }
         }
 
