@@ -66,77 +66,79 @@ public struct QuotaTierListSubView: View {
                     }
                 }
 
-                // ─── PRICE BLOCK ────────────────────────────────────────────────
-                VStack(spacing: 4) {
-                    // “Price” as a spanning header
-                    HStack {
-                        Text("Price")
-                            .font(.subheadline)
-                            .bold()
-                        Spacer()
+                VStack(spacing: 24) { // extra space between subtables, but not from header
+                    // ─── PRICE BLOCK ────────────────────────────────────────────────
+                    VStack(spacing: 4) {
+                        // “Price” as a spanning header
+                        HStack {
+                            Text("Price")
+                                .font(.subheadline)
+                                .bold()
+                            Spacer()
+                        }
+                        .padding(.vertical, 4)
+
+                        Divider()
+                        .padding(.vertical, 4)
+
+                        TableBlock(
+                            rowLabelWidth: 80,
+                            tiers: tiers,
+                            valuesFor: { content in
+                                content.levels.viewableTuples(of: .price)
+                            },
+                            textColor: .primary
+                        )
                     }
-                    .padding(.vertical, 4)
 
-                    Divider()
-                    .padding(.vertical, 4)
+                    // ─── COST BLOCK ─────────────────────────────────────────────────
+                    VStack(spacing: 4) {
+                        HStack {
+                            Text("Cost")
+                                .font(.subheadline)
+                                .bold()
+                            Spacer()
+                        }
+                        .padding(.vertical, 4)
 
-                    TableBlock(
-                        rowLabelWidth: 80,
-                        tiers: tiers,
-                        valuesFor: { content in
-                            content.levels.viewableTuples(of: .price)
-                        },
-                        textColor: .primary
-                    )
-                }
+                        Divider()
+                        .padding(.vertical, 4)
 
-                // ─── COST BLOCK ─────────────────────────────────────────────────
-                VStack(spacing: 4) {
-                    HStack {
-                        Text("Cost")
-                            .font(.subheadline)
-                            .bold()
-                        Spacer()
+                        TableBlock(
+                            rowLabelWidth: 80,
+                            tiers: tiers,
+                            valuesFor: { content in
+                                content.levels.viewableTuples(of: .cost)
+                            },
+                            textColor: .secondary
+                        )
                     }
-                    .padding(.vertical, 4)
 
-                    Divider()
-                    .padding(.vertical, 4)
+                    // ─── BASE BLOCK ─────────────────────────────────────────────────
+                    VStack(spacing: 4) {
+                        HStack {
+                            Text("Base")
+                                .font(.subheadline)
+                                .bold()
+                            Spacer()
+                        }
+                        .padding(.vertical, 4)
 
-                    TableBlock(
-                        rowLabelWidth: 80,
-                        tiers: tiers,
-                        valuesFor: { content in
-                            content.levels.viewableTuples(of: .cost)
-                        },
-                        textColor: .secondary
-                    )
-                }
+                        Divider()
+                        .padding(.vertical, 4)
 
-                // ─── BASE BLOCK ─────────────────────────────────────────────────
-                VStack(spacing: 4) {
-                    HStack {
-                        Text("Base")
-                            .font(.subheadline)
-                            .bold()
-                        Spacer()
+                        TableBlock(
+                            rowLabelWidth: 80,
+                            tiers: tiers,
+                            valuesFor: { content in
+                                content.levels.viewableTuples(of: .base)
+                            },
+                            textColor: .secondary
+                        )
                     }
-                    .padding(.vertical, 4)
 
-                    Divider()
-                    .padding(.vertical, 4)
-
-                    TableBlock(
-                        rowLabelWidth: 80,
-                        tiers: tiers,
-                        valuesFor: { content in
-                            content.levels.viewableTuples(of: .base)
-                        },
-                        textColor: .secondary
-                    )
+                    Spacer(minLength: 0)
                 }
-
-                Spacer(minLength: 0)
             }
             .padding()
         }
