@@ -50,7 +50,7 @@ struct SelectableTierView: View {
             }
 
             HStack {
-                StandardNotifyingButton(
+                StandardButton(
                     type: .copy,
                     title: "short",
                     action: {
@@ -62,11 +62,11 @@ struct SelectableTierView: View {
                             shortCopyQuotaNotifier.message = error.localizedDescription
                         }
                     },
-                    notifier: shortCopyQuotaNotifier,
-                    notifierPosition: .under
+                    // notifier: shortCopyQuotaNotifier,
+                    // notifierPosition: .under
                 )
 
-                StandardNotifyingButton(
+                StandardButton(
                     type: .copy,
                     title: "full",
                     action: {
@@ -78,8 +78,8 @@ struct SelectableTierView: View {
                             copyQuotaNotifier.message = error.localizedDescription
                         }
                     },
-                    notifier: copyQuotaNotifier,
-                    notifierPosition: .under
+                    // notifier: copyQuotaNotifier,
+                    // notifierPosition: .under
                 )
             }
         }
