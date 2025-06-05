@@ -1,11 +1,18 @@
 import Foundation
 import plate
 import SwiftUI 
+import Implementations
 
-struct WAMessageRow: View {
-    let template: WAMessageTemplate
+public struct WAMessageRow: View {
+    public let template: WAMessageTemplate
 
-    var body: some View {
+    public init(
+        template: WAMessageTemplate
+    ) {
+        self.template = template
+    }
+
+    public var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(template.title)
                 .lineLimit(1)
@@ -22,14 +29,14 @@ struct WAMessageRow: View {
     }
 }
 
-struct WAMessageDropdown: View {
-    @Binding var selected: WAMessageTemplate
-    @State private var isExpanded: Bool = false
+public struct WAMessageDropdown: View {
+    @Binding public var selected: WAMessageTemplate
+    @State public var isExpanded: Bool = false
 
-    let labelWidth: CGFloat
-    let maxListHeight: CGFloat
+    public let labelWidth: CGFloat
+    public let maxListHeight: CGFloat
 
-    init(
+    public init(
         selected: Binding<WAMessageTemplate>,
         labelWidth: CGFloat = 200,
         maxListHeight: CGFloat = 200
@@ -39,7 +46,7 @@ struct WAMessageDropdown: View {
         self.maxListHeight = maxListHeight
     }
 
-    var body: some View {
+    public var body: some View {
         ZStack(alignment: .topLeading) {
             Button(action: {
                 withAnimation(.easeInOut(duration: 0.2)) {
@@ -120,7 +127,7 @@ struct WAMessageDropdown: View {
     }
 }
 
-enum WAMessageTemplate: String, Hashable, CaseIterable {
+public enum WAMessageTemplate: String, Hashable, CaseIterable {
     case called
     case calledVariationI
     case calledVariationII
@@ -128,7 +135,7 @@ enum WAMessageTemplate: String, Hashable, CaseIterable {
     case repeatedCalls
     case follow
 
-    var title: String {
+    public var title: String {
         switch self {
             case .called:
                 return "Called"
@@ -151,7 +158,7 @@ enum WAMessageTemplate: String, Hashable, CaseIterable {
     }
 
 
-    var subtitle: String {
+    public var subtitle: String {
         switch self {
             case .called, .calledVariationI, .calledVariationII:
                 return "Call attempt, \"do you need us?\"--check, prompt to call us"
@@ -167,7 +174,7 @@ enum WAMessageTemplate: String, Hashable, CaseIterable {
         }
     }
 
-    var message: String {
+    public var message: String {
         switch self {
         case .called:
             return """
