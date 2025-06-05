@@ -42,6 +42,68 @@ public struct VariablesView: View, @preconcurrency Equatable {
     public let sendMailerEmail: () throws -> Void
     public let clearContact: () -> Void
 
+    public init(
+        contactsVm: ContactsListViewModel,
+        apiPathVm: MailerAPISelectionViewModel,
+        invoiceVm: MailerAPIInvoiceVariablesViewModel,
+        local: Binding<Bool>,
+        selectedContact: Binding<CNContact?>,
+        client: Binding<String>,
+        dog: Binding<String>,
+        email: Binding<String>,
+        location: Binding<String>,
+        areaCode: Binding<String?>,
+        street: Binding<String?>,
+        number: Binding<String?>,
+        localLocation: Binding<String>,
+        fetchableCategory: Binding<String>,
+        fetchableFile: Binding<String>,
+        subject: Binding<String>,
+        fetchedHtml: Binding<String>,
+        selectedWAMessage: Binding<WAMessageTemplate>,
+        anyInvalidConditionsCheck: Bool,
+        emptyEmailWarning: Bool,
+        emptySubjectWarning: Bool,
+        finalHtmlContainsRawVariables: Bool,
+        selectedWAMessageReplaced: String,
+        waMessageContainsRawPlaceholders: Bool,
+        sendMailerEmail: @escaping () throws -> Void,
+        clearContact: @escaping () -> Void
+    ) {
+        self.contactsVm = contactsVm
+        self.apiPathVm = apiPathVm
+        self.invoiceVm = invoiceVm
+
+        self._local = local
+        self._selectedContact = selectedContact
+        self._client = client
+        self._dog = dog
+        self._email = email
+        self._location = location
+        self._areaCode = areaCode
+        self._street = street
+        self._number = number
+        self._localLocation = localLocation
+
+        self._fetchableCategory = fetchableCategory
+        self._fetchableFile = fetchableFile
+
+        self._subject = subject
+        self._fetchedHtml = fetchedHtml
+
+        self._selectedWAMessage = selectedWAMessage
+
+        self.anyInvalidConditionsCheck = anyInvalidConditionsCheck
+        self.emptyEmailWarning = emptyEmailWarning
+        self.emptySubjectWarning = emptySubjectWarning
+        self.finalHtmlContainsRawVariables = finalHtmlContainsRawVariables
+        self.selectedWAMessageReplaced = selectedWAMessageReplaced
+        self.waMessageContainsRawPlaceholders = waMessageContainsRawPlaceholders
+
+        self.sendMailerEmail = sendMailerEmail
+        self.clearContact = clearContact
+    }
+
     public static func == (lhs: VariablesView, rhs: VariablesView) -> Bool {
         return lhs.local                                       == rhs.local &&
                lhs.selectedContact == rhs.selectedContact       &&

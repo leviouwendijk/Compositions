@@ -36,6 +36,45 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
 
     public let sendMailerEmail: () throws -> Void
 
+    public init(
+        apiPathVm: MailerAPISelectionViewModel,
+        weeklyScheduleVm: WeeklyScheduleViewModel,
+        quotaVm: QuotaViewModel,
+        subject: Binding<String>,
+        fetchedHtml: Binding<String>,
+        includeQuoteInCustomMessage: Binding<Bool>,
+        showSuccessBanner: Binding<Bool>,
+        successBannerMessage: Binding<String>,
+        bannerColor: Binding<Color>,
+        isSendingEmail: Binding<Bool>,
+        anyInvalidConditionsCheck: Bool,
+        emptySubjectWarning: Bool,
+        finalHtmlContainsRawVariables: Bool,
+        clientIdentifier: String,
+        sendMailerEmail: @escaping () throws -> Void
+    ) {
+        self.apiPathVm = apiPathVm
+        self.weeklyScheduleVm = weeklyScheduleVm
+        self.quotaVm = quotaVm
+
+        self._subject = subject
+        self._fetchedHtml = fetchedHtml
+        self._includeQuoteInCustomMessage = includeQuoteInCustomMessage
+
+        self._showSuccessBanner = showSuccessBanner
+        self._successBannerMessage = successBannerMessage
+        self._bannerColor = bannerColor
+        self._isSendingEmail = isSendingEmail
+
+        self.anyInvalidConditionsCheck = anyInvalidConditionsCheck
+        self.emptySubjectWarning = emptySubjectWarning
+        self.finalHtmlContainsRawVariables = finalHtmlContainsRawVariables
+
+        self.clientIdentifier = clientIdentifier
+
+        self.sendMailerEmail = sendMailerEmail
+    }
+
     public static func == (lhs: ValuesPaneView, rhs: ValuesPaneView) -> Bool {
         return lhs.subject                     == rhs.subject &&
                lhs.fetchedHtml                 == rhs.fetchedHtml &&
