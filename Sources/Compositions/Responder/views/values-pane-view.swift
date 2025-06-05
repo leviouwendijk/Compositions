@@ -455,8 +455,6 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                                 quota: quota,
                                 clientIdentifier: clientIdentifier
                             )
-
-                            Spacer()
                         }
 
                     }
@@ -479,6 +477,8 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                 }
             }
         }
-        .frame(minWidth: 500)
+        .frame(minWidth: 400)
+
+        Spacer()
     }
 }
