@@ -7,11 +7,6 @@ import Economics
 import Interfaces
 import Implementations
 
-public class MailerViewModel: ObservableObject {
-    @Published public var mailerOutput: String = ""
-    @Published public var sharedMailerCommandCopy: String = ""
-}
-
 public struct MailerStandardOutput: View {
     @EnvironmentObject public var vm: MailerViewModel
 
