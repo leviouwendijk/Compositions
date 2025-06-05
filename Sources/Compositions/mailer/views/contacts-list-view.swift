@@ -223,10 +223,10 @@ public struct ContactsListView: View {
                                 .padding(.vertical, 6)
                                 // .padding(.horizontal)
                                 // .padding(.trailing)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 6)
-                                    .fill(Color(NSColor.windowBackgroundColor))
-                                )
+                                // .background(
+                                //     RoundedRectangle(cornerRadius: 6)
+                                //     .fill(Color(NSColor.windowBackgroundColor))
+                                // )
                             }
                             .padding(.horizontal)
 
