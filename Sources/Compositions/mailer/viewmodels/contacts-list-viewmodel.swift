@@ -28,13 +28,13 @@ public class ContactsListViewModel: ObservableObject {
     // @Published public private(set) var filteredContacts: [CNContact] = []
     @Published public private(set) var filteredContacts: [CNContact] = [] {
         didSet {
-            // Run “after filter is done” logic here, exactly once per new array:
-            withAnimation(.easeInOut(duration: 0.20)) {
-                isFuzzyFiltering = false
-            }
-
             let newFirstID = filteredContacts.first?.identifier
-            DispatchQueue.main.async {
+
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                withAnimation(.easeInOut(duration: 0.20)) {
+                    self.isFuzzyFiltering = false
+                }
                 self.scrollToFirstID = newFirstID
             }
         }
