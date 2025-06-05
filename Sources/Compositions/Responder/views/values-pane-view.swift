@@ -7,36 +7,36 @@ import Contacts
 import Economics
 import Implementations
 
-struct ValuesPaneView: View, @preconcurrency Equatable {
+public struct ValuesPaneView: View, @preconcurrency Equatable {
     // observables (passed)
-    @ObservedObject var apiPathVm: MailerAPISelectionViewModel
-    @ObservedObject var weeklyScheduleVm: WeeklyScheduleViewModel
-    @ObservedObject var quotaVm: QuotaViewModel
+    @ObservedObject public var apiPathVm: MailerAPISelectionViewModel
+    @ObservedObject public var weeklyScheduleVm: WeeklyScheduleViewModel
+    @ObservedObject public var quotaVm: QuotaViewModel
 
     // local state object inits
-    @StateObject private var localPdfNotifier: NotificationBannerController = NotificationBannerController()
-    @StateObject private var combinedPdfNotifier: NotificationBannerController = NotificationBannerController()
-    @StateObject private var remotePdfNotifier: NotificationBannerController = NotificationBannerController()
+    @StateObject public var localPdfNotifier: NotificationBannerController = NotificationBannerController()
+    @StateObject public var combinedPdfNotifier: NotificationBannerController = NotificationBannerController()
+    @StateObject public var remotePdfNotifier: NotificationBannerController = NotificationBannerController()
 
     // passed properties
-    @Binding var subject: String
-    @Binding var fetchedHtml: String
-    @Binding var includeQuoteInCustomMessage: Bool
+    @Binding public var subject: String
+    @Binding public var fetchedHtml: String
+    @Binding public var includeQuoteInCustomMessage: Bool
 
-    @Binding var showSuccessBanner: Bool
-    @Binding var successBannerMessage: String
-    @Binding var bannerColor: Color
-    @Binding var isSendingEmail: Bool
+    @Binding public var showSuccessBanner: Bool
+    @Binding public var successBannerMessage: String
+    @Binding public var bannerColor: Color
+    @Binding public var isSendingEmail: Bool
 
-    let anyInvalidConditionsCheck: Bool
-    let emptySubjectWarning: Bool
-    let finalHtmlContainsRawVariables: Bool
+    public let anyInvalidConditionsCheck: Bool
+    public let emptySubjectWarning: Bool
+    public let finalHtmlContainsRawVariables: Bool
 
-    let clientIdentifier: String
+    public let clientIdentifier: String
 
-    let sendMailerEmail: () throws -> Void
+    public let sendMailerEmail: () throws -> Void
 
-    static func == (lhs: ValuesPaneView, rhs: ValuesPaneView) -> Bool {
+    public static func == (lhs: ValuesPaneView, rhs: ValuesPaneView) -> Bool {
         return lhs.subject                     == rhs.subject &&
                lhs.fetchedHtml                 == rhs.fetchedHtml &&
                lhs.includeQuoteInCustomMessage == rhs.includeQuoteInCustomMessage &&
@@ -50,7 +50,7 @@ struct ValuesPaneView: View, @preconcurrency Equatable {
                lhs.clientIdentifier            == rhs.clientIdentifier
     }
 
-    var body: some View {
+    public var body: some View {
         VStack {
             if apiPathVm.selectedRoute == .custom {
                 VStack(alignment: .leading) {

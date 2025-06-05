@@ -3,13 +3,19 @@ import plate
 import Economics
 import ViewComponents
 
-struct QuotaTierListView: View {
-    let quota: CustomQuota
+public struct QuotaTierListView: View {
+    public let quota: CustomQuota
 
-    @State private var tiers: [QuotaTierContent]? = nil
-    @State private var message: String = ""
+    @State public var tiers: [QuotaTierContent]? = nil
+    @State public var message: String = ""
 
-    var body: some View {
+    public init (
+        quota: CustomQuota
+    ) {
+        self.quota = quota
+    }
+
+    public var body: some View {
         Group {
             if let t = tiers {
                 QuotaTierListSubView(tiers: t)
@@ -31,16 +37,16 @@ struct QuotaTierListView: View {
     }
 }
 
-struct QuotaTierListSubView: View {
-    let tiers: [QuotaTierContent]
+public struct QuotaTierListSubView: View {
+    public let tiers: [QuotaTierContent]
 
-    init(
+    public init(
         tiers: [QuotaTierContent]
     ) {
         self.tiers = tiers
     }
 
-    var body: some View {
+    public var body: some View {
         ScrollView {
             VStack(spacing: 24) {
                 // ─── HEADER ROW ──────────────────────────────────────────────────
@@ -133,17 +139,17 @@ struct QuotaTierListSubView: View {
     }
 }
 
-private struct TableBlock: View {
-    let rowLabelWidth: CGFloat
-    let tiers: [QuotaTierContent]
-    let valuesFor: (QuotaTierContent) -> [(String, Double)]
-    let textColor: Color
+public struct TableBlock: View {
+    public let rowLabelWidth: CGFloat
+    public let tiers: [QuotaTierContent]
+    public let valuesFor: (QuotaTierContent) -> [(String, Double)]
+    public let textColor: Color
 
-    private var allRows: [String]            // row names, e.g. ["prognosis", "suggestion", …]
-    private var tierValueMatrix: [[Double]]  // tierValueMatrix[rowIndex][tierIndex]
-    private var isPrognosisRow: [Bool]       // true if the “String” is “prognosis”
+    public var allRows: [String]            // row names, e.g. ["prognosis", "suggestion", …]
+    public var tierValueMatrix: [[Double]]  // tierValueMatrix[rowIndex][tierIndex]
+    public var isPrognosisRow: [Bool]       // true if the “String” is “prognosis”
 
-    init(
+    public init(
         rowLabelWidth: CGFloat,
         tiers: [QuotaTierContent],
         valuesFor: @escaping (QuotaTierContent) -> [(String, Double)],
@@ -176,7 +182,7 @@ private struct TableBlock: View {
         self.tierValueMatrix = matrix
     }
 
-    var body: some View {
+    public var body: some View {
         VStack(spacing: 8) {
             ForEach(allRows.indices, id: \.self) { rowIndex in
                 HStack(spacing: 4) {
@@ -204,11 +210,11 @@ private struct TableBlock: View {
     }
 }
 
-private struct StatView: View {
-    let label: String
-    let value: Double
+public struct StatView: View {
+    public let label: String
+    public let value: Double
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading) {
             Text(label)
                 .font(.caption)

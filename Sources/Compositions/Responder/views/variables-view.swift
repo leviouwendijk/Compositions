@@ -6,43 +6,43 @@ import ViewComponents
 import Contacts
 import Implementations
 
-struct VariablesView: View, @preconcurrency Equatable {
-    @ObservedObject var contactsVm: ContactsListViewModel
-    @ObservedObject var apiPathVm: MailerAPISelectionViewModel
-    @ObservedObject var invoiceVm: MailerAPIInvoiceVariablesViewModel
+public struct VariablesView: View, @preconcurrency Equatable {
+    @ObservedObject public var contactsVm: ContactsListViewModel
+    @ObservedObject public var apiPathVm: MailerAPISelectionViewModel
+    @ObservedObject public var invoiceVm: MailerAPIInvoiceVariablesViewModel
 
-    @StateObject private var waMessageNotifier: NotificationBannerController = NotificationBannerController()
+    @StateObject public var waMessageNotifier: NotificationBannerController = NotificationBannerController()
 
-    @Binding var local: Bool
-    @Binding var selectedContact: CNContact?
-    @Binding var client: String
-    @Binding var dog: String
-    @Binding var email: String
-    @Binding var location: String
-    @Binding var areaCode: String?
-    @Binding var street: String?
-    @Binding var number: String?
-    @Binding var localLocation: String
+    @Binding public var local: Bool
+    @Binding public var selectedContact: CNContact?
+    @Binding public var client: String
+    @Binding public var dog: String
+    @Binding public var email: String
+    @Binding public var location: String
+    @Binding public var areaCode: String?
+    @Binding public var street: String?
+    @Binding public var number: String?
+    @Binding public var localLocation: String
 
-    @Binding var fetchableCategory: String
-    @Binding var fetchableFile: String
+    @Binding public var fetchableCategory: String
+    @Binding public var fetchableFile: String
 
-    @Binding var subject: String
-    @Binding var fetchedHtml: String
+    @Binding public var subject: String
+    @Binding public var fetchedHtml: String
 
-    @Binding var selectedWAMessage: WAMessageTemplate
+    @Binding public var selectedWAMessage: WAMessageTemplate
 
-    let anyInvalidConditionsCheck: Bool
-    let emptyEmailWarning: Bool
-    let emptySubjectWarning: Bool
-    let finalHtmlContainsRawVariables: Bool
-    let selectedWAMessageReplaced: String
-    let waMessageContainsRawPlaceholders: Bool
+    public let anyInvalidConditionsCheck: Bool
+    public let emptyEmailWarning: Bool
+    public let emptySubjectWarning: Bool
+    public let finalHtmlContainsRawVariables: Bool
+    public let selectedWAMessageReplaced: String
+    public let waMessageContainsRawPlaceholders: Bool
 
-    let sendMailerEmail: () throws -> Void
-    let clearContact: () -> Void
+    public let sendMailerEmail: () throws -> Void
+    public let clearContact: () -> Void
 
-    static func == (lhs: VariablesView, rhs: VariablesView) -> Bool {
+    public static func == (lhs: VariablesView, rhs: VariablesView) -> Bool {
         return lhs.local                                       == rhs.local &&
                lhs.selectedContact == rhs.selectedContact       &&
                lhs.client                                      == rhs.client &&
@@ -66,7 +66,7 @@ struct VariablesView: View, @preconcurrency Equatable {
                lhs.waMessageContainsRawPlaceholders            == rhs.waMessageContainsRawPlaceholders
     }
 
-    var body: some View {
+    public var body: some View {
         VStack {
             VStack {
                 if !(apiPathVm.selectedRoute == .template || apiPathVm.selectedRoute == .invoice) {
