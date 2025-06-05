@@ -31,7 +31,7 @@ public class ContactsListViewModel: ObservableObject {
     @Published public var isFuzzyFiltering = false
 
     @Published public var selectedContactId: String? = nil
-    @Published public var scrollToFirstID: String? = nil
+    // @Published public var scrollToFirstID: String? = nil
 
     private var pendingFilterWorkItem: DispatchWorkItem?
     private let debounceInterval: TimeInterval = 0.2
@@ -115,7 +115,7 @@ public class ContactsListViewModel: ObservableObject {
                     self.filteredContacts = results
                     self.isFuzzyFiltering = false
                 }
-                self.scrollToFirstID = results.first?.identifier
+                // self.scrollToFirstID = results.first?.identifier
             }
         }
     }
@@ -154,12 +154,12 @@ public class ContactsListViewModel: ObservableObject {
 
             self.filteredContacts = results
 
-            let newFirstID = results.first?.identifier
+            // let newFirstID = results.first?.identifier
             DispatchQueue.main.async {
                 withAnimation(.easeInOut(duration: 0.20)) {
                     self.isFuzzyFiltering = false
                 }
-                self.scrollToFirstID = newFirstID
+                // self.scrollToFirstID = newFirstID
             }
         }
     }
