@@ -108,8 +108,8 @@ struct QuotaTierActionsView: View {
                         },
                         notifier: notifier
                     )
-                    ControlledNotificationBanner(controller: notifier)
                 }
+                ControlledNotificationBanner(controller: notifier)
             }
         }
         .frame(maxWidth: .infinity)
