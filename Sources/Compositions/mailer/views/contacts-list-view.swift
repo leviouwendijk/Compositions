@@ -202,10 +202,10 @@ public struct ContactsListView: View {
                         .foregroundColor(.blue)
                         .padding(.vertical, 6)
                         .padding(.horizontal)
-                        .background(
-                            RoundedRectangle(cornerRadius: 6)
-                            .fill(Color(NSColor.windowBackgroundColor))
-                        )
+                        // .background(
+                        //     RoundedRectangle(cornerRadius: 6)
+                        //     .fill(Color(NSColor.windowBackgroundColor))
+                        // )
                         .zIndex(1)
                     } else if !(viewModel.searchQuery.isEmpty) && !(viewModel.isFuzzyFiltering) && viewModel.filteredContacts.isEmpty {
                         VStack {
