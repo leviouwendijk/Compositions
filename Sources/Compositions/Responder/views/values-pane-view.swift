@@ -23,11 +23,6 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
     @Binding public var fetchedHtml: String
     @Binding public var includeQuoteInCustomMessage: Bool
 
-    @Binding public var showSuccessBanner: Bool
-    @Binding public var successBannerMessage: String
-    @Binding public var bannerColor: Color
-    @Binding public var isSendingEmail: Bool
-
     public let anyInvalidConditionsCheck: Bool
     public let emptySubjectWarning: Bool
     public let finalHtmlContainsRawVariables: Bool
@@ -43,10 +38,6 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
         subject: Binding<String>,
         fetchedHtml: Binding<String>,
         includeQuoteInCustomMessage: Binding<Bool>,
-        showSuccessBanner: Binding<Bool>,
-        successBannerMessage: Binding<String>,
-        bannerColor: Binding<Color>,
-        isSendingEmail: Binding<Bool>,
         anyInvalidConditionsCheck: Bool,
         emptySubjectWarning: Bool,
         finalHtmlContainsRawVariables: Bool,
@@ -61,11 +52,6 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
         self._fetchedHtml = fetchedHtml
         self._includeQuoteInCustomMessage = includeQuoteInCustomMessage
 
-        self._showSuccessBanner = showSuccessBanner
-        self._successBannerMessage = successBannerMessage
-        self._bannerColor = bannerColor
-        self._isSendingEmail = isSendingEmail
-
         self.anyInvalidConditionsCheck = anyInvalidConditionsCheck
         self.emptySubjectWarning = emptySubjectWarning
         self.finalHtmlContainsRawVariables = finalHtmlContainsRawVariables
@@ -79,10 +65,6 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
         return lhs.subject                     == rhs.subject &&
                lhs.fetchedHtml                 == rhs.fetchedHtml &&
                lhs.includeQuoteInCustomMessage == rhs.includeQuoteInCustomMessage &&
-               lhs.showSuccessBanner           == rhs.showSuccessBanner &&
-               lhs.successBannerMessage        == rhs.successBannerMessage &&
-               lhs.bannerColor                 == rhs.bannerColor &&
-               lhs.isSendingEmail              == rhs.isSendingEmail &&
                lhs.anyInvalidConditionsCheck   == rhs.anyInvalidConditionsCheck &&
                lhs.emptySubjectWarning         == rhs.emptySubjectWarning &&
                lhs.finalHtmlContainsRawVariables == rhs.finalHtmlContainsRawVariables &&
@@ -490,75 +472,6 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                         WeeklyScheduleView(viewModel: weeklyScheduleVm)
                     }
                     .padding(.vertical, 8)
-                }
-            }
-
-            Spacer()
-
-            if showSuccessBanner {
-                VStack {
-                    Spacer()
-                    HStack {
-                        Image(systemName: bannerColor == .green
-                                ? "checkmark.circle.fill"
-                                : "xmark.octagon.fill")
-                        .foregroundColor(.white)
-                        Text(successBannerMessage)
-                        .foregroundColor(.white)
-                    }
-                    .padding()
-                    .background(bannerColor)
-                    .cornerRadius(8)
-                    .padding(.bottom, 20)
-                    .transition(.move(edge: .bottom))
-                }
-                .animation(.easeInOut, value: showSuccessBanner)
-            } else {
-                if isSendingEmail {
-                    HStack(spacing: 8) {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                        Text("Sending...")
-                    }
-                    .padding(.bottom, 10)
-                    .transition(.opacity)
-                    .animation(.easeInOut(duration: 0.3), value: isSendingEmail)
-                }
-
-                if apiPathVm.selectedRoute == .invoice && apiPathVm.selectedEndpoint == .expired {
-                    NotificationBanner(
-                        type: .warning,
-                        message: "You are sending an overdue reminder"
-                    )
-                }
-
-                HStack {
-                    StandardEscapableButton(
-                        type: .execute, 
-                        title: "Run mailer", 
-                        cancelTitle: "Do not run mailer yet", 
-                        subtitle: "Starts mailer background process"
-                    ) {
-                        do {
-                            try sendMailerEmail()
-                        } catch {
-                            print(error)
-                        }
-                    }
-                    .disabled(
-                        isSendingEmail || 
-                        anyInvalidConditionsCheck || 
-                        apiPathVm.routeOrEndpointIsNil()
-                    )
-                }
-                .padding(.top, 10)
-
-                HStack {
-                    NotificationBanner(
-                        type: .warning,
-                        message: "No endpoint selected"
-                    )
-                    .hide(when: !apiPathVm.routeOrEndpointIsNil())
                 }
             }
         }
