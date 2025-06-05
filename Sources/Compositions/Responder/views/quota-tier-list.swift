@@ -16,23 +16,26 @@ public struct QuotaTierListView: View {
     }
 
     public var body: some View {
-        Group {
-            if let t = tiers {
-                QuotaTierListSubView(tiers: t)
-                    .padding(.top, 16)
-            } else {
-                VStack {
-                    NotificationBanner(type: .warning,
-                            message: message)
-                }
-                .onAppear {
-                    do {
-                        self.tiers = try quota.tiers()
-                    } catch {
-                        self.message = error.localizedDescription
+        VStack {
+            Group {
+                if let t = tiers {
+                    QuotaTierListSubView(tiers: t)
+                        .padding(.top, 16)
+                } else {
+                    VStack {
+                        NotificationBanner(type: .warning,
+                                message: message)
+                    }
+                    .onAppear {
+                        do {
+                            self.tiers = try quota.tiers()
+                        } catch {
+                            self.message = error.localizedDescription
+                        }
                     }
                 }
             }
+            .frame(maxHeight: .infinity)
         }
     }
 }
