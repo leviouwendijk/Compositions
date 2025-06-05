@@ -10,6 +10,8 @@ import Implementations
 public struct MailerStandardOutput: View {
     @EnvironmentObject public var vm: MailerViewModel
 
+    public init() {}
+
     public var body: some View {
         VStack {
             VStack {
