@@ -32,7 +32,11 @@ public class ContactsListViewModel: ObservableObject {
             withAnimation(.easeInOut(duration: 0.20)) {
                 isFuzzyFiltering = false
             }
-            scrollToFirstID = filteredContacts.first?.identifier
+
+            let newFirstID = filteredContacts.first?.identifier
+            DispatchQueue.main.async {
+                self.scrollToFirstID = newFirstID
+            }
         }
     }
 
@@ -41,10 +45,7 @@ public class ContactsListViewModel: ObservableObject {
     @Published public var selectedContactId: String? = nil
     @Published public var scrollToFirstID: String? = nil
 
-    /// A DispatchWorkItem that we cancel+reschedule whenever any input changes.
     private var pendingFilterWorkItem: DispatchWorkItem?
-
-    /// How long to wait after the “last change” before actually filtering.
     private let debounceInterval: TimeInterval = 0.2
 
     public init() {
