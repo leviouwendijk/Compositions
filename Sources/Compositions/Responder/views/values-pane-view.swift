@@ -289,7 +289,7 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                             .padding(.top, 16)
 
                         VStack {
-                            HStack(alignment: .center, spacing: 45) {
+                            HStack(spacing: 45) {
                                 Spacer()
 
                                 VStack {
@@ -447,7 +447,7 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
                                     )
                                     .hide(when: remotePdfNotifier.hide)
                                 }
-                                .padding(.trailing, 40)
+                                .padding(.trailing, 30)
                             }
                             .frame(maxWidth: .infinity, alignment: .center)
 
