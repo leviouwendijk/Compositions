@@ -60,7 +60,8 @@ public struct QuotaTierListSubView: View {
 
                     ForEach(tiers, id: \.tier) { content in
                         Text(content.tier.rawValue.capitalized)
-                            .font(.headline)
+                            .font(.subheadline)
+                            .bold()
                             .frame(maxWidth: .infinity, alignment: .center)
                     }
                 }
