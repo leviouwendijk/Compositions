@@ -13,8 +13,6 @@ public class ContactsListViewModel: ObservableObject {
     @Published public var errorMessage: String?
     // @Published public var searchStrictness: SearchStrictness = .strict
 
-
-    /// When these change, we’ll “debounce” and then re‐filter.
     @Published public var contacts: [CNContact] = [] {
         didSet { scheduleFilterIfNeeded() }
     }
@@ -68,57 +66,57 @@ public class ContactsListViewModel: ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
 
-    public func fuzzyFilterListener() {
-        Publishers
-        .CombineLatest3($contacts, $searchQuery, $searchStrictness)
-        .drop { contacts, _, _ in contacts.isEmpty }
-        .removeDuplicates(by: { a, b in
-            return a.0.count == b.0.count
-            && a.1 == b.1
-            && a.2 == b.2
-        })
-        .debounce(for: .milliseconds(200), scheduler: DispatchQueue.main)
-        .sink { [weak self] allContacts, query, strictness in
-            guard let self = self else { return }
+    // public func fuzzyFilterListener() {
+    //     Publishers
+    //     .CombineLatest3($contacts, $searchQuery, $searchStrictness)
+    //     .drop { contacts, _, _ in contacts.isEmpty }
+    //     .removeDuplicates(by: { a, b in
+    //         return a.0.count == b.0.count
+    //         && a.1 == b.1
+    //         && a.2 == b.2
+    //     })
+    //     .debounce(for: .milliseconds(200), scheduler: DispatchQueue.main)
+    //     .sink { [weak self] allContacts, query, strictness in
+    //         guard let self = self else { return }
 
-            if !(self.isLoading) {
-                withAnimation(.easeInOut(duration: 0.25)) {
-                    self.isFuzzyFiltering = true
-                }
-            }
+    //         if !(self.isLoading) {
+    //             withAnimation(.easeInOut(duration: 0.25)) {
+    //                 self.isFuzzyFiltering = true
+    //             }
+    //         }
 
-            self.applyFuzzyFilter(
-                to: allContacts,
-                query: query,
-                tolerance: strictness.tolerance
-            )
-        }
-        .store(in: &cancellables)
-    }
+    //         self.applyFuzzyFilter(
+    //             to: allContacts,
+    //             query: query,
+    //             tolerance: strictness.tolerance
+    //         )
+    //     }
+    //     .store(in: &cancellables)
+    // }
 
-    public func applyFuzzyFilter(
-        to allContacts: [CNContact],
-        query: String,
-        tolerance: Int
-    ) {
-        let normalized = query.normalizedForClientDogSearch
+    // public func applyFuzzyFilter(
+    //     to allContacts: [CNContact],
+    //     query: String,
+    //     tolerance: Int
+    // ) {
+    //     let normalized = query.normalizedForClientDogSearch
 
-        DispatchQueue.global(qos: .userInitiated).async {
-            let results = allContacts
-            .filteredClientContacts(
-                matching: normalized,
-                fuzzyTolerance: tolerance
-            )
+    //     DispatchQueue.global(qos: .userInitiated).async {
+    //         let results = allContacts
+    //         .filteredClientContacts(
+    //             matching: normalized,
+    //             fuzzyTolerance: tolerance
+    //         )
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
-                withAnimation(.easeInOut(duration: 0.20)) {
-                    self.filteredContacts = results
-                    self.isFuzzyFiltering = false
-                }
-                // self.scrollToFirstID = results.first?.identifier
-            }
-        }
-    }
+    //         DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+    //             withAnimation(.easeInOut(duration: 0.20)) {
+    //                 self.filteredContacts = results
+    //                 self.isFuzzyFiltering = false
+    //             }
+    //             // self.scrollToFirstID = results.first?.identifier
+    //         }
+    //     }
+    // }
 
     private func scheduleFilterIfNeeded() {
         guard !contacts.isEmpty else {
