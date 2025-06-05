@@ -222,7 +222,7 @@ public struct ValuesPaneView: View, @preconcurrency Equatable {
 
                     // 5) Travel‐cost fields
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Travel Cost Inputs").bold()
+                        // Text("Travel Cost Inputs").bold()
                         HStack {
                             StandardTextField(
                                 "speed",
