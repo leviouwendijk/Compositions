@@ -28,13 +28,6 @@ public struct QuotaTierListView: View {
                         message: viewmodel.errorMessage
                     )
                 }
-                .onAppear {
-                    do {
-                        try viewmodel.loadTiers()
-                    } catch {
-                        viewmodel.errorMessage = error.localizedDescription
-                    }
-                }
             }
         }
     }
