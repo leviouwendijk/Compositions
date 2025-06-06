@@ -23,8 +23,10 @@ public struct QuotaTierListView: View {
                         .padding(.top, 16)
                 } else {
                     VStack {
-                        NotificationBanner(type: .warning,
-                                message: message)
+                        NotificationBanner(
+                            type: .warning, 
+                            message: message
+                        )
                     }
                     .onAppear {
                         do {
@@ -35,7 +37,6 @@ public struct QuotaTierListView: View {
                     }
                 }
             }
-            .frame(maxHeight: .infinity, alignment: .center)
         }
     }
 }
@@ -51,6 +52,8 @@ public struct QuotaTierListSubView: View {
 
     public var body: some View {
         ScrollView {
+            Spacer()
+
             VStack(spacing: 12) {
                 // ─── HEADER ROW ──────────────────────────────────────────────────
                 HStack(spacing: 0) {
@@ -141,6 +144,8 @@ public struct QuotaTierListSubView: View {
                 }
             }
             .padding()
+
+            Spacer()
         }
     }
 }

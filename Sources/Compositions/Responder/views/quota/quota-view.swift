@@ -57,6 +57,7 @@ public struct QuotaView: View {
                         .padding(.top, 16)
                     }
                 }
+                .frame(minWidth: 300, alignment: .center)
                 // .frame(maxHeight: .infinity)
                 // .frame(maxWidth: .infinity)
             }
