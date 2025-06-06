@@ -29,6 +29,5 @@ public struct ValuesPaneView: View {
                 }
             }
         }
-        Spacer()
     }
 }
