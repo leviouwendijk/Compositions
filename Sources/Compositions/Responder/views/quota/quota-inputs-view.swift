@@ -151,6 +151,5 @@ public struct QuotaInputsView: View {
             }
             .padding(.top, 8)
         }
-        .frame(maxHeight: .infinity)
     }
 }
