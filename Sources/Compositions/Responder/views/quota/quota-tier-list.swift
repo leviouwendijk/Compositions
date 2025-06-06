@@ -36,6 +36,7 @@ public struct QuotaTierListView: View {
                     }
                 }
             }
+            .frame(maxHeight: .infinity, alignment: .center)
         }
         .frame(maxHeight: .infinity)
     }
@@ -51,7 +52,6 @@ public struct QuotaTierListSubView: View {
     }
 
     public var body: some View {
-        Spacer()
         ScrollView {
             VStack(spacing: 12) {
                 // ─── HEADER ROW ──────────────────────────────────────────────────
@@ -144,7 +144,6 @@ public struct QuotaTierListSubView: View {
             }
             .padding()
         }
-        Spacer()
     }
 }
 
