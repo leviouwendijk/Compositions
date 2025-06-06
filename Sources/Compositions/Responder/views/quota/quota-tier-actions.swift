@@ -37,6 +37,7 @@ public struct QuotaTierActionsView: View {
                                 isSelected: (viewmodel.selectedTier == tier),
                                 action: { viewmodel.selectedTier = tier }
                             )
+                            .frame(maxWidth: 200)
                             // .font(.caption2)
                             // .padding(.vertical, 4)
                             // .padding(.horizontal, 6)
