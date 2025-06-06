@@ -10,6 +10,12 @@ import Structures
 public struct VariablesView: View {
     @ObservedObject public var viewmodel: ResponderViewModel
     @StateObject public var waMessageNotifier: NotificationBannerController = NotificationBannerController()
+    
+    public init(
+        viewmodel: ResponderViewModel
+    ) {
+        self.viewmodel = viewmodel
+    }
 
     public var body: some View {
         VStack {
