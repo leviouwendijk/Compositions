@@ -60,6 +60,7 @@ public struct ExecuteMailerView: View {
                         }
                     }
                     .disabled(viewmodel.isSendingEmail)
+                    .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
                 }
                 .padding(.top, 10)
             }
