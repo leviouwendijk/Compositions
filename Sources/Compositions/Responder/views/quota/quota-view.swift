@@ -29,6 +29,8 @@ public struct QuotaView: View {
                 }
             }
 
+            Spacer()
+
             QuotaStatusView(
                 viewmodel: quotaVm
             )
