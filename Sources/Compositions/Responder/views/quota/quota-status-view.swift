@@ -24,7 +24,7 @@ public struct QuotaStatusView: View {
                 if viewmodel.hasEmptyInputs {
                     NotificationBanner(
                         type: .info,
-                        message: "Enter inputs"
+                        message: "Enter quote value inputs"
                     )
                 } else {
                     NotificationBanner(
@@ -32,12 +32,6 @@ public struct QuotaStatusView: View {
                         message: viewmodel.errorMessage
                     )
                 }
-            } else {
-                NotificationBanner(
-                    type: .info,
-                    message: "Enter quote values above"
-                )
-                .padding(.top, 16)
             }
         }
         .frame(minWidth: 300, alignment: .center)
