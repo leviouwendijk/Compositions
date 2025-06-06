@@ -20,6 +20,7 @@ public struct QuotaTierListView: View {
             Group {
                 if let t = tiers {
                     QuotaTierListSubView(tiers: t)
+                    .frame(maxHeight: 300)
                 } else {
                     VStack {
                         NotificationBanner(
