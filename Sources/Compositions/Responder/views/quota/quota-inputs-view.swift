@@ -18,12 +18,7 @@ public struct QuotaInputsView: View {
             // 1) “Kilometers” field
             StandardTextField(
                 "kilometers",
-                text: Binding<String>(
-                    get:  { viewmodel.quotaVm.customQuotaInputs.travelCost.kilometers },
-                    set:  { newValue in
-                        viewmodel.quotaVm.customQuotaInputs.travelCost.kilometers = newValue
-                    }
-                ),
+                text: $viewmodel.quotaVm.customQuotaInputs.travelCost.kilometers,
                 placeholder: "45"
             )
 
