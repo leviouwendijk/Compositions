@@ -16,16 +16,13 @@ public struct QuotaTierActionsView: View {
     )
 
     @ObservedObject public var viewmodel: QuotaViewModel
-    // public let quota: CustomQuota
     public let clientIdentifier: String
     
     public init(
         viewmodel: QuotaViewModel,
-        // quota: CustomQuota,
         clientIdentifier: String
     ) {
         self.viewmodel = viewmodel
-        // self.quota = quota
         self.clientIdentifier = clientIdentifier
     }
 
@@ -111,11 +108,11 @@ public struct QuotaTierActionsView: View {
                     }
                     ControlledNotificationBanner(controller: notifier)
                 }
-            } else {
-                NotificationBanner(
-                    type: .warning,
-                    message: "No quota available"
-                )
+            // } else {
+            //     NotificationBanner(
+            //         type: .info,
+            //         message: "No quota available"
+            //     )
             }
         }
         .frame(maxWidth: .infinity)
