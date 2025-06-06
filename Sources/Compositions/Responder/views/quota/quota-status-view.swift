@@ -34,6 +34,8 @@ public struct QuotaStatusView: View {
                 }
             }
         }
-        .frame(minWidth: 300, alignment: .center)
+        .frame(minWidth: 300)
+        .frame(minHeight: 200)
+        .frame(alignment: .center)
     }
 }
