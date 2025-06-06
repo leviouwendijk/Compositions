@@ -6,7 +6,8 @@ import Implementations
 
 public struct QuotaView: View {
     @ObservedObject public var viewmodel: ResponderViewModel
-    
+    public var quotaVm: QuotaViewModel = QuotaViewModel()
+
     public init(
         viewmodel: ResponderViewModel
     ) {
@@ -17,13 +18,13 @@ public struct QuotaView: View {
         VStack {
             QuotaInputsView(viewmodel: viewmodel)
 
-            if viewmodel.quotaVm.isLoading {
+            if quotaVm.isLoading {
                 ProgressView("Computing quota…")
                     .padding(.top, 16)
             }
 
-            if !(viewmodel.quotaVm.errorMessage.isEmpty) {
-                if viewmodel.quotaVm.hasEmptyInputs {
+            if !(quotaVm.errorMessage.isEmpty) {
+                if quotaVm.hasEmptyInputs {
                     NotificationBanner(
                         type: .info,
                         message: "Enter inputs"
@@ -31,12 +32,12 @@ public struct QuotaView: View {
                 } else {
                     NotificationBanner(
                         type: .warning,
-                        message: viewmodel.quotaVm.errorMessage
+                        message: quotaVm.errorMessage
                     )
                 }
             }
 
-            else if let quota = viewmodel.quotaVm.loadedQuota {
+            else if let quota = quotaVm.loadedQuota {
                 QuotaTierListView(quota: quota)
                     // .padding(.top, 12)
                     // .padding(.bottom, 16)
