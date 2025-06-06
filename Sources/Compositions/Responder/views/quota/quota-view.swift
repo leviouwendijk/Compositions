@@ -52,5 +52,6 @@ public struct QuotaView: View {
             }
         }
         .frame(maxHeight: .infinity)
+        .frame(maxWidth: 400)
     }
 }
