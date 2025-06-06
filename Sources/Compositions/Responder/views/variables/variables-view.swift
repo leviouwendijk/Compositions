@@ -82,6 +82,10 @@ public struct VariablesView: View {
                         StandardTextField("endpoint", text: $viewmodel.fetchableFile)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .onSubmit {
+                                guard !viewmodel.apiPathVm.routeOrEndpointIsNil else { 
+                                    return 
+                                }
+
                                 do {
                                     try viewmodel.sendMailerEmail()
                                 } catch {

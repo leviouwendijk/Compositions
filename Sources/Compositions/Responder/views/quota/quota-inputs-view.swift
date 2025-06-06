@@ -26,22 +26,12 @@ public struct QuotaInputsView: View {
             HStack {
                 StandardTextField(
                     "prognosis",
-                    text: Binding<String>(
-                        get:  { viewmodel.customQuotaInputs.prognosis.count },
-                        set:  { newValue in
-                            viewmodel.customQuotaInputs.prognosis.count = newValue
-                        }
-                    ),
+                    text: $viewmodel.customQuotaInputs.prognosis.count,
                     placeholder: "5"
                 )
                 StandardTextField(
                     "local",
-                    text: Binding<String>(
-                        get:  { viewmodel.customQuotaInputs.prognosis.local },
-                        set:  { newValue in
-                            viewmodel.customQuotaInputs.prognosis.local = newValue
-                        }
-                    ),
+                    text: $viewmodel.customQuotaInputs.prognosis.local,
                     placeholder: "4"
                 )
             }
@@ -50,22 +40,12 @@ public struct QuotaInputsView: View {
             HStack {
                 StandardTextField(
                     "suggestion",
-                    text: Binding<String>(
-                        get:  { viewmodel.customQuotaInputs.suggestion.count },
-                        set:  { newValue in
-                            viewmodel.customQuotaInputs.suggestion.count = newValue
-                        }
-                    ),
+                    text: $viewmodel.customQuotaInputs.suggestion.count,
                     placeholder: "3"
                 )
                 StandardTextField(
                     "local",
-                    text: Binding<String>(
-                        get:  { viewmodel.customQuotaInputs.suggestion.local },
-                        set:  { newValue in
-                            viewmodel.customQuotaInputs.suggestion.local = newValue
-                        }
-                    ),
+                    text: $viewmodel.customQuotaInputs.suggestion.local,
                     placeholder: "2"
                 )
             }
@@ -74,22 +54,12 @@ public struct QuotaInputsView: View {
             HStack {
                 StandardTextField(
                     "singular",
-                    text: Binding<String>(
-                        get:  { viewmodel.customQuotaInputs.singular.count },
-                        set:  { newValue in
-                            viewmodel.customQuotaInputs.singular.count = newValue
-                        }
-                    ),
+                    text: $viewmodel.customQuotaInputs.singular.count,
                     placeholder: "1"
                 )
                 StandardTextField(
                     "local",
-                    text: Binding<String>(
-                        get:  { viewmodel.customQuotaInputs.singular.local },
-                        set:  { newValue in
-                            viewmodel.customQuotaInputs.singular.local = newValue
-                        }
-                    ),
+                    text: $viewmodel.customQuotaInputs.singular.local,
                     placeholder: "0"
                 )
             }
@@ -98,12 +68,7 @@ public struct QuotaInputsView: View {
             // 4) Base
             StandardTextField(
                 "base",
-                text: Binding<String>(
-                    get:  { viewmodel.customQuotaInputs.base },
-                    set:  { newValue in
-                        viewmodel.customQuotaInputs.base = newValue
-                    }
-                ),
+                text: $viewmodel.customQuotaInputs.base,
                 placeholder: "350"
             )
 
@@ -113,12 +78,7 @@ public struct QuotaInputsView: View {
                 HStack {
                     StandardTextField(
                         "speed",
-                        text: Binding<String>(
-                            get:  { viewmodel.customQuotaInputs.travelCost.speed },
-                            set:  { newValue in
-                                viewmodel.customQuotaInputs.travelCost.speed = newValue
-                            }
-                        ),
+                        text: $viewmodel.customQuotaInputs.travelCost.speed,
                         placeholder: "80.0"
                     )
                     StandardTextField(
