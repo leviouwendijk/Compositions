@@ -55,8 +55,8 @@ public struct QuotaView: View {
                         .padding(.top, 16)
                     }
                 }
-                .frame(maxHeight: .infinity)
-                .frame(maxWidth: .infinity)
+                // .frame(maxHeight: .infinity)
+                // .frame(maxWidth: .infinity)
             }
 
             if let quota = quotaVm.loadedQuota {
