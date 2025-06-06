@@ -38,9 +38,7 @@ struct QuotaTierActionsView: View {
                         .padding(.vertical, 4)
                         .padding(.horizontal, 6)
                         .background(
-                            selectedTier == tier
-                                ? Color.accentColor.opacity(0.2)
-                                : Color.secondary.opacity(0.1)
+                            selectedTier == tier ? Color.accentColor.opacity(0.2) : Color.secondary.opacity(0.1)
                         )
                         .cornerRadius(4)
                         .onTapGesture {

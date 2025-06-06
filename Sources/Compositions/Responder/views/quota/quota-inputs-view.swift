@@ -5,10 +5,10 @@ import ViewComponents
 import Implementations
 
 public struct QuotaInputsView: View {
-    @ObservedObject public var viewmodel: ResponderViewModel
+    @ObservedObject public var viewmodel: QuotaViewModel
     
     public init(
-        viewmodel: ResponderViewModel
+        viewmodel: QuotaViewModel
     ) {
         self.viewmodel = viewmodel
     }
@@ -18,7 +18,7 @@ public struct QuotaInputsView: View {
             // 1) “Kilometers” field
             StandardTextField(
                 "kilometers",
-                text: $viewmodel.quotaVm.customQuotaInputs.travelCost.kilometers,
+                text: $viewmodel.customQuotaInputs.travelCost.kilometers,
                 placeholder: "45"
             )
 
@@ -27,9 +27,9 @@ public struct QuotaInputsView: View {
                 StandardTextField(
                     "prognosis",
                     text: Binding<String>(
-                        get:  { viewmodel.quotaVm.customQuotaInputs.prognosis.count },
+                        get:  { viewmodel.customQuotaInputs.prognosis.count },
                         set:  { newValue in
-                            viewmodel.quotaVm.customQuotaInputs.prognosis.count = newValue
+                            viewmodel.customQuotaInputs.prognosis.count = newValue
                         }
                     ),
                     placeholder: "5"
@@ -37,9 +37,9 @@ public struct QuotaInputsView: View {
                 StandardTextField(
                     "local",
                     text: Binding<String>(
-                        get:  { viewmodel.quotaVm.customQuotaInputs.prognosis.local },
+                        get:  { viewmodel.customQuotaInputs.prognosis.local },
                         set:  { newValue in
-                            viewmodel.quotaVm.customQuotaInputs.prognosis.local = newValue
+                            viewmodel.customQuotaInputs.prognosis.local = newValue
                         }
                     ),
                     placeholder: "4"
@@ -51,9 +51,9 @@ public struct QuotaInputsView: View {
                 StandardTextField(
                     "suggestion",
                     text: Binding<String>(
-                        get:  { viewmodel.quotaVm.customQuotaInputs.suggestion.count },
+                        get:  { viewmodel.customQuotaInputs.suggestion.count },
                         set:  { newValue in
-                            viewmodel.quotaVm.customQuotaInputs.suggestion.count = newValue
+                            viewmodel.customQuotaInputs.suggestion.count = newValue
                         }
                     ),
                     placeholder: "3"
@@ -61,9 +61,9 @@ public struct QuotaInputsView: View {
                 StandardTextField(
                     "local",
                     text: Binding<String>(
-                        get:  { viewmodel.quotaVm.customQuotaInputs.suggestion.local },
+                        get:  { viewmodel.customQuotaInputs.suggestion.local },
                         set:  { newValue in
-                            viewmodel.quotaVm.customQuotaInputs.suggestion.local = newValue
+                            viewmodel.customQuotaInputs.suggestion.local = newValue
                         }
                     ),
                     placeholder: "2"
@@ -75,9 +75,9 @@ public struct QuotaInputsView: View {
                 StandardTextField(
                     "singular",
                     text: Binding<String>(
-                        get:  { viewmodel.quotaVm.customQuotaInputs.singular.count },
+                        get:  { viewmodel.customQuotaInputs.singular.count },
                         set:  { newValue in
-                            viewmodel.quotaVm.customQuotaInputs.singular.count = newValue
+                            viewmodel.customQuotaInputs.singular.count = newValue
                         }
                     ),
                     placeholder: "1"
@@ -85,9 +85,9 @@ public struct QuotaInputsView: View {
                 StandardTextField(
                     "local",
                     text: Binding<String>(
-                        get:  { viewmodel.quotaVm.customQuotaInputs.singular.local },
+                        get:  { viewmodel.customQuotaInputs.singular.local },
                         set:  { newValue in
-                            viewmodel.quotaVm.customQuotaInputs.singular.local = newValue
+                            viewmodel.customQuotaInputs.singular.local = newValue
                         }
                     ),
                     placeholder: "0"
@@ -99,9 +99,9 @@ public struct QuotaInputsView: View {
             StandardTextField(
                 "base",
                 text: Binding<String>(
-                    get:  { viewmodel.quotaVm.customQuotaInputs.base },
+                    get:  { viewmodel.customQuotaInputs.base },
                     set:  { newValue in
-                        viewmodel.quotaVm.customQuotaInputs.base = newValue
+                        viewmodel.customQuotaInputs.base = newValue
                     }
                 ),
                 placeholder: "350"
@@ -114,9 +114,9 @@ public struct QuotaInputsView: View {
                     StandardTextField(
                         "speed",
                         text: Binding<String>(
-                            get:  { viewmodel.quotaVm.customQuotaInputs.travelCost.speed },
+                            get:  { viewmodel.customQuotaInputs.travelCost.speed },
                             set:  { newValue in
-                                viewmodel.quotaVm.customQuotaInputs.travelCost.speed = newValue
+                                viewmodel.customQuotaInputs.travelCost.speed = newValue
                             }
                         ),
                         placeholder: "80.0"
@@ -124,11 +124,11 @@ public struct QuotaInputsView: View {
                     StandardTextField(
                         "rate/travel",
                         text: Binding<String>(
-                            get:  { viewmodel.quotaVm.customQuotaInputs.travelCost.rates.travel },
+                            get:  { viewmodel.customQuotaInputs.travelCost.rates.travel },
                             set:  { newValue in
-                                viewmodel.quotaVm.customQuotaInputs.travelCost.rates = TravelCostRatesInputs(
+                                viewmodel.customQuotaInputs.travelCost.rates = TravelCostRatesInputs(
                                     travel: newValue,
-                                    time: viewmodel.quotaVm.customQuotaInputs.travelCost.rates.time
+                                    time: viewmodel.customQuotaInputs.travelCost.rates.time
                                 )
                             }
                         ),
@@ -137,10 +137,10 @@ public struct QuotaInputsView: View {
                     StandardTextField(
                         "rate/time",
                         text: Binding<String>(
-                            get:  { viewmodel.quotaVm.customQuotaInputs.travelCost.rates.time },
+                            get:  { viewmodel.customQuotaInputs.travelCost.rates.time },
                             set:  { newValue in
-                                viewmodel.quotaVm.customQuotaInputs.travelCost.rates = TravelCostRatesInputs(
-                                    travel: viewmodel.quotaVm.customQuotaInputs.travelCost.rates.travel,
+                                viewmodel.customQuotaInputs.travelCost.rates = TravelCostRatesInputs(
+                                    travel: viewmodel.customQuotaInputs.travelCost.rates.travel,
                                     time: newValue
                                 )
                             }

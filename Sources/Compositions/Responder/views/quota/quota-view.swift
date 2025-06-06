@@ -16,7 +16,7 @@ public struct QuotaView: View {
 
     public var body: some View {
         VStack {
-            QuotaInputsView(viewmodel: viewmodel)
+            QuotaInputsView(viewmodel: quotaVm)
 
             if quotaVm.isLoading {
                 ProgressView("Computing quota…")
