@@ -18,6 +18,9 @@ public struct QuotaView: View {
         VStack {
             HStack {
                 QuotaInputsView(viewmodel: quotaVm)
+                .frame(maxWidth: 300)
+                .padding(.leading, 20)
+                .padding(.trailing, 20)
 
                 VStack {
                     if quotaVm.isLoading {

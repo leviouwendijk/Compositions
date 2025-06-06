@@ -137,7 +137,7 @@ public struct QuotaTierListSubView: View {
                         )
                     }
 
-                    Spacer(minLength: 0)
+                    // Spacer(minLength: 0)
                 }
             }
             .padding()
