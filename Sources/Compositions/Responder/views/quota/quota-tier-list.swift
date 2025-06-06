@@ -20,7 +20,6 @@ public struct QuotaTierListView: View {
             Group {
                 if let t = tiers {
                     QuotaTierListSubView(tiers: t)
-                        .padding(.top, 16)
                 } else {
                     VStack {
                         NotificationBanner(
@@ -38,6 +37,7 @@ public struct QuotaTierListView: View {
                 }
             }
         }
+        .frame(maxHeight: .infinity)
     }
 }
 
