@@ -38,10 +38,13 @@ public struct QuotaView: View {
                 viewmodel: quotaVm
             )
 
-            QuotaTierActionsView(
-                viewmodel: quotaVm, 
-                clientIdentifier: viewmodel.clientIdentifier
-            )
+            if let quota = quotaVm.loadedQuota {
+                QuotaTierActionsView(
+                    viewmodel: quotaVm, 
+                    quota: quota,
+                    clientIdentifier: viewmodel.clientIdentifier
+                )
+            }
         }
     }
 }
