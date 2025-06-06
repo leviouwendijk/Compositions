@@ -21,13 +21,6 @@ public struct QuotaTierListView: View {
                     tiers: t
                 )
                 .frame(maxHeight: 420)
-            } else {
-                VStack {
-                    NotificationBanner(
-                        type: .warning, 
-                        message: viewmodel.errorMessage
-                    )
-                }
             }
         }
     }
