@@ -24,7 +24,7 @@ public struct QuotaView: View {
 
                 Spacer()
 
-                VStack {
+                HStack {
                     if quotaVm.isLoading {
                         ProgressView("Computing quota…")
                             .padding(.top, 16)
