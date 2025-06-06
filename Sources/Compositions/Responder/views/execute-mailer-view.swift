@@ -1,61 +1,41 @@
 import Foundation
 import SwiftUI
 import ViewComponents
+import Implementations
 
-public struct ExecuteMailerView: View, @preconcurrency Equatable {
-    @Binding public var isSendingEmail: Bool
-    @Binding public var showSuccessBanner: Bool
-    @Binding public var successBannerMessage: String
-    @Binding public var bannerColor: Color
-
-    public let sendMailerEmail: () throws -> Void
-
+public struct ExecuteMailerView: View {
+    @ObservedObject public var viewmodel: ResponderViewModel
+    
     public init(
-        isSendingEmail: Binding<Bool>,
-        showSuccessBanner: Binding<Bool>,
-        successBannerMessage: Binding<String>,
-        bannerColor: Binding<Color>,
-        sendMailerEmail: @escaping () throws -> Void
+        viewmodel: ResponderViewModel
     ) {
-        self._isSendingEmail = isSendingEmail
-        self._showSuccessBanner = showSuccessBanner
-        self._successBannerMessage = successBannerMessage
-        self._bannerColor = bannerColor
-        self.sendMailerEmail = sendMailerEmail
-    }
-
-    public static func == (lhs: ExecuteMailerView, rhs: ExecuteMailerView) -> Bool {
-        return
-            lhs.isSendingEmail == rhs.isSendingEmail &&
-            lhs.showSuccessBanner == rhs.showSuccessBanner &&
-            lhs.successBannerMessage == rhs.successBannerMessage &&
-            lhs.bannerColor == rhs.bannerColor
+        self.viewmodel = viewmodel
     }
 
     public var body: some View {
         VStack {
-            if showSuccessBanner {
+            if viewmodel.showSuccessBanner {
                 VStack {
                     Spacer()
                     HStack {
-                        Image(systemName: bannerColor == .green
+                        Image(systemName: viewmodel.bannerColor == .green
                                 ? "checkmark.circle.fill"
                                 : "xmark.octagon.fill"
                         )
                         .foregroundColor(.white)
-                        Text(successBannerMessage)
+                        Text(viewmodel.successBannerMessage)
                             .foregroundColor(.white)
                     }
                     .padding()
-                    .background(bannerColor)
+                    .background(viewmodel.bannerColor)
                     .cornerRadius(8)
                     .padding(.bottom, 20)
                     .transition(.move(edge: .bottom))
                 }
-                .animation(.easeInOut, value: showSuccessBanner)
+                .animation(.easeInOut, value: viewmodel.showSuccessBanner)
             }
             else {
-                if isSendingEmail {
+                if viewmodel.isSendingEmail {
                     HStack(spacing: 8) {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle())
@@ -63,7 +43,7 @@ public struct ExecuteMailerView: View, @preconcurrency Equatable {
                     }
                     .padding(.bottom, 10)
                     .transition(.opacity)
-                    .animation(.easeInOut(duration: 0.3), value: isSendingEmail)
+                    .animation(.easeInOut(duration: 0.3), value: viewmodel.isSendingEmail)
                 }
 
                 HStack {
@@ -74,12 +54,12 @@ public struct ExecuteMailerView: View, @preconcurrency Equatable {
                         subtitle: "Starts mailer background process"
                     ) {
                         do {
-                            try sendMailerEmail()
+                            try viewmodel.sendMailerEmail()
                         } catch {
                             print(error)
                         }
                     }
-                    .disabled(isSendingEmail)
+                    .disabled(viewmodel.isSendingEmail)
                 }
                 .padding(.top, 10)
             }

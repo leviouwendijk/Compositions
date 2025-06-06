@@ -8,7 +8,7 @@ import Interfaces
 import Implementations
 
 public struct MailerStandardOutput: View {
-    @EnvironmentObject public var vm: MailerViewModel
+    @EnvironmentObject public var vm: ResponderViewModel
 
     public init() {}
 
