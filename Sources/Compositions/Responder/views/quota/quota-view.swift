@@ -16,18 +16,21 @@ public struct QuotaView: View {
 
     public var body: some View {
         VStack {
-            HStack {
-                QuotaInputsView(viewmodel: quotaVm)
-                .frame(maxWidth: 300)
-                .padding(.leading, 20)
-                .padding(.trailing, 20)
+            VStack {
+                HStack {
+                    QuotaInputsView(viewmodel: quotaVm)
+                    .frame(maxWidth: 300)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 20)
 
-                Spacer()
+                    Spacer()
 
-                if let quota = quotaVm.loadedQuota {
-                    QuotaTierListView(quota: quota)
+                    if let quota = quotaVm.loadedQuota {
+                        QuotaTierListView(quota: quota)
+                    }
                 }
             }
+            .frame(minHeight: 420)
 
             Spacer()
 
