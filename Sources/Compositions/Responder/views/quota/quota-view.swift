@@ -6,7 +6,7 @@ import Implementations
 
 public struct QuotaView: View {
     @ObservedObject public var viewmodel: ResponderViewModel
-    public var quotaVm: QuotaViewModel = QuotaViewModel()
+    @StateObject public var quotaVm: QuotaViewModel = QuotaViewModel()
 
     public init(
         viewmodel: ResponderViewModel
