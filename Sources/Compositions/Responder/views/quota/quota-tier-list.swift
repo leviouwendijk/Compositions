@@ -37,9 +37,9 @@ public struct QuotaTierListView: View {
                     }
                 }
             }
-            .frame(maxHeight: .infinity, alignment: .center)
+            // .frame(maxHeight: .infinity, alignment: .center)
         }
-        .frame(maxHeight: .infinity)
+        // .frame(maxHeight: .infinity)
     }
 }
 
