@@ -5,6 +5,7 @@ import Interfaces
 import ViewComponents
 import Contacts
 import Implementations
+import Structures
 
 public struct VariablesView: View, @preconcurrency Equatable {
     @ObservedObject public var contactsVm: ContactsListViewModel

@@ -8,15 +8,12 @@ import Economics
 import Implementations
 
 public struct ValuesPaneView: View, @preconcurrency Equatable {
+    // @ObservedObject public var mailerVm: MailerViewModel
+
     // observables (passed)
     @ObservedObject public var apiPathVm: MailerAPISelectionViewModel
     @ObservedObject public var weeklyScheduleVm: WeeklyScheduleViewModel
     @ObservedObject public var quotaVm: QuotaViewModel
-
-    // // local state object inits
-    // @StateObject public var localPdfNotifier: NotificationBannerController = NotificationBannerController()
-    // @StateObject public var combinedPdfNotifier: NotificationBannerController = NotificationBannerController()
-    // @StateObject public var remotePdfNotifier: NotificationBannerController = NotificationBannerController()
 
     // passed properties
     @Binding public var subject: String
