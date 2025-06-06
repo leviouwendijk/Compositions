@@ -5,7 +5,7 @@ import ViewComponents
 import Implementations
 
 public struct QuotaInputsView: View {
-    public var viewmodel: ResponderViewModel
+    @ObservedObject public var viewmodel: ResponderViewModel
     
     public init(
         viewmodel: ResponderViewModel
