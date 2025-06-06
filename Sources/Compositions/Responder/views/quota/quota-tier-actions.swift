@@ -32,19 +32,23 @@ public struct QuotaTierActionsView: View {
                 VStack {
                     HStack(spacing: 4) {
                         ForEach(QuotaTierType.allCases) { tier in
-                            Text(tier.rawValue)
-                            .font(.caption2)
-                            .padding(.vertical, 4)
-                            .padding(.horizontal, 6)
-                            .background(
-                                viewmodel.selectedTier == tier ? Color.accentColor.opacity(0.2) : Color.secondary.opacity(0.1)
+                            SelectableRow(
+                                title: tier.rawValue,
+                                isSelected: (viewmodel.selectedTier == tier),
+                                action: { viewmodel.selectedTier = tier }
                             )
-                            .cornerRadius(4)
-                            .onTapGesture {
-                                withAnimation {
-                                    viewmodel.selectedTier = tier
-                                }
-                            }
+                            // .font(.caption2)
+                            // .padding(.vertical, 4)
+                            // .padding(.horizontal, 6)
+                            // .background(
+                            //     viewmodel.selectedTier == tier ? Color.accentColor.opacity(0.2) : Color.secondary.opacity(0.1)
+                            // )
+                            // .cornerRadius(4)
+                            // .onTapGesture {
+                            //     withAnimation {
+                            //         viewmodel.selectedTier = tier
+                            //     }
+                            // }
                         }
                     }
 

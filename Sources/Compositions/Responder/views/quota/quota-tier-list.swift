@@ -6,25 +6,20 @@ import ViewComponents
 import Implementations
 
 public struct QuotaTierListView: View {
-    // public let quota: CustomQuota
-
-    // @State public var tiers: [QuotaTierContent]? = nil
-    // @State public var message: String = ""
-
     @ObservedObject public var viewmodel: QuotaViewModel
 
     public init (
-        // quota: CustomQuota
         viewmodel: QuotaViewModel
     ) {
-        // self.quota = quota
         self.viewmodel = viewmodel
     }
 
     public var body: some View {
         VStack {
             if let t = viewmodel.tiers {
-                QuotaTierListSubView(tiers: t)
+                QuotaTierListSubView(
+                    tiers: t
+                )
                 .frame(maxHeight: 420)
             } else {
                 VStack {
@@ -49,7 +44,7 @@ public struct QuotaTierListSubView: View {
     public let tiers: [QuotaTierContent]
 
     public init(
-        tiers: [QuotaTierContent]
+        tiers: [QuotaTierContent],
     ) {
         self.tiers = tiers
     }
@@ -164,7 +159,7 @@ public struct TableBlock: View {
         rowLabelWidth: CGFloat,
         tiers: [QuotaTierContent],
         valuesFor: @escaping (QuotaTierContent) -> [(String, Double)],
-        textColor: Color
+        textColor: Color,
     ) {
         self.rowLabelWidth = rowLabelWidth
         self.tiers = tiers
