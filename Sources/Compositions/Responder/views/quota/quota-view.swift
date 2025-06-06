@@ -25,9 +25,10 @@ public struct QuotaView: View {
 
                     Spacer()
 
-                    if let quota = quotaVm.loadedQuota {
-                        QuotaTierListView(quota: quota)
-                    }
+                    // if let quota = quotaVm.loadedQuota {
+                        // QuotaTierListView(quota: quota)
+                        QuotaTierListView(viewmodel: quotaVm)
+                    // }
                 }
             }
             .frame(minHeight: 420)

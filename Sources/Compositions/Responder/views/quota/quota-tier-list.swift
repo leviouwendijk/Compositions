@@ -1,45 +1,47 @@
+import Foundation
 import SwiftUI
 import plate
 import Economics
 import ViewComponents
+import Implementations
 
 public struct QuotaTierListView: View {
-    public let quota: CustomQuota
+    // public let quota: CustomQuota
 
-    @State public var tiers: [QuotaTierContent]? = nil
-    @State public var message: String = ""
+    // @State public var tiers: [QuotaTierContent]? = nil
+    // @State public var message: String = ""
+
+    @ObservedObject public var viewmodel: QuotaViewModel
 
     public init (
-        quota: CustomQuota
+        // quota: CustomQuota
+        viewmodel: QuotaViewModel
     ) {
-        self.quota = quota
+        // self.quota = quota
+        self.viewmodel = viewmodel
     }
 
     public var body: some View {
         VStack {
-            Group {
-                if let t = tiers {
-                    QuotaTierListSubView(tiers: t)
-                    .frame(maxHeight: 420)
-                } else {
-                    VStack {
-                        NotificationBanner(
-                            type: .warning, 
-                            message: message
-                        )
-                    }
-                    .onAppear {
-                        do {
-                            self.tiers = try quota.tiers()
-                        } catch {
-                            self.message = error.localizedDescription
-                        }
+            if let t = viewmodel.tiers {
+                QuotaTierListSubView(tiers: t)
+                .frame(maxHeight: 420)
+            } else {
+                VStack {
+                    NotificationBanner(
+                        type: .warning, 
+                        message: viewmodel.errorMessage
+                    )
+                }
+                .onAppear {
+                    do {
+                        try viewmodel.loadTiers()
+                    } catch {
+                        viewmodel.errorMessage = error.localizedDescription
                     }
                 }
             }
-            // .frame(maxHeight: .infinity, alignment: .center)
         }
-        // .frame(maxHeight: .infinity)
     }
 }
 
@@ -205,13 +207,18 @@ public struct TableBlock: View {
                     ForEach(Array(tiers.indices), id: \.self) { tierIndex in
                         let rawValue = tierValueMatrix[rowIndex][tierIndex]
                         let str      = String(format: "%.2f", rawValue)
-                        let displayed = isPrognosisRow[rowIndex]
-                        ? "(\(str))"
-                        : str
+                        let displayed = isPrognosisRow[rowIndex] ? "(\(str))" : str
 
                         Text(displayed)
                         .frame(maxWidth: .infinity, alignment: .center)
                         .foregroundStyle(textColor)
+                        .padding(4)
+                        // .background(
+                        //     (viewmodel.selectedTier == .local)
+                        //       ? Color.blue.opacity(0.1)
+                        //       : Color.clear
+                        // )
+
                     }
                 }
             }
