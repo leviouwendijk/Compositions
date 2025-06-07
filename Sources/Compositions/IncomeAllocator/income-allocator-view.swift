@@ -50,7 +50,8 @@ public struct IncomeAllocatorView: View {
                     icon: "calendar"
                 )
             }
-            .padding(.bottom, 20)
+
+            Divider()
 
             Section(header: Text("Allocations")) {
                 if viewModel.allocationResults.isEmpty {
@@ -62,7 +63,8 @@ public struct IncomeAllocatorView: View {
                     }
                 }
             }
-            .padding(.bottom, 20)
+
+            Divider()
 
             Section(header: Text("Projections")) {
                 if !viewModel.periodsToGrossText.isEmpty {
@@ -75,7 +77,6 @@ public struct IncomeAllocatorView: View {
                     Text(viewModel.projectedBalanceText)
                 }
             }
-            .padding(.bottom, 20)
         }
         .navigationTitle("Income Allocator")
     }
