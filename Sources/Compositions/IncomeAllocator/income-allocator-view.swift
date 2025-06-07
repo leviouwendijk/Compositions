@@ -53,7 +53,11 @@ public struct IncomeAllocatorView: View {
 
             Divider()
 
-            Section(header: Text("Allocations")) {
+            Section() {
+                Text("Allocations")
+                .italic()
+                .opacity(0.6)
+
                 if viewModel.allocationResults.isEmpty {
                     Text("No allocations configured")
                         .foregroundColor(.secondary)
@@ -66,7 +70,11 @@ public struct IncomeAllocatorView: View {
 
             Divider()
 
-            Section(header: Text("Projections")) {
+            Section() {
+                Text("Projections")
+                .italic()
+                .opacity(0.6)
+
                 if !viewModel.periodsToGrossText.isEmpty {
                     Text(viewModel.periodsToGrossText)
                 }
