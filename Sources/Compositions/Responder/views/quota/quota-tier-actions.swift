@@ -59,8 +59,9 @@ public struct QuotaTierActionsView: View {
                             title: "short",
                             action: {
                                 do {
-                                    let table = try quota.shortInputs(for: viewmodel.selectedTier, clientIdentifier: clientIdentifier) 
-                                    copyToClipboard(table)
+                                    // let table = try quota.shortInputs(for: viewmodel.selectedTier, clientIdentifier: clientIdentifier) 
+                                    let string = try viewmodel.copyable(length: .short, clientIdentifier: clientIdentifier) 
+                                    copyToClipboard(string)
                                     notifier.setAndNotify(to: "copied")
                                 } catch {
                                     notifier.message = error.localizedDescription
@@ -74,8 +75,8 @@ public struct QuotaTierActionsView: View {
                             title: "full",
                             action: {
                                 do {
-                                    let table = try quota.quotaSummary(clientIdentifier: clientIdentifier)
-                                    copyToClipboard(table)
+                                    let string = try viewmodel.copyable(length: .long, clientIdentifier: clientIdentifier) 
+                                    copyToClipboard(string)
                                     notifier.setAndNotify(to: "copied")
                                 } catch {
                                     notifier.message = error.localizedDescription
