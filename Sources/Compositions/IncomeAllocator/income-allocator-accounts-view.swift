@@ -19,7 +19,7 @@ public struct IncomeAllocatorAccountsView: View {
     }
 
     public var body: some View {
-        VStack(spacing: 12) {
+        HStack(spacing: 12) {
             VStack(spacing: 12) {
                 Text("Allocations")
                 .italic()
@@ -67,38 +67,40 @@ public struct IncomeAllocatorAccountsView: View {
 
             Divider()
 
-            VStack(spacing: 12) {
-                Text("Allocations")
-                .italic()
-                .opacity(0.6)
-                .padding(.bottom, 20)
+            VStack {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Allocations")
+                    .italic()
+                    .opacity(0.6)
+                    .padding(.bottom, 20)
 
-                if viewmodel.allocationResults.isEmpty {
-                    Text("No allocations configured")
-                        .foregroundColor(.secondary)
-                } else {
-                    ForEach(viewmodel.allocationResults, id: \.self) { line in
-                        Text(line)
+                    if viewmodel.allocationResults.isEmpty {
+                        Text("No allocations configured")
+                            .foregroundColor(.secondary)
+                    } else {
+                        ForEach(viewmodel.allocationResults, id: \.self) { line in
+                            Text(line)
+                        }
                     }
                 }
-            }
 
-            Divider()
+                Divider()
 
-            VStack(spacing: 12) {
-                Text("Projections")
-                .italic()
-                .opacity(0.6)
-                .padding(.bottom, 20)
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Projections")
+                    .italic()
+                    .opacity(0.6)
+                    .padding(.bottom, 20)
 
-                if !viewmodel.periodsToGrossText.isEmpty {
-                    Text(viewmodel.periodsToGrossText)
-                }
-                if !viewmodel.periodsToAccountText.isEmpty {
-                    Text(viewmodel.periodsToAccountText)
-                }
-                if !viewmodel.projectedBalanceText.isEmpty {
-                    Text(viewmodel.projectedBalanceText)
+                    if !viewmodel.periodsToGrossText.isEmpty {
+                        Text(viewmodel.periodsToGrossText)
+                    }
+                    if !viewmodel.periodsToAccountText.isEmpty {
+                        Text(viewmodel.periodsToAccountText)
+                    }
+                    if !viewmodel.projectedBalanceText.isEmpty {
+                        Text(viewmodel.projectedBalanceText)
+                    }
                 }
             }
         }
