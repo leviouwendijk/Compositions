@@ -17,13 +17,14 @@ public struct IncomeAllocatorView: View {
             IncomeAllocatorAccountsView(
                 viewmodel: viewmodel.allocatorVm
             )
-            .frame(maxWidth: 200)
+            .frame(maxWidth: 300)
 
             Divider()
 
             CompounderView(
                 viewmodel: viewmodel.compounderVm
             )
+            .frame(maxWidth: 300)
         }
         .navigationTitle("Income Allocator")
     }
