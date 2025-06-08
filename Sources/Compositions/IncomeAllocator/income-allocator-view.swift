@@ -9,23 +9,35 @@ public struct IncomeAllocatorView: View {
     @StateObject public var viewmodel: IncomeAllocatorViewModel
 
     public init(viewmodel: IncomeAllocatorViewModel? = nil) {
-        _viewmodel = StateObject(wrappedValue: viewmodel ?? IncomeAllocatorViewModel())
+        let vm = IncomeAllocatorViewModel()
+        _viewmodel = StateObject(wrappedValue: viewmodel ?? vm)
     }
 
     public var body: some View {
-        HStack(spacing: 12) {
-            IncomeAllocatorAccountsView(
-                viewmodel: viewmodel.allocatorVm
-            )
-            .frame(maxWidth: 600)
+        VStack {
+            if let alloc = viewmodel.allocatorVm {
+                HStack(spacing: 12) {
+                    IncomeAllocatorAccountsView(
+                        viewmodel: alloc
+                    )
+                    .frame(maxWidth: 600)
 
-            Divider()
+                    Divider()
 
-            CompounderView(
-                viewmodel: viewmodel.compounderVm
-            )
-            .frame(maxWidth: 300)
+                    CompounderView(
+                        viewmodel: viewmodel.compounderVm
+                    )
+                    .frame(maxWidth: 300)
+                }
+            }
+
+            if !viewmodel.errorMessage.isEmpty {
+                NotificationBanner(
+                    type: .error,
+                    message: viewmodel.errorMessage
+                )
+            }
         }
-        .navigationTitle("Income Allocator")
+        // .navigationTitle("Income Allocator")
     }
 }

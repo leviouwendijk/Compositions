@@ -14,8 +14,10 @@ import Implementations
 public struct IncomeAllocatorAccountsView: View {
     @StateObject public var viewmodel: IncomeAllocatorAccountsViewModel
 
-    public init(viewmodel: IncomeAllocatorAccountsViewModel? = nil) {
-        _viewmodel = StateObject(wrappedValue: viewmodel ?? IncomeAllocatorAccountsViewModel())
+    public init(
+        viewmodel: IncomeAllocatorAccountsViewModel
+    ) {
+        _viewmodel = StateObject(wrappedValue: viewmodel)
     }
 
     public var body: some View {
