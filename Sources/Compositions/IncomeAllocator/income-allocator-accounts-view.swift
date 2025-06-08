@@ -23,7 +23,7 @@ public struct IncomeAllocatorAccountsView: View {
     public var body: some View {
         HStack(spacing: 12) {
             VStack(spacing: 12) {
-                Text("Allocations")
+                Text("Income")
                 .italic()
                 .opacity(0.6)
                 .padding(.bottom, 20)
