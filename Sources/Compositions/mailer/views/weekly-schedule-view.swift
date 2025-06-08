@@ -3,6 +3,7 @@ import Combine
 import ViewComponents
 import Interfaces
 import Implementations
+import Structures
 
 /// A reusable weekly schedule view that binds to a shared ViewModel
 public struct WeeklyScheduleView: View {

@@ -20,6 +20,10 @@ public struct ValuesPaneView: View {
         VStack {
             if viewmodel.apiPathVm.selectedRoute == .custom {
                 CustomMessagePaneView(viewmodel: viewmodel)
+            } else if viewmodel.apiPathVm.selectedRoute == .appointment {
+                DatePickerView(
+                    viewmodel: viewmodel
+                )
             } else {
                 if viewmodel.apiPathVm.endpointNeedsAvailabilityVariable {
                     VStack(alignment: .leading, spacing: 8) {

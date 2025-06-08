@@ -6,6 +6,7 @@ import ViewComponents
 import Economics
 import Interfaces
 import Implementations
+import Structures
 
 public struct MailerStandardOutput: View {
     @EnvironmentObject public var vm: ResponderViewModel
