@@ -17,7 +17,7 @@ public struct IncomeAllocatorView: View {
             IncomeAllocatorAccountsView(
                 viewmodel: viewmodel.allocatorVm
             )
-            .frame(maxWidth: 300)
+            .frame(maxWidth: 600)
 
             Divider()
 
