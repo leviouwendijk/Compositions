@@ -55,6 +55,7 @@ public struct IncomeAllocatorView: View {
                     icon: "calendar"
                 )
             }
+            .frame(maxWidth: 200)
 
             Divider()
 
