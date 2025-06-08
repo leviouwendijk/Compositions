@@ -11,8 +11,13 @@ public struct IncomeAllocatorView: View {
     public init() {}
 
     public var body: some View {
-        Form {
-            Section(header: Text("Income & Targets")) {
+        VStack(spacing: 12) {
+            VStack(spacing: 12) {
+                Text("Allocations")
+                .italic()
+                .opacity(0.6)
+                .padding(.bottom, 20)
+
                 StandardTextField(
                     "Income",
                     text: $viewModel.incomeText,
@@ -53,10 +58,11 @@ public struct IncomeAllocatorView: View {
 
             Divider()
 
-            Section() {
+            VStack(spacing: 12) {
                 Text("Allocations")
                 .italic()
                 .opacity(0.6)
+                .padding(.bottom, 20)
 
                 if viewModel.allocationResults.isEmpty {
                     Text("No allocations configured")
@@ -70,10 +76,11 @@ public struct IncomeAllocatorView: View {
 
             Divider()
 
-            Section() {
+            VStack(spacing: 12) {
                 Text("Projections")
                 .italic()
                 .opacity(0.6)
+                .padding(.bottom, 20)
 
                 if !viewModel.periodsToGrossText.isEmpty {
                     Text(viewModel.periodsToGrossText)
