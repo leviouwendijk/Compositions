@@ -156,9 +156,7 @@ public struct DatePickerView: View {
                             AppointmentRow(
                                 appointment: appt,
                                 onDelete: {
-                                    DispatchQueue.main.async {
-                                        viewmodel.removeAppointment(appt)
-                                    }
+                                    viewmodel.removeAppointment(appt)
                                 }
                             )
                         }
