@@ -153,9 +153,12 @@ public struct DatePickerView: View {
                 } else {
                     ScrollView {
                         ForEach(viewmodel.appointmentsQueue) { appt in
-                            AppointmentRow(appointment: appt) {
-                                viewmodel.removeAppointment(appt)
-                            }
+                            AppointmentRow(
+                                appointment: appt,
+                                onDelete: {
+                                    viewmodel.removeAppointment(appt)
+                                }
+                            )
                         }
                     }
                 }
