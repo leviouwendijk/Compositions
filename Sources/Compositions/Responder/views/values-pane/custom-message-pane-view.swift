@@ -4,13 +4,9 @@ import ViewComponents
 import Implementations
 
 public struct CustomMessagePaneView: View {
-    @ObservedObject public var viewmodel: ResponderViewModel
-    
-    public init(
-        viewmodel: ResponderViewModel
-    ) {
-        self.viewmodel = viewmodel
-    }
+    @EnvironmentObject var viewmodel: ResponderViewModel
+
+    public init() {}
 
     public var body: some View {
         VStack(alignment: .leading) {

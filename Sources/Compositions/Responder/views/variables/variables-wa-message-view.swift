@@ -8,14 +8,16 @@ import Implementations
 import Structures
 
 public struct VariablesWAMessageView: View {
-    @ObservedObject public var viewmodel: ResponderViewModel
+    @EnvironmentObject var viewmodel: ResponderViewModel
+
+    // @ObservedObject public var viewmodel: ResponderViewModel
     public var notifier: NotificationBannerController
     
     public init(
-        viewmodel: ResponderViewModel,
+        // viewmodel: ResponderViewModel,
         notifier: NotificationBannerController
     ) {
-        self.viewmodel = viewmodel
+        // self.viewmodel = viewmodel
         self.notifier = notifier
     }
 

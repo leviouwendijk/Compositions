@@ -8,15 +8,19 @@ import Implementations
 import Structures
 
 public struct VariablesContactView: View {
-    @ObservedObject public var viewmodel: ResponderViewModel
+    @EnvironmentObject var viewmodel: ResponderViewModel
+
+    public init() {}
+
+    // @ObservedObject public var viewmodel: ResponderViewModel
     
     @StateObject public var waMessageNotifier: NotificationBannerController = NotificationBannerController()
     
-    public init(
-        viewmodel: ResponderViewModel
-    ) {
-        self.viewmodel = viewmodel
-    }
+    // public init(
+    //     viewmodel: ResponderViewModel
+    // ) {
+    //     self.viewmodel = viewmodel
+    // }
 
     public var body: some View {
         VStack {

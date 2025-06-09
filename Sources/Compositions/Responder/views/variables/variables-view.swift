@@ -8,14 +8,17 @@ import Implementations
 import Structures
 
 public struct VariablesView: View {
-    @ObservedObject public var viewmodel: ResponderViewModel
+    @EnvironmentObject var viewmodel: ResponderViewModel
     @StateObject public var waMessageNotifier: NotificationBannerController = NotificationBannerController()
+
+    public init() {}
+
     
-    public init(
-        viewmodel: ResponderViewModel
-    ) {
-        self.viewmodel = viewmodel
-    }
+    // public init(
+    //     viewmodel: ResponderViewModel
+    // ) {
+    //     self.viewmodel = viewmodel
+    // }
 
     public var body: some View {
         VStack {
@@ -113,7 +116,9 @@ public struct VariablesView: View {
                         MailerAPIInvoiceVariablesView(viewModel: viewmodel.invoiceVm)
                     }
                 } else {
-                    VariablesContactView(viewmodel: viewmodel)
+                    // VariablesContactView(viewmodel: viewmodel)
+                    VariablesContactView()
+                    .environmentObject(viewmodel)
 
                     VStack {
                         HStack {
@@ -129,7 +134,9 @@ public struct VariablesView: View {
                         }
                         .frame(maxWidth: 350)
 
-                        VariablesWAMessageView(viewmodel: viewmodel, notifier: waMessageNotifier)
+                        // VariablesWAMessageView(viewmodel: viewmodel, notifier: waMessageNotifier)
+                        VariablesWAMessageView(notifier: waMessageNotifier)
+                        .environmentObject(viewmodel)
                     }
                 }
             }

@@ -4,13 +4,17 @@ import ViewComponents
 import Implementations
 
 public struct ExecuteMailerView: View {
-    @ObservedObject public var viewmodel: ResponderViewModel
+    @EnvironmentObject var viewmodel: ResponderViewModel
+
+    public init() {}
+
+    // @ObservedObject public var viewmodel: ResponderViewModel
     
-    public init(
-        viewmodel: ResponderViewModel
-    ) {
-        self.viewmodel = viewmodel
-    }
+    // public init(
+    //     viewmodel: ResponderViewModel
+    // ) {
+    //     self.viewmodel = viewmodel
+    // }
 
     public var body: some View {
         VStack {

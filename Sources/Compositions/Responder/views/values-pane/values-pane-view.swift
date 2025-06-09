@@ -15,7 +15,8 @@ public struct ValuesPaneView: View {
     public var body: some View {
         VStack {
             if viewmodel.apiPathVm.selectedRoute == .custom {
-                CustomMessagePaneView(viewmodel: viewmodel)
+                CustomMessagePaneView()
+                .environmentObject(viewmodel)
             } else if viewmodel.apiPathVm.selectedRoute == .appointment {
                 DatePickerView()
                 .environmentObject(viewmodel)
