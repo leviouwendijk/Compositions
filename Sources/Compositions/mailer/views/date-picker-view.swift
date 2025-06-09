@@ -151,7 +151,7 @@ public struct DatePickerView: View {
                     Text("No appointments added")
                         .foregroundColor(.gray)
                 } else {
-                    AppointmentListView(appointments: $viewmodel.appointmentsQueue)
+                    AppointmentListView()
                 }
                 Spacer()
 
@@ -191,18 +191,17 @@ public struct DatePickerView: View {
     }
 }
 
-struct AppointmentListView: View {
-    @Binding var appointments: [MailerAPIAppointmentContent]
+public struct AppointmentListView: View {
+    @EnvironmentObject public var viewmodel: ResponderViewModel
 
-    var body: some View {
-        let snapshot = appointments
+    public init() { }
 
+    public var body: some View {
         ScrollView {
             VStack(spacing: 8) {
-                ForEach(snapshot) { appt in
+                ForEach(viewmodel.appointmentsQueue) { appt in
                     AppointmentRow(appointment: appt) {
-                        // Mutates the real array, not `snapshot` that’s mid-iterate
-                        appointments.removeAll { $0.id == appt.id }
+                        viewmodel.appointmentsQueue.removeAll { $0.id == appt.id }
                     }
                 }
             }
