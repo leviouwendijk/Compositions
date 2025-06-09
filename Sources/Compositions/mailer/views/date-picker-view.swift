@@ -195,14 +195,18 @@ struct AppointmentListView: View {
     @Binding var appointments: [MailerAPIAppointmentContent]
 
     var body: some View {
-        List {
-            ForEach(appointments) { appt in
-                AppointmentRow(appointment: appt) {
-                    appointments.removeAll { $0.id == appt.id }
+        let snapshot = appointments
+
+        ScrollView {
+            VStack(spacing: 8) {
+                ForEach(snapshot) { appt in
+                    AppointmentRow(appointment: appt) {
+                        // Mutates the real array, not `snapshot` that’s mid-iterate
+                        appointments.removeAll { $0.id == appt.id }
+                    }
                 }
             }
         }
-        .listStyle(.plain)
     }
 }
 
