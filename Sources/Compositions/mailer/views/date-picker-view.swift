@@ -234,9 +234,6 @@ public struct AppointmentRow: View {
                 if !appointment.area.isEmpty {
                     Text(appointment.area)
                 }
-                if !appointment.area.isEmpty {
-                    Text(appointment.area)
-                }
                 Text("\(appointment.location)")
             }
 
