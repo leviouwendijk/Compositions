@@ -151,7 +151,7 @@ public struct DatePickerView: View {
                     Text("No appointments added")
                         .foregroundColor(.gray)
                 } else {
-                    AppointmentListView()
+                    AppointmentListView(viewmodel: viewmodel)
                     // .environmentObject(viewmodel)
                 }
                 Spacer()
@@ -193,24 +193,29 @@ public struct DatePickerView: View {
 }
 
 public struct AppointmentListView: View {
-    @EnvironmentObject public var viewmodel: ResponderViewModel
-    @State private var localAppointments: [MailerAPIAppointmentContent] = []
+    @ObservedObject public var viewmodel: ResponderViewModel
+
+    public init(viewmodel: ResponderViewModel) {
+        self.viewmodel = viewmodel
+    }
 
     public var body: some View {
         ScrollView {
             VStack(spacing: 8) {
-                ForEach(localAppointments) { appt in
-                    AppointmentRow(
-                        appointment: appt, 
-                        onDelete: { 
-                            viewmodel.removeAppointment(appt)
-                        }
-                    )
+                if viewmodel.appointmentsQueue.isEmpty {
+                    Text("No appointments added")
+                        .foregroundColor(.gray)
+                } else {
+                    ForEach(viewmodel.appointmentsQueue) { appt in
+                        AppointmentRow(
+                            appointment: appt,
+                            onDelete: {
+                                viewmodel.removeAppointment(appt)
+                            }
+                        )
+                    }
                 }
             }
-        }
-        .onReceive(viewmodel.$appointmentsQueue) { newQueue in
-            localAppointments = newQueue
         }
     }
 }
