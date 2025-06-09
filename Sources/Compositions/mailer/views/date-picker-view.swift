@@ -204,9 +204,12 @@ public struct AppointmentListView: View {
         ScrollView {
             VStack(spacing: 8) {
                 ForEach(snapshot) { appt in
-                    AppointmentRow(appointment: appt) //{
-                        // viewmodel.appointmentsQueue.removeAll { $0.id == appt.id }
-                    //}
+                    AppointmentRow(
+                        appointment: appt, 
+                        onDelete: { 
+                            viewmodel.appointmentsQueue.removeAll { $0.id == appt.id } 
+                        }
+                    )
                 }
             }
         }
@@ -215,7 +218,7 @@ public struct AppointmentListView: View {
 
 public struct AppointmentRow: View {
     public let appointment: MailerAPIAppointmentContent
-    // public let onDelete: ()->Void
+    public let onDelete: ()->Void
 
     public var body: some View {
         HStack {
@@ -228,15 +231,18 @@ public struct AppointmentRow: View {
                 if !appointment.area.isEmpty {
                     Text(appointment.area)
                 }
+                if !appointment.area.isEmpty {
+                    Text(appointment.area)
+                }
                 Text("📍 \(appointment.location)")
             }
 
             Spacer()
 
-            // Button(action: onDelete) {
-            //     Image(systemName: "x.circle.fill")
-            //     .foregroundColor(.red)
-            // }
+            Button(action: onDelete) {
+                Image(systemName: "x.circle.fill")
+                .foregroundColor(.red)
+            }
         }
         .padding()
         .background(Color.gray.opacity(0.2))
