@@ -151,7 +151,7 @@ public struct DatePickerView: View {
                     Text("No appointments added")
                         .foregroundColor(.gray)
                 } else {
-                    // AppointmentListView()
+                    AppointmentListView()
                 }
                 Spacer()
 
@@ -191,55 +191,55 @@ public struct DatePickerView: View {
     }
 }
 
-// public struct AppointmentListView: View {
-//     @EnvironmentObject public var viewmodel: ResponderViewModel
+public struct AppointmentListView: View {
+    @EnvironmentObject public var viewmodel: ResponderViewModel
 
-//     public init() {}
+    public init() {}
 
-//     public var snapshot: [MailerAPIAppointmentContent] {
-//         viewmodel.appointmentsQueue
-//     }
+    public var snapshot: [MailerAPIAppointmentContent] {
+        viewmodel.appointmentsQueue
+    }
 
-//     public var body: some View {
-//         ScrollView {
-//             VStack(spacing: 8) {
-//                 ForEach(snapshot) { appt in
-//                     AppointmentRow(appointment: appt) {
-//                         viewmodel.appointmentsQueue.removeAll { $0.id == appt.id }
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
+    public var body: some View {
+        ScrollView {
+            VStack(spacing: 8) {
+                ForEach(snapshot) { appt in
+                    AppointmentRow(appointment: appt) {
+                        // viewmodel.appointmentsQueue.removeAll { $0.id == appt.id }
+                    }
+                }
+            }
+        }
+    }
+}
 
-// public struct AppointmentRow: View {
-//     public let appointment: MailerAPIAppointmentContent
-//     public let onDelete: ()->Void
+public struct AppointmentRow: View {
+    public let appointment: MailerAPIAppointmentContent
+    // public let onDelete: ()->Void
 
-//     public var body: some View {
-//         HStack {
-//             VStack(alignment: .leading) {
-//                 Text("📅 \(appointment.date) (\(appointment.day))")
-//                 Text("🕒 \(appointment.time)")
-//                 if !appointment.street.isEmpty {
-//                     Text("\(appointment.street) \(appointment.number)")
-//                 }
-//                 if !appointment.area.isEmpty {
-//                     Text(appointment.area)
-//                 }
-//                 Text("📍 \(appointment.location)")
-//             }
+    public var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("📅 \(appointment.date) (\(appointment.day))")
+                Text("🕒 \(appointment.time)")
+                if !appointment.street.isEmpty {
+                    Text("\(appointment.street) \(appointment.number)")
+                }
+                if !appointment.area.isEmpty {
+                    Text(appointment.area)
+                }
+                Text("📍 \(appointment.location)")
+            }
 
-//             Spacer()
+            Spacer()
 
-//             Button(action: onDelete) {
-//                 Image(systemName: "x.circle.fill")
-//                 .foregroundColor(.red)
-//             }
-//         }
-//         .padding()
-//         .background(Color.gray.opacity(0.2))
-//         .cornerRadius(8)
-//     }
-// }
+            // Button(action: onDelete) {
+            //     Image(systemName: "x.circle.fill")
+            //     .foregroundColor(.red)
+            // }
+        }
+        .padding()
+        .background(Color.gray.opacity(0.2))
+        .cornerRadius(8)
+    }
+}
