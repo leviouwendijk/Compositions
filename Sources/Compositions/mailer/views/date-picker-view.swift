@@ -226,8 +226,8 @@ public struct AppointmentRow: View {
         HStack {
             VStack(alignment: .leading) {
                 HStack {
+                    Text("(\((try? appointment.writtenDate()) ?? "")")
                     Label(appointment.date, systemImage: "calendar")
-                    Text(appointment.day)
                 }
                 Label(appointment.time, systemImage: "clock")
                 if !appointment.street.isEmpty {
