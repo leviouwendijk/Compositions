@@ -16,10 +16,10 @@ public struct ValuesPaneView: View {
         VStack {
             if viewmodel.apiPathVm.selectedRoute == .custom {
                 CustomMessagePaneView()
-                .environmentObject(viewmodel)
+                // .environmentObject(viewmodel)
             } else if viewmodel.apiPathVm.selectedRoute == .appointment {
                 DatePickerView()
-                .environmentObject(viewmodel)
+                // .environmentObject(viewmodel)
             } else {
                 if viewmodel.apiPathVm.endpointNeedsAvailabilityVariable {
                     VStack(alignment: .leading, spacing: 8) {

@@ -152,7 +152,7 @@ public struct DatePickerView: View {
                         .foregroundColor(.gray)
                 } else {
                     AppointmentListView()
-                    .environmentObject(viewmodel)
+                    // .environmentObject(viewmodel)
                 }
                 Spacer()
 
