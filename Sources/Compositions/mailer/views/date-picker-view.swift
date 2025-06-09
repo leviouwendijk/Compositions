@@ -143,7 +143,8 @@ public struct DatePickerView: View {
             Divider()
 
             VStack {
-                Text("Appointments Queue").bold()
+                SectionTitle(title: "Appointments Queue", fontSize: 14)
+                .padding(.bottom, 20)
 
                 if viewmodel.appointmentsQueue.isEmpty {
                     Text("No appointments added")
@@ -184,7 +185,7 @@ public struct DatePickerView: View {
             //     let appt = viewmodel.createAppointment()
             //     print("created appt in view:\n", appt)
             // }
-            .frame(width: 320)
+            .frame(width: 300)
         }
         .padding()
     }
