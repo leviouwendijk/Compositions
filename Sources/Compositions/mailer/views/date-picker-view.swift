@@ -169,7 +169,9 @@ public struct DatePickerView: View {
                         type: .load,
                         title: "Add to Queue",
                         action: {
-                            viewmodel.addToQueue()
+                            DispatchQueue.main.async {
+                                self.viewmodel.addToQueue()
+                            }
                         },
                         image: "plus.circle.fill"
                     )
@@ -178,7 +180,9 @@ public struct DatePickerView: View {
                         type: .clear,
                         title: "Clear Queue",
                         action: {
-                            viewmodel.clearQueue()
+                            DispatchQueue.main.async {
+                                self.viewmodel.clearQueue()
+                            }
                         },
                         image: "trash.fill"
                     )
@@ -190,10 +194,10 @@ public struct DatePickerView: View {
                 }
                 .padding(.top, 10)
             }
-            .onAppear {
-                let appt = viewmodel.createAppointment()
-                print("created appt in view:\n", appt)
-            }
+            // .onAppear {
+            //     let appt = viewmodel.createAppointment()
+            //     print("created appt in view:\n", appt)
+            // }
             .frame(width: 400)
         }
         .padding()
