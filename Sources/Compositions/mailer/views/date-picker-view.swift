@@ -204,9 +204,9 @@ public struct AppointmentListView: View {
         ScrollView {
             VStack(spacing: 8) {
                 ForEach(snapshot) { appt in
-                    AppointmentRow(appointment: appt) {
+                    AppointmentRow(appointment: appt) //{
                         // viewmodel.appointmentsQueue.removeAll { $0.id == appt.id }
-                    }
+                    //}
                 }
             }
         }
