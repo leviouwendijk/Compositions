@@ -225,10 +225,8 @@ public struct AppointmentRow: View {
     public var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                HStack {
-                    Text("(\((try? appointment.writtenDate()) ?? "")")
-                    Label(appointment.date, systemImage: "calendar")
-                }
+                Text("\( ( try? appointment.writtenDate(in: .us) ) ?? "" )")
+                Label(appointment.date, systemImage: "calendar")
                 Label(appointment.time, systemImage: "clock")
                 if !appointment.street.isEmpty {
                     Text("\(appointment.street) \(appointment.number)")
