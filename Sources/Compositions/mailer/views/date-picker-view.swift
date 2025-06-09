@@ -41,6 +41,10 @@ public struct DatePickerView: View {
             }
             .frame(width: 180)
 
+            .onChange(of: viewmodel.selectedMonth) { newMonth in
+                viewmodel.validateDay()
+            }
+
             // Day selector
             VStack(spacing: 0) {
                 SectionTitle(title: "Days")
@@ -131,16 +135,16 @@ public struct DatePickerView: View {
             }
             .frame(width: 120)
             
-                // Text("Preset Formats").bold()
-                // Picker("Select Format", selection: $outputFormat) {
-                //     Text("YYYY-MM-DD HH:mm").tag("yyyy-MM-dd HH:mm")
-                //     Text("DD/MM/YYYY HH:mm").tag("dd/MM/yyyy HH:mm")
-                //     Text("MM-DD-YYYY HH:mm").tag("MM-dd-yyyy HH:mm")
-                //     Text("ISO 8601").tag("yyyy-MM-dd'T'HH:mm:ssZ")
-                //     Text("CLI (mailer)").tag("--date dd/MM/yyyy --time HH:mm")
-                // }
-                // .pickerStyle(MenuPickerStyle())
-                // .padding()
+                Text("Preset Formats").bold()
+                Picker("Select Format", selection: $viewmodel.outputFormat) {
+                    Text("YYYY-MM-DD HH:mm").tag("yyyy-MM-dd HH:mm")
+                    Text("DD/MM/YYYY HH:mm").tag("dd/MM/yyyy HH:mm")
+                    Text("MM-DD-YYYY HH:mm").tag("MM-dd-yyyy HH:mm")
+                    Text("ISO 8601").tag("yyyy-MM-dd'T'HH:mm:ssZ")
+                    Text("CLI (mailer)").tag("--date dd/MM/yyyy --time HH:mm")
+                }
+                .pickerStyle(MenuPickerStyle())
+                .padding()
 
             Divider()
 
@@ -169,9 +173,7 @@ public struct DatePickerView: View {
                         type: .load,
                         title: "Add to Queue",
                         action: {
-                            DispatchQueue.main.async {
-                                self.viewmodel.addToQueue()
-                            }
+                            viewmodel.addToQueue()
                         },
                         image: "plus.circle.fill"
                     )
@@ -180,9 +182,7 @@ public struct DatePickerView: View {
                         type: .clear,
                         title: "Clear Queue",
                         action: {
-                            DispatchQueue.main.async {
-                                self.viewmodel.clearQueue()
-                            }
+                            viewmodel.clearQueue()
                         },
                         image: "trash.fill"
                     )
