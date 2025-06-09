@@ -151,16 +151,16 @@ public struct DatePickerView: View {
                     Text("No appointments added")
                         .foregroundColor(.gray)
                 } else {
-                    ScrollView {
-                        ForEach(viewmodel.appointmentsQueue) { appt in
-                            AppointmentRow(
-                                appointment: appt,
-                                onDelete: {
-                                    viewmodel.removeAppointment(appt)
-                                }
-                            )
-                        }
-                    }
+                    // ScrollView {
+                    //     ForEach(viewmodel.appointmentsQueue) { appt in
+                    //         AppointmentRow(
+                    //             appointment: appt,
+                    //             onDelete: {
+                    //                 viewmodel.removeAppointment(appt)
+                    //             }
+                    //         )
+                    //     }
+                    // }
                 }
                 Spacer()
 
