@@ -131,16 +131,16 @@ public struct DatePickerView: View {
             }
             .frame(width: 120)
             
-                Text("Preset Formats").bold()
-                Picker("Select Format", selection: $viewmodel.outputFormat) {
-                    Text("YYYY-MM-DD HH:mm").tag("yyyy-MM-dd HH:mm")
-                    Text("DD/MM/YYYY HH:mm").tag("dd/MM/yyyy HH:mm")
-                    Text("MM-DD-YYYY HH:mm").tag("MM-dd-yyyy HH:mm")
-                    Text("ISO 8601").tag("yyyy-MM-dd'T'HH:mm:ssZ")
-                    Text("CLI (mailer)").tag("--date dd/MM/yyyy --time HH:mm")
-                }
-                .pickerStyle(MenuPickerStyle())
-                .padding()
+            // Text("Preset Formats").bold()
+            // Picker("Select Format", selection: $viewmodel.outputFormat) {
+            //     Text("YYYY-MM-DD HH:mm").tag("yyyy-MM-dd HH:mm")
+            //     Text("DD/MM/YYYY HH:mm").tag("dd/MM/yyyy HH:mm")
+            //     Text("MM-DD-YYYY HH:mm").tag("MM-dd-yyyy HH:mm")
+            //     Text("ISO 8601").tag("yyyy-MM-dd'T'HH:mm:ssZ")
+            //     Text("CLI (mailer)").tag("--date dd/MM/yyyy --time HH:mm")
+            // }
+            // .pickerStyle(MenuPickerStyle())
+            // .padding()
 
             Divider()
 
