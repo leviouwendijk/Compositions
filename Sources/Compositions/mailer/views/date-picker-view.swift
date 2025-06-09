@@ -195,13 +195,14 @@ struct AppointmentListView: View {
     @Binding var appointments: [MailerAPIAppointmentContent]
 
     var body: some View {
-        ScrollView {
+        List {
             ForEach(appointments) { appt in
                 AppointmentRow(appointment: appt) {
                     appointments.removeAll { $0.id == appt.id }
                 }
             }
         }
+        .listStyle(.plain)
     }
 }
 
