@@ -104,13 +104,13 @@ public struct DatePickerView: View {
                             .padding(.horizontal)
                             .padding(.vertical, 8)
                         }
+                        
+
+                        SectionTitle(title: "Common", fontSize: 14)
+                            .padding(.horizontal)
 
                         ScrollView {
                             VStack(spacing: 5) {
-                                SectionTitle(title: "Common", fontSize: 14)
-                                    .padding(.horizontal)
-
-                                // Common quarter-hour picks
                                 ForEach([0, 15, 30, 45], id: \.self) { minute in
                                     SelectableRow(
                                         title: String(format: "%02d", minute),
