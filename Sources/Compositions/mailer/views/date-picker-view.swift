@@ -39,7 +39,7 @@ public struct DatePickerView: View {
                     .frame(width: 160)
 
                     VStack(spacing: 0) {
-                        SectionTitle(title: "Day")
+                        SectionTitle(title: "Day", fontSize: 14)
                             .padding(.horizontal)
 
                         ScrollView {
@@ -58,12 +58,12 @@ public struct DatePickerView: View {
                             .padding(.vertical, 8)
                         }
                     }
-                    .frame(width: 140)
+                    .frame(width: 120)
                 }
 
                 HStack {
                     VStack(spacing: 0) {
-                        SectionTitle(title: "Hour")
+                        SectionTitle(title: "Hour", fontSize: 14)
                             .padding(.horizontal)
 
                         ScrollView {
@@ -85,7 +85,7 @@ public struct DatePickerView: View {
                     .frame(width: 120)
 
                     VStack(spacing: 0) {
-                        SectionTitle(title: "Minute")
+                        SectionTitle(title: "Minute", fontSize: 14)
                             .padding(.horizontal)
 
                         ScrollView {
@@ -107,7 +107,7 @@ public struct DatePickerView: View {
 
                         ScrollView {
                             VStack(spacing: 5) {
-                                SectionTitle(title: "Common")
+                                SectionTitle(title: "Common", fontSize: 14)
                                     .padding(.horizontal)
 
                                 // Common quarter-hour picks
@@ -184,7 +184,7 @@ public struct DatePickerView: View {
             //     let appt = viewmodel.createAppointment()
             //     print("created appt in view:\n", appt)
             // }
-            .frame(width: 400)
+            .frame(width: 320)
         }
         .padding()
     }
