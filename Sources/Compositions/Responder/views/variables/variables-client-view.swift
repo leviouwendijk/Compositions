@@ -53,7 +53,7 @@ public struct VariablesContactView: View {
             .textFieldStyle(RoundedBorderTextFieldStyle())
 
             TextField("Street", text: Binding(
-                get: { viewmodel.local ? "" : (viewmodel.street ?? "") },
+                get: { viewmodel.local ? viewmodel.localStreet : (viewmodel.street ?? "") },
                 set: { viewmodel.street = viewmodel.local ? nil : ($0.isEmpty ? nil : $0) }
             ))
             .textFieldStyle(RoundedBorderTextFieldStyle())

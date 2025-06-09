@@ -37,9 +37,9 @@ public struct DatePickerView: View {
             }
             .frame(width: 180)
 
-            .onChange(of: viewmodel.selectedMonth) { newMonth in
-                viewmodel.validateDay()
-            }
+            // .onChange(of: viewmodel.selectedMonth) { newMonth in
+            //     viewmodel.validateDay()
+            // }
 
             // Day selector
             VStack(spacing: 0) {
