@@ -165,16 +165,28 @@ public struct DatePickerView: View {
                 Spacer()
 
                 HStack {
-                    Button(action: viewmodel.addToQueue) {
-                        Label("Add to Queue", systemImage: "plus.circle.fill")
-                    }
-                    .buttonStyle(.borderedProminent)
+                    StandardButton(
+                        type: .load,
+                        title: "Add to Queue",
+                        action: {
+                            viewmodel.addToQueue()
+                        },
+                        image: "plus.circle.fill"
+                    )
 
-                    Button(action: viewmodel.clearQueue) {
-                        Label("Clear Queue", systemImage: "trash.fill")
-                            .foregroundColor(.red)
-                    }
-                    .buttonStyle(.bordered)
+                    StandardButton(
+                        type: .clear,
+                        title: "Clear Queue",
+                        action: {
+                            viewmodel.clearQueue()
+                        },
+                        image: "trash.fill"
+                    )
+                    // Button(action: viewmodel.clearQueue) {
+                    //     Label("Clear Queue", systemImage: "trash.fill")
+                    //         .foregroundColor(.red)
+                    // }
+                    // .buttonStyle(.bordered)
                 }
                 .padding(.top, 10)
             }
