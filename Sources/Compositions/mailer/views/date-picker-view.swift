@@ -227,8 +227,8 @@ public struct AppointmentRow: View {
     public var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("📅 \(appointment.date) (\(appointment.day))")
-                Text("🕒 \(appointment.time)")
+                Text("\(appointment.date) (\(appointment.day))")
+                Text("\(appointment.time)")
                 if !appointment.street.isEmpty {
                     Text("\(appointment.street) \(appointment.number)")
                 }
@@ -238,7 +238,7 @@ public struct AppointmentRow: View {
                 if !appointment.area.isEmpty {
                     Text(appointment.area)
                 }
-                Text("📍 \(appointment.location)")
+                Text("\(appointment.location)")
             }
 
             Spacer()
