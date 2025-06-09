@@ -151,16 +151,7 @@ public struct DatePickerView: View {
                     Text("No appointments added")
                         .foregroundColor(.gray)
                 } else {
-                    // ScrollView {
-                    //     ForEach(viewmodel.appointmentsQueue) { appt in
-                    //         AppointmentRow(
-                    //             appointment: appt,
-                    //             onDelete: {
-                    //                 viewmodel.removeAppointment(appt)
-                    //             }
-                    //         )
-                    //     }
-                    // }
+                    AppointmentListView(appointments: $viewmodel.appointmentsQueue)
                 }
                 Spacer()
 
@@ -197,6 +188,20 @@ public struct DatePickerView: View {
             .frame(width: 400)
         }
         .padding()
+    }
+}
+
+struct AppointmentListView: View {
+    @Binding var appointments: [MailerAPIAppointmentContent]
+
+    var body: some View {
+        ScrollView {
+            ForEach(appointments) { appt in
+                AppointmentRow(appointment: appt) {
+                    appointments.removeAll { $0.id == appt.id }
+                }
+            }
+        }
     }
 }
 
