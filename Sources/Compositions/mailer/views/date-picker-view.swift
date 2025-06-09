@@ -190,6 +190,10 @@ public struct DatePickerView: View {
                 }
                 .padding(.top, 10)
             }
+            .onAppear {
+                let appt = viewmodel.createAppointment()
+                print("created appt in view:\n", appt)
+            }
             .frame(width: 400)
         }
         .padding()
