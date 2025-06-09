@@ -193,25 +193,23 @@ public struct DatePickerView: View {
 
 public struct AppointmentListView: View {
     @EnvironmentObject public var viewmodel: ResponderViewModel
-
-    public init() {}
-
-    public var snapshot: [MailerAPIAppointmentContent] {
-        viewmodel.appointmentsQueue
-    }
+    @State private var localAppointments: [MailerAPIAppointmentContent] = []
 
     public var body: some View {
         ScrollView {
             VStack(spacing: 8) {
-                ForEach(snapshot) { appt in
+                ForEach(localAppointments) { appt in
                     AppointmentRow(
                         appointment: appt, 
                         onDelete: { 
-                            viewmodel.appointmentsQueue.removeAll { $0.id == appt.id } 
+                            viewmodel.removeAppointment(appt)
                         }
                     )
                 }
             }
+        }
+        .onReceive(viewmodel.$appointmentsQueue) { newQueue in
+            localAppointments = newQueue
         }
     }
 }
