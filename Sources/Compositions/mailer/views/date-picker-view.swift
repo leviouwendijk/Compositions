@@ -13,123 +13,121 @@ public struct DatePickerView: View {
 
     public var body: some View {
         HStack {
-            // Month selector
-            VStack(spacing: 0) {
-                SectionTitle(title: "Months")
-                    .padding(.horizontal)
-
-                ScrollView {
-                    VStack(spacing: 5) {
-                        ForEach(viewmodel.months.indices, id: \.self) { idx in
-                            SelectableRow(
-                                title: viewmodel.months[idx],
-                                isSelected: viewmodel.selectedMonth == idx + 1
-                            ) {
-                                viewmodel.selectedMonth = idx + 1
-                                viewmodel.validateDay()
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                }
-            }
-            .frame(width: 180)
-
-            // .onChange(of: viewmodel.selectedMonth) { newMonth in
-            //     viewmodel.validateDay()
-            // }
-
-            // Day selector
-            VStack(spacing: 0) {
-                SectionTitle(title: "Days")
-                    .padding(.horizontal)
-
-                ScrollView {
-                    VStack(spacing: 5) {
-                        ForEach(viewmodel.days, id: \.self) { day in
-                            SelectableRow(
-                                title: "\(day)",
-                                isSelected: viewmodel.selectedDay == day
-                            ) {
-                                viewmodel.selectedDay = day
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                }
-            }
-            .frame(width: 140)
-
-            // Hour selector
-            VStack(spacing: 0) {
-                SectionTitle(title: "Hours")
-                    .padding(.horizontal)
-
-                ScrollView {
-                    VStack(spacing: 5) {
-                        ForEach(viewmodel.hours, id: \.self) { hour in
-                            SelectableRow(
-                                title: String(format: "%02d", hour),
-                                isSelected: viewmodel.selectedHour == hour
-                            ) {
-                                viewmodel.selectedHour = hour
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                }
-            }
-            .frame(width: 120)
-
-            // Minute selector + Common
-            VStack(spacing: 0) {
-                SectionTitle(title: "Minutes")
-                    .padding(.horizontal)
-
-                ScrollView {
-                    VStack(spacing: 5) {
-                        // All minute options
-                        ForEach(viewmodel.minutes, id: \.self) { minute in
-                            SelectableRow(
-                                title: String(format: "%02d", minute),
-                                isSelected: viewmodel.selectedMinute == minute
-                            ) {
-                                viewmodel.selectedMinute = minute
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                    }
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
-                }
-
-                ScrollView {
-                    VStack(spacing: 5) {
-                        SectionTitle(title: "Common")
+            VStack {
+                HStack {
+                    VStack(spacing: 0) {
+                        SectionTitle(title: "Month", fontSize: 14)
                             .padding(.horizontal)
 
-                        // Common quarter-hour picks
-                        ForEach([0, 15, 30, 45], id: \.self) { minute in
-                            SelectableRow(
-                                title: String(format: "%02d", minute),
-                                isSelected: viewmodel.selectedMinute == minute
-                            ) {
-                                viewmodel.selectedMinute = minute
+                        ScrollView {
+                            VStack(spacing: 5) {
+                                ForEach(viewmodel.months.indices, id: \.self) { idx in
+                                    SelectableRow(
+                                        title: viewmodel.months[idx],
+                                        isSelected: viewmodel.selectedMonth == idx + 1
+                                    ) {
+                                        viewmodel.selectedMonth = idx + 1
+                                        viewmodel.validateDay()
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                }
                             }
-                            .frame(maxWidth: .infinity)
+                            .padding(.horizontal)
+                            .padding(.vertical, 8)
                         }
                     }
-                    .padding(.horizontal)
-                    .padding(.vertical, 8)
+                    .frame(width: 160)
+
+                    VStack(spacing: 0) {
+                        SectionTitle(title: "Day")
+                            .padding(.horizontal)
+
+                        ScrollView {
+                            VStack(spacing: 5) {
+                                ForEach(viewmodel.days, id: \.self) { day in
+                                    SelectableRow(
+                                        title: "\(day)",
+                                        isSelected: viewmodel.selectedDay == day
+                                    ) {
+                                        viewmodel.selectedDay = day
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                }
+                            }
+                            .padding(.horizontal)
+                            .padding(.vertical, 8)
+                        }
+                    }
+                    .frame(width: 140)
+                }
+
+                HStack {
+                    VStack(spacing: 0) {
+                        SectionTitle(title: "Hour")
+                            .padding(.horizontal)
+
+                        ScrollView {
+                            VStack(spacing: 5) {
+                                ForEach(viewmodel.hours, id: \.self) { hour in
+                                    SelectableRow(
+                                        title: String(format: "%02d", hour),
+                                        isSelected: viewmodel.selectedHour == hour
+                                    ) {
+                                        viewmodel.selectedHour = hour
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                }
+                            }
+                            .padding(.horizontal)
+                            .padding(.vertical, 8)
+                        }
+                    }
+                    .frame(width: 120)
+
+                    VStack(spacing: 0) {
+                        SectionTitle(title: "Minute")
+                            .padding(.horizontal)
+
+                        ScrollView {
+                            VStack(spacing: 5) {
+                                // All minute options
+                                ForEach(viewmodel.minutes, id: \.self) { minute in
+                                    SelectableRow(
+                                        title: String(format: "%02d", minute),
+                                        isSelected: viewmodel.selectedMinute == minute
+                                    ) {
+                                        viewmodel.selectedMinute = minute
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                }
+                            }
+                            .padding(.horizontal)
+                            .padding(.vertical, 8)
+                        }
+
+                        ScrollView {
+                            VStack(spacing: 5) {
+                                SectionTitle(title: "Common")
+                                    .padding(.horizontal)
+
+                                // Common quarter-hour picks
+                                ForEach([0, 15, 30, 45], id: \.self) { minute in
+                                    SelectableRow(
+                                        title: String(format: "%02d", minute),
+                                        isSelected: viewmodel.selectedMinute == minute
+                                    ) {
+                                        viewmodel.selectedMinute = minute
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                }
+                            }
+                            .padding(.horizontal)
+                            .padding(.vertical, 8)
+                        }
+                    }
+                    .frame(width: 120)
                 }
             }
-            .frame(width: 120)
             
             // Text("Preset Formats").bold()
             // Picker("Select Format", selection: $viewmodel.outputFormat) {
