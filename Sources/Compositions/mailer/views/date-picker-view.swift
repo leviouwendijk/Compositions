@@ -7,13 +7,9 @@ import Implementations
 import Structures
 
 public struct DatePickerView: View {
-    @ObservedObject public var viewmodel: ResponderViewModel
-    
-    public init(
-        viewmodel: ResponderViewModel
-    ) {
-        self.viewmodel = viewmodel
-    }
+    @EnvironmentObject public var viewmodel: ResponderViewModel
+
+    public init() { }
 
     public var body: some View {
         HStack {
