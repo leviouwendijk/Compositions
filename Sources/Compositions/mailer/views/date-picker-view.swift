@@ -151,7 +151,7 @@ public struct DatePickerView: View {
                     Text("No appointments added")
                         .foregroundColor(.gray)
                 } else {
-                    AppointmentListView(viewmodel: viewmodel)
+                    AppointmentListView()
                     // .environmentObject(viewmodel)
                 }
                 Spacer()
@@ -193,11 +193,9 @@ public struct DatePickerView: View {
 }
 
 public struct AppointmentListView: View {
-    @ObservedObject public var viewmodel: ResponderViewModel
+    @EnvironmentObject public var viewmodel: ResponderViewModel
 
-    public init(viewmodel: ResponderViewModel) {
-        self.viewmodel = viewmodel
-    }
+    public init() {}
 
     public var body: some View {
         ScrollView {
@@ -227,8 +225,11 @@ public struct AppointmentRow: View {
     public var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("\(appointment.date) (\(appointment.day))")
-                Text("\(appointment.time)")
+                HStack {
+                    Label(appointment.date, systemImage: "calendar")
+                    Text(appointment.day)
+                }
+                Label(appointment.time, systemImage: "clock")
                 if !appointment.street.isEmpty {
                     Text("\(appointment.street) \(appointment.number)")
                 }
