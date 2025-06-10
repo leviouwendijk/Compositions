@@ -7,7 +7,7 @@
       "location" : "https://github.com/leviouwendijk/Economics.git",
       "state" : {
         "branch" : "master",
-        "revision" : "2e34543f3bf20efc0ceb245ac886ac7d63305f06"
+        "revision" : "edcc563eaa6f95bfd0385592804817ecbbe0c357"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/leviouwendijk/Implementations.git",
       "state" : {
         "branch" : "master",
-        "revision" : "8a2c73723902da3e4145f5b4739382e91cc71dc5"
+        "revision" : "c58b6347253fadc3f61142ffd9e630a89f3a50d3"
       }
     },
     {
@@ -25,7 +25,7 @@
       "location" : "https://github.com/leviouwendijk/Interfaces.git",
       "state" : {
         "branch" : "master",
-        "revision" : "126fa621c724beb650f715511903aefc9ec01d15"
+        "revision" : "3ce74acc0c63b715c01e401e5554ddf4090eeea7"
       }
     },
     {
@@ -43,7 +43,7 @@
       "location" : "https://github.com/leviouwendijk/Structures.git",
       "state" : {
         "branch" : "master",
-        "revision" : "b254c4ca5afaa11b212a2a52569d6f40a95ef096"
+        "revision" : "4b3bc4b74296ea4b76f9b4576a972432f72dfccb"
       }
     },
     {

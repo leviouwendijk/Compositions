@@ -84,6 +84,14 @@ public struct IncomeAllocatorAccountsView: View {
                             Text(line)
                         }
                     }
+
+                    StandardButton(
+                        type: .copy,
+                        title: "copy",
+                        action: {
+                            viewmodel.textReport.sCopy()
+                        }
+                    )
                 }
 
                 Divider()
