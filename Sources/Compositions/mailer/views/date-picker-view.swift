@@ -19,7 +19,7 @@ public struct DatePickerView: View {
             Divider()
 
             AppointmentsQueueView()
-            .frame(width: 200)
+            .frame(width: 240)
         }
         .padding()
     }
@@ -34,12 +34,12 @@ public struct DateComponentSelectionView: View {
         VStack {
             HStack {
                 MonthSelectionView()
-                .frame(width: 140)
+                .frame(width: 150)
 
                 DaySelectionView()
                 // .frame(width: 100)
             }
-            .frame(width: 250)
+            .frame(width: 260)
 
             HStack {
                 HourSelectionView()
@@ -48,7 +48,7 @@ public struct DateComponentSelectionView: View {
                 MinuteSelectionView()
                 // .frame(width: 100)
             }
-            .frame(width: 250)
+            .frame(width: 260)
         }
     }
 }
