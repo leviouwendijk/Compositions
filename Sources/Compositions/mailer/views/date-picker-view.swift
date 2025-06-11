@@ -212,7 +212,7 @@ public struct AppointmentsQueueView: View {
             HStack {
                 StandardButton(
                     type: .load,
-                    title: "Add to Queue",
+                    title: "Add",
                     action: {
                         viewmodel.addToQueue()
                     },
@@ -221,7 +221,7 @@ public struct AppointmentsQueueView: View {
 
                 StandardButton(
                     type: .clear,
-                    title: "Clear Queue",
+                    title: "Clear",
                     action: {
                         viewmodel.clearQueue()
                     },
