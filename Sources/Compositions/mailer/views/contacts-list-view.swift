@@ -140,29 +140,13 @@ public struct ContactsListView: View {
                     .frame(maxHeight: maxListHeight)
                     .padding(.horizontal)
 
-                    .onChange(of: viewModel.searchQuery) { _ in
-                        guard autoScrollToTop,
-                            let firstID = viewModel.filteredContacts.first?.identifier
-                        else { 
-                            return
-                        }
-
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
-                            withAnimation(.linear(duration: 0.05)) {
-                                proxy.scrollTo(firstID, anchor: .top)
-                            }
-                        }
-                    }
-
-// mute this for experimental didSet replacement
-                    // .onAppear {
-                    //     DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
-                    //         viewModel.fuzzyFilterListener()
+                    // REPLACED BY CONCURRENCY IMPLEMENATION
+                    // .onChange(of: viewModel.searchQuery) { _ in
+                    //     guard autoScrollToTop,
+                    //         let firstID = viewModel.filteredContacts.first?.identifier
+                    //     else { 
+                    //         return
                     //     }
-                    // }
-
-                    // .onReceive(viewModel.$scrollToFirstID.compactMap { $0 }) { firstID in
-                    //     guard autoScrollToTop else { return }
 
                     //     DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
                     //         withAnimation(.linear(duration: 0.05)) {
@@ -171,7 +155,15 @@ public struct ContactsListView: View {
                     //     }
                     // }
 
-
+                    .onReceive(viewModel.$scrollToFirstID.compactMap { $0 }) { firstID in
+                        guard autoScrollToTop else { return }
+                        // Defer until after the table’s update pass
+                        DispatchQueue.main.async {
+                            withAnimation(.linear(duration: 0.05)) {
+                                proxy.scrollTo(firstID, anchor: .top)
+                            }
+                        }
+                    }
                 }
 
                 if showWarning {
