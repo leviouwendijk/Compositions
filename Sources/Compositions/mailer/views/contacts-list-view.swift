@@ -155,6 +155,7 @@ public struct ContactsListView: View {
                     //     }
                     // }
 
+                    // CONCURRENCY IMPLEMENTATION
                     .onReceive(viewModel.$scrollToFirstID.compactMap { $0 }) { firstID in
                         guard autoScrollToTop else { return }
                         // Defer until after the table’s update pass
