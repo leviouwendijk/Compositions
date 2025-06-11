@@ -37,7 +37,7 @@ public struct VariablesView: View {
                     }
                 }
             }
-            .frame(maxWidth: 350)
+            // .frame(maxWidth: 350)
 
             Divider()
 
@@ -45,7 +45,7 @@ public struct VariablesView: View {
                 if !(viewmodel.apiPathVm.selectedRoute == .template || viewmodel.apiPathVm.selectedRoute == .invoice) {
                     ContactsListView(
                         viewModel: viewmodel.contactsVm,
-                        maxListHeight: 200,
+                        maxListHeight: 300,
                         onSelect: { contact in
                             viewmodel.clearContact()
                             viewmodel.selectedContact = contact
@@ -70,7 +70,7 @@ public struct VariablesView: View {
                             viewmodel.clearContact()
                         }
                     )
-                    .frame(maxWidth: 350)
+                    .frame(maxWidth: 300)
                 }
 
                 Text("Mailer Arguments").bold()
@@ -132,7 +132,7 @@ public struct VariablesView: View {
 
                             Spacer()
                         }
-                        .frame(maxWidth: 350)
+                        .frame(maxWidth: 300)
 
                         // VariablesWAMessageView(viewmodel: viewmodel, notifier: waMessageNotifier)
                         VariablesWAMessageView(notifier: waMessageNotifier)
@@ -143,6 +143,6 @@ public struct VariablesView: View {
             .frame(minHeight: 600)
             .padding()
         }
-        .frame(width: 400)
+        .frame(width: 300)
     }
 }

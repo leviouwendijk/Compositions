@@ -47,7 +47,7 @@ public struct MailerAPIPathSelectionView: View {
                             .padding(.vertical, 8)
                         }
                     }
-                    .frame(width: 150)
+                    .frame(width: 160)
 
                     // ─── ENDPOINTS COLUMN ───────────────────────────
                     VStack {
@@ -74,7 +74,7 @@ public struct MailerAPIPathSelectionView: View {
                             .padding(.vertical, 8)
                         }
                     }
-                    .frame(width: 150)
+                    .frame(width: 160)
                 }
             }
 
