@@ -34,12 +34,12 @@ public struct DateComponentSelectionView: View {
         VStack {
             HStack {
                 MonthSelectionView()
-                .frame(width: 120)
+                .frame(width: 140)
 
                 DaySelectionView()
                 // .frame(width: 100)
             }
-            .frame(width: 200)
+            .frame(width: 250)
 
             HStack {
                 HourSelectionView()
@@ -48,7 +48,7 @@ public struct DateComponentSelectionView: View {
                 MinuteSelectionView()
                 // .frame(width: 100)
             }
-            .frame(width: 200)
+            .frame(width: 250)
         }
     }
 }
