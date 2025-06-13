@@ -103,12 +103,33 @@ public struct TierColumnView: View {
                   .padding(.vertical, 8)
                   .opacity(0.8)
 
-                VStack {
-                    Text("\(content.levels.prognosis.estimation.local) in Alkmaar")
-                    .font(.caption)
-                    Text("\(content.levels.prognosis.estimation.remote) huisbezoeken")
-                    .font(.caption)
+                HStack {
+                    VStack {
+                        Text("Suggestion")
+                        .italic()
+                        .padding(.bottom, 8)
+
+                        Text("\(content.levels.prognosis.estimation.local) in Alkmaar")
+                        .font(.caption)
+
+                        Text("\(content.levels.prognosis.estimation.remote) huisbezoeken")
+                        .font(.caption)
+                    }
+
+                    VStack {
+                        Text("Prognosis")
+                        .italic()
+                        .padding(.bottom, 8)
+
+                        Text("\(content.levels.prognosis.estimation.local) in Alkmaar")
+                        .font(.caption)
+
+                        Text("\(content.levels.prognosis.estimation.remote) huisbezoeken")
+                        .font(.caption)
+                    }
                 }
+                .opacity(0.8)
+                .padding(.bottom, 8)
 
                 Divider()
 
