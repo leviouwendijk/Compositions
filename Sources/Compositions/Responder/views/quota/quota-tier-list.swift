@@ -222,3 +222,158 @@ public struct StatView: View {
         }
     }
 }
+
+// public struct LabelView: View {
+//     public init() {}
+
+//     public var body: some View {
+//         VStack(alignment: .leading) {
+
+//             Text("prognosis")
+//                 .font(.caption)
+
+//             Text("suggestion")
+//                 .font(.caption)
+
+//             Text("singular")
+//                 .font(.caption)
+//         }
+//     }
+// }
+
+
+// public struct LabelColumnView: View {
+//     public let label: QuotaRateType
+
+//     public var body: some View {
+//         VStack(alignment: .leading) {
+
+//             HStack {
+//                 Text(label.rawValue)
+//                     .font(.subheadline)
+//                     .bold()
+//                 Spacer()
+//             }
+            
+//             Divider()
+
+//             LabelView()
+
+//         }
+//     }
+// }
+
+
+// public struct ValueView: View {
+//     public let rate: QuotaRateType
+//     public let prognosis: Double
+//     public let suggestion: Double
+//     public let singular: Double
+    
+//     public init(
+//         rate: QuotaRateType,
+//         prognosis: Double,
+//         suggestion: Double,
+//         singular: Double
+//     ) {
+//         self.rate = rate
+//         self.prognosis = prognosis
+//         self.suggestion = suggestion
+//         self.singular = singular
+//     }
+
+//     public var body: some View {
+//         VStack(alignment: .center) {
+
+//             Text(prognosis.display())
+//                 .font(.caption)
+
+//             Text(suggestion.display())
+//                 .font(.caption)
+
+//             Text(singular.display())
+//                 .font(.caption)
+//         }
+//     }
+// }
+
+// public struct TierColumnView: View {
+//     public let tier: QuotaTierType
+
+//     public var body: some View {
+//         VStack(alignment: .center) {
+//             HStack(alignment: .center) {
+//                 Text(tier.rawValue)
+//                     .font(.subheadline)
+//                     .bold()
+//             }
+            
+//             Divider()
+
+//             ValueView(
+//                 rate: .price,
+//                 prognosis: 0.0, // placeholders
+//                 suggestion: 0.0,
+//                 singular: 0.0
+//             )
+
+//             Divider()
+
+//             ValueView(
+//                 rate: .cost,
+//                 prognosis: 0.0, // placeholders
+//                 suggestion: 0.0,
+//                 singular: 0.0
+//             )
+
+//             Divider()
+
+//             ValueView(
+//                 rate: .base,
+//                 prognosis: 0.0, // placeholders
+//                 suggestion: 0.0,
+//                 singular: 0.0
+//             )
+
+//         }
+//     }
+// }
+
+
+// public struct QuotaTableView: View {
+//     public let tiers: [QuotaTierContent]
+
+//     public var body: some View {
+//         HStack(alignment: .center) {
+//             LabelView()
+            
+//             Divider()
+
+//             ValueView(
+//                 rate: .price,
+//                 prognosis: 0.0, // placeholders
+//                 suggestion: 0.0,
+//                 singular: 0.0
+//             )
+
+//             Divider()
+
+//             ValueView(
+//                 rate: .cost,
+//                 prognosis: 0.0, // placeholders
+//                 suggestion: 0.0,
+//                 singular: 0.0
+//             )
+
+//             Divider()
+
+//             ValueView(
+//                 rate: .base,
+//                 prognosis: 0.0, // placeholders
+//                 suggestion: 0.0,
+//                 singular: 0.0
+//             )
+
+//         }
+//     }
+// }

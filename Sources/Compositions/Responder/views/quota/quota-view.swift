@@ -30,7 +30,8 @@ public struct QuotaView: View {
 
                     // if let quota = quotaVm.loadedQuota {
                         // QuotaTierListView(quota: quota)
-                        QuotaTierListView(viewmodel: quotaVm)
+                        // QuotaTierListView(viewmodel: quotaVm)
+                        QuotaTableView(viewmodel: quotaVm)
                     // }
                 }
             }
