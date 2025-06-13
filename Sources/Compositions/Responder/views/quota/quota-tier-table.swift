@@ -27,7 +27,11 @@ public struct QuotaTableView: View {
                         )
                         .onTapGesture { 
                             withAnimation {
-                                viewmodel.selectedTier = t.tier 
+                                if viewmodel.selectedTier == t.tier {
+                                    viewmodel.selectedTier = nil
+                                } else {
+                                    viewmodel.selectedTier = t.tier 
+                                }
                             }
                         }
                     }
