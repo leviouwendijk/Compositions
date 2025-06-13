@@ -19,11 +19,11 @@ public struct QuotaTableView: View {
             if let tiers = viewmodel.tiers {
                 HStack(alignment: .top, spacing: 4) {
                     LabelColumnView()
-                        .frame(width: 100)
+                    .frame(width: 100)
                     ForEach(tiers, id: \.tier) { t in
                         TierColumnView(
-                          content: t,
-                          isSelected: (viewmodel.selectedTier == t.tier)
+                            content: t,
+                            isSelected: (viewmodel.selectedTier == t.tier)
                         )
                         .onTapGesture { 
                             withAnimation {
@@ -103,6 +103,13 @@ public struct TierColumnView: View {
                   .padding(.vertical, 8)
                   .opacity(0.8)
 
+                VStack {
+                    Text("\(content.levels.prognosis.estimation.local) in Alkmaar")
+                    .font(.caption)
+                    Text("\(content.levels.prognosis.estimation.remote) huisbezoeken")
+                    .font(.caption)
+                }
+
                 Divider()
 
                 // — Price rows —
@@ -171,6 +178,7 @@ public struct LabelColumnView: View {
                     .font(.subheadline).bold()
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
+
                 Divider()
 
                 ForEach(Array(rates.enumerated()), id: \.0) { (blockIndex, rate) in
