@@ -69,6 +69,7 @@ public struct QuotaTierActionsView: View {
                             },
                             notifier: notifier,
                         )
+                        .disabled(viewmodel.selectedTierIsNil)
 
                         BannerlessNotifyingButton(
                             type: .copy,
@@ -117,6 +118,7 @@ public struct QuotaTierActionsView: View {
                             },
                             notifier: notifier
                         )
+                        .disabled(viewmodel.selectedTierIsNil)
                     }
                     ControlledNotificationBanner(controller: notifier)
                 }
