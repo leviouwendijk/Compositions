@@ -88,6 +88,7 @@ public struct TierColumnView: View {
                   .font(.subheadline).bold()
                   .frame(maxWidth: .infinity)
                   .padding(.vertical, 8)
+                  .opacity(0.8)
 
                 Divider()
 
@@ -96,11 +97,11 @@ public struct TierColumnView: View {
                     HStack {
                         if showLabels {
                             Text(label)
-                              .font(.caption)
+                              .font(.tableLine)
                         }
                         Spacer()
                         Text(String(format: "%.2f", value))
-                          .font(.caption)
+                          .font(.tableLine)
                     }
                     .padding(.vertical, 2)
                 }
@@ -112,12 +113,12 @@ public struct TierColumnView: View {
                     HStack {
                         if showLabels {
                             Text(label)
-                              .font(.caption)
+                              .font(.tableLine)
                               .foregroundColor(.secondary)
                         }
                         Spacer()
                         Text(String(format: "%.2f", value))
-                          .font(.caption)
+                          .font(.tableLine)
                           .foregroundColor(.secondary)
                     }
                     .padding(.vertical, 2)
@@ -130,12 +131,12 @@ public struct TierColumnView: View {
                     HStack {
                         if showLabels {
                             Text(label)
-                              .font(.caption)
+                              .font(.tableLine)
                               .foregroundColor(.secondary)
                         }
                         Spacer()
                         Text(String(format: "%.2f", value))
-                          .font(.caption)
+                          .font(.tableLine)
                           .foregroundColor(.secondary)
                     }
                     .padding(.vertical, 2)
@@ -153,7 +154,6 @@ public struct LabelColumnView: View {
     public var body: some View {
         SelectableColumn(isSelected: false) {
             VStack(spacing: 0) {
-                // Empty header cell for alignment
                 Text("")
                     .font(.subheadline).bold()
                     .frame(maxWidth: .infinity)
@@ -163,7 +163,7 @@ public struct LabelColumnView: View {
                 ForEach(Array(rates.enumerated()), id: \.0) { (blockIndex, rate) in
                     ForEach(rowLabels, id: \.self) { rowLabel in
                         Text(rowLabel)
-                            .font(.caption)
+                            .font(.tableLine)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .foregroundColor(color(for: rate))
                             .padding(.vertical, 2)
