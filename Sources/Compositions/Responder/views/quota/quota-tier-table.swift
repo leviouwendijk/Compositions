@@ -18,8 +18,12 @@ public struct QuotaTableView: View {
         VStack {
             if let tiers = viewmodel.tiers {
                 HStack(alignment: .top, spacing: 4) {
-                    LabelColumnView()
-                    .frame(width: 100)
+                    VStack {
+                        Spacer()
+
+                        LabelColumnView()
+                        .frame(width: 100)
+                    }
                     ForEach(tiers, id: \.tier) { t in
                         TierColumnView(
                             content: t,
@@ -98,7 +102,8 @@ public struct TierColumnView: View {
             VStack(spacing: 0) {
                 // — Header —
                 Text(content.tier.rawValue.capitalized)
-                  .font(.subheadline).bold()
+                  // .font(.subheadline).bold()
+                  .bold()
                   .frame(maxWidth: .infinity)
                   .padding(.vertical, 8)
                   .opacity(0.8)
@@ -108,6 +113,7 @@ public struct TierColumnView: View {
                         Text("Suggestion")
                         .italic()
                         .padding(.bottom, 8)
+                        .font(.caption)
 
                         Text("\(content.levels.prognosis.estimation.local) in Alkmaar")
                         .font(.caption)
@@ -120,6 +126,7 @@ public struct TierColumnView: View {
                         Text("Prognosis")
                         .italic()
                         .padding(.bottom, 8)
+                        .font(.caption)
 
                         Text("\(content.levels.prognosis.estimation.local) in Alkmaar")
                         .font(.caption)
