@@ -54,21 +54,31 @@ public struct SelectableColumn<Content: View>: View {
 
     public var body: some View {
         content()
-          .padding(4)
-          .background(Color(NSColor.windowBackgroundColor))
-          .cornerRadius(cornerRadius)
-          .overlay(
+        .padding(4)
+        .background(Color(NSColor.windowBackgroundColor))
+        .cornerRadius(cornerRadius)
+        .overlay(
             RoundedRectangle(cornerRadius: cornerRadius)
-              .stroke(isSelected ? Color.accentColor : Color.clear,
-                      lineWidth: lineWidth)
-          )
-          .contentShape(RoundedRectangle(cornerRadius: cornerRadius))
+            .stroke(isSelected ? Color.accentColor : Color.clear, lineWidth: lineWidth)
+        )
+        .contentShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
 }
 
 public struct TierColumnView: View {
     public let content: QuotaTierContent
     public var isSelected: Bool
+    public let showLabels: Bool
+    
+    public init(
+        content: QuotaTierContent,
+        isSelected: Bool,
+        showLabels: Bool = false
+    ) {
+        self.content = content
+        self.isSelected = isSelected
+        self.showLabels = showLabels
+    }
 
     public var body: some View {
         SelectableColumn(isSelected: isSelected) {
@@ -84,8 +94,10 @@ public struct TierColumnView: View {
                 // — Price rows —
                 ForEach(content.levels.viewableTuples(of: .price), id: \.0) { label, value in
                     HStack {
-                        Text(label)
-                          .font(.caption)
+                        if showLabels {
+                            Text(label)
+                              .font(.caption)
+                        }
                         Spacer()
                         Text(String(format: "%.2f", value))
                           .font(.caption)
@@ -98,9 +110,11 @@ public struct TierColumnView: View {
                 // — Cost rows —
                 ForEach(content.levels.viewableTuples(of: .cost), id: \.0) { label, value in
                     HStack {
-                        Text(label)
-                          .font(.caption)
-                          .foregroundColor(.secondary)
+                        if showLabels {
+                            Text(label)
+                              .font(.caption)
+                              .foregroundColor(.secondary)
+                        }
                         Spacer()
                         Text(String(format: "%.2f", value))
                           .font(.caption)
@@ -114,9 +128,11 @@ public struct TierColumnView: View {
                 // — Base rows —
                 ForEach(content.levels.viewableTuples(of: .base), id: \.0) { label, value in
                     HStack {
-                        Text(label)
-                          .font(.caption)
-                          .foregroundColor(.secondary)
+                        if showLabels {
+                            Text(label)
+                              .font(.caption)
+                              .foregroundColor(.secondary)
+                        }
                         Spacer()
                         Text(String(format: "%.2f", value))
                           .font(.caption)
@@ -131,29 +147,37 @@ public struct TierColumnView: View {
 
 public struct LabelColumnView: View {
     private let rates: [QuotaRateType] = [.price, .cost, .base]
+    private let rowLabels = ["prognosis", "suggestion", "singular"]
     public init() {}
 
     public var body: some View {
         SelectableColumn(isSelected: false) {
             VStack(spacing: 0) {
+                // Empty header cell for alignment
                 Text("")
                     .font(.subheadline).bold()
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 8)
                 Divider()
 
-                ForEach(rates.indices, id: \.self) { blockIndex in
-                    ForEach(["prognosis", "suggestion", "singular"], id: \.self) { rowLabel in
+                ForEach(Array(rates.enumerated()), id: \.0) { (blockIndex, rate) in
+                    ForEach(rowLabels, id: \.self) { rowLabel in
                         Text(rowLabel)
                             .font(.caption)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .foregroundColor(color(for: rate))
                             .padding(.vertical, 2)
                     }
+
                     if blockIndex < rates.count - 1 {
                         Divider()
                     }
                 }
             }
         }
+    }
+
+    public func color(for rate: QuotaRateType) -> Color {
+        rate == .price ? .primary : .secondary
     }
 }
