@@ -18,12 +18,9 @@ public struct QuotaTableView: View {
         VStack {
             if let tiers = viewmodel.tiers {
                 HStack(alignment: .top, spacing: 4) {
-                    VStack {
-                        Spacer()
+                    LabelColumnView()
+                    .frame(width: 100)
 
-                        LabelColumnView()
-                        .frame(width: 100)
-                    }
                     ForEach(tiers, id: \.tier) { t in
                         TierColumnView(
                             content: t,
@@ -205,7 +202,7 @@ public struct LabelColumnView: View {
                 Text("")
                     .font(.subheadline).bold()
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 24)
 
                 Divider()
 
