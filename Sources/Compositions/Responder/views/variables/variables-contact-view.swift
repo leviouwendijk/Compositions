@@ -28,10 +28,14 @@ public struct VariablesContactView: View {
                 StandardTextField(
                     "Client",
                     text: $viewmodel.client,
-                    placeholder: "\"John\"  (variable: \"{{name || client}}\")",
+                    placeholder: "John",
                 )
 
-                StandardTextField("Email (accepts comma-separated values)", text: $viewmodel.email)
+                StandardTextField(
+                    "Email (accepts comma-separated values)",
+                    text: $viewmodel.email,
+                    placeholder: "john_and_bella@yahoo.com"
+                )
 
                 if (viewmodel.anyInvalidConditionsCheck && viewmodel.emptyEmailWarning) {
                     NotificationBanner(
@@ -41,9 +45,9 @@ public struct VariablesContactView: View {
                 }
                 
                 StandardTextField(
-                    "Dog (variable: \"{{dog}}\"",
+                    "Dog",
                     text: $viewmodel.dog,
-                    placeholder: "\"Bella\"  (variable: \"{{dog}}\")",
+                    placeholder: "Bella",
                 )
 
                 StandardTextField(
