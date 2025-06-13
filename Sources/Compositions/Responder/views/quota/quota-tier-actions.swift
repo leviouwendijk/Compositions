@@ -41,7 +41,7 @@ public struct QuotaTierActionsView: View {
                     //     }
                     // }
 
-                    if clientIdentifier.isEmpty {
+                    if clientIdentifier == "no contact specified" {
                         NotificationBanner(
                             type: .info,
                             message: "Select a contact for copyable string"
