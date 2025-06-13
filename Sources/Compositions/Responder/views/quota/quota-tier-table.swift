@@ -25,7 +25,11 @@ public struct QuotaTableView: View {
                           content: t,
                           isSelected: (viewmodel.selectedTier == t.tier)
                         )
-                        .onTapGesture { viewmodel.selectedTier = t.tier }
+                        .onTapGesture { 
+                            withAnimation {
+                                viewmodel.selectedTier = t.tier 
+                            }
+                        }
                     }
                 }
                 .padding()
@@ -55,7 +59,9 @@ public struct SelectableColumn<Content: View>: View {
     public var body: some View {
         content()
         .padding(4)
-        .background(Color(NSColor.windowBackgroundColor))
+        .background(
+            isSelected ? Color.accentColor.opacity(0.1) : Color(NSColor.windowBackgroundColor)
+        )
         .cornerRadius(cornerRadius)
         .overlay(
             RoundedRectangle(cornerRadius: cornerRadius)
