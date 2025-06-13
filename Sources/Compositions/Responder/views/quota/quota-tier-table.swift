@@ -112,10 +112,10 @@ public struct TierColumnView: View {
                         .padding(.bottom, 8)
                         .font(.caption)
 
-                        Text("\(content.levels.prognosis.estimation.local) in Alkmaar")
+                        Text("\(content.levels.suggestion.estimation.local) in Alkmaar")
                         .font(.caption)
 
-                        Text("\(content.levels.prognosis.estimation.remote) huisbezoeken")
+                        Text("\(content.levels.suggestion.estimation.remote) huisbezoeken")
                         .font(.caption)
                     }
 
