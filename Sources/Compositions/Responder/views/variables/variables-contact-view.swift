@@ -25,11 +25,13 @@ public struct VariablesContactView: View {
     public var body: some View {
         ScrollView {
             VStack {
-                StandardTextField("Client (variable: \"{{name}}\"", text: $viewmodel.client)
-                    // .textFieldStyle(RoundedBorderTextFieldStyle())
+                StandardTextField(
+                    "Client",
+                    text: $viewmodel.client,
+                    placeholder: "\"John\"  (variable: \"{{name || client}}\")",
+                )
 
                 StandardTextField("Email (accepts comma-separated values)", text: $viewmodel.email)
-                    // .textFieldStyle(RoundedBorderTextFieldStyle())
 
                 if (viewmodel.anyInvalidConditionsCheck && viewmodel.emptyEmailWarning) {
                     NotificationBanner(
@@ -38,32 +40,47 @@ public struct VariablesContactView: View {
                     )
                 }
                 
-                StandardTextField("Dog (variable: \"{{dog}}\"", text: $viewmodel.dog)
-                    // .textFieldStyle(RoundedBorderTextFieldStyle())
+                StandardTextField(
+                    "Dog (variable: \"{{dog}}\"",
+                    text: $viewmodel.dog,
+                    placeholder: "\"Bella\"  (variable: \"{{dog}}\")",
+                )
 
-                StandardTextField("Location", text: Binding(
-                    get: { viewmodel.local ? viewmodel.localLocation : viewmodel.location },
-                    set: { viewmodel.location = $0 }
-                ))
-                // .textFieldStyle(RoundedBorderTextFieldStyle())
+                StandardTextField(
+                    "Location",
+                    text: Binding(
+                        get: { viewmodel.local ? viewmodel.localLocation : viewmodel.location },
+                        set: { viewmodel.location = $0 }
+                    ),
+                    placeholder: "Amsterdam"
+                )
 
-                StandardTextField("Area Code", text: Binding(
-                    get: { viewmodel.local ? "" : (viewmodel.areaCode ?? "") },
-                    set: { viewmodel.areaCode = viewmodel.local ? nil : ($0.isEmpty ? nil : $0) }
-                ))
-                // .textFieldStyle(RoundedBorderTextFieldStyle())
+                StandardTextField(
+                    "Area Code", 
+                    text: Binding(
+                        get: { viewmodel.local ? "" : (viewmodel.areaCode ?? "") },
+                        set: { viewmodel.areaCode = viewmodel.local ? nil : ($0.isEmpty ? nil : $0) }
+                    ),
+                    placeholder: "1234 AB"
+                )
 
-                StandardTextField("Street", text: Binding(
-                    get: { viewmodel.local ? viewmodel.localStreet : (viewmodel.street ?? "") },
-                    set: { viewmodel.street = viewmodel.local ? nil : ($0.isEmpty ? nil : $0) }
-                ))
-                // .textFieldStyle(RoundedBorderTextFieldStyle())
+                StandardTextField(
+                    "Street",
+                    text: Binding(
+                        get: { viewmodel.local ? viewmodel.localStreet : (viewmodel.street ?? "") },
+                        set: { viewmodel.street = viewmodel.local ? nil : ($0.isEmpty ? nil : $0) }
+                    ),
+                    placeholder: "Langestraat"
+                )
 
-                StandardTextField("Number", text: Binding(
-                    get: { viewmodel.local ? "" : (viewmodel.number ?? "") },
-                    set: { viewmodel.number = viewmodel.local ? nil : ($0.isEmpty ? nil : $0) }
-                ))
-                // .textFieldStyle(RoundedBorderTextFieldStyle())
+                StandardTextField(
+                    "Number",
+                    text: Binding(
+                        get: { viewmodel.local ? "" : (viewmodel.number ?? "") },
+                        set: { viewmodel.number = viewmodel.local ? nil : ($0.isEmpty ? nil : $0) }
+                    ),
+                    placeholder: "51"
+                )
             }
         }
     }
