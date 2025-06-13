@@ -30,28 +30,16 @@ public struct QuotaTierActionsView: View {
         HStack {
             if let quota = viewmodel.loadedQuota {
                 VStack {
-                    HStack(spacing: 4) {
-                        ForEach(QuotaTierType.allCases) { tier in
-                            SelectableRow(
-                                title: tier.rawValue,
-                                isSelected: (viewmodel.selectedTier == tier),
-                                action: { viewmodel.selectedTier = tier }
-                            )
-                            .frame(maxWidth: 100)
-                            // .font(.caption2)
-                            // .padding(.vertical, 4)
-                            // .padding(.horizontal, 6)
-                            // .background(
-                            //     viewmodel.selectedTier == tier ? Color.accentColor.opacity(0.2) : Color.secondary.opacity(0.1)
-                            // )
-                            // .cornerRadius(4)
-                            // .onTapGesture {
-                            //     withAnimation {
-                            //         viewmodel.selectedTier = tier
-                            //     }
-                            // }
-                        }
-                    }
+                    // HStack(spacing: 4) {
+                    //     ForEach(QuotaTierType.allCases) { tier in
+                    //         SelectableRow(
+                    //             title: tier.rawValue,
+                    //             isSelected: (viewmodel.selectedTier == tier),
+                    //             action: { viewmodel.selectedTier = tier }
+                    //         )
+                    //         .frame(maxWidth: 100)
+                    //     }
+                    // }
 
                     HStack {
                         BannerlessNotifyingButton(
