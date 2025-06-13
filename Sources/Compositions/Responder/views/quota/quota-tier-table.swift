@@ -202,7 +202,7 @@ public struct LabelColumnView: View {
                 Text("")
                     .font(.subheadline).bold()
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 40)
+                    .padding(.vertical, 39)
 
                 Divider()
 
