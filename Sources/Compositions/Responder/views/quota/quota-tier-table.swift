@@ -46,27 +46,26 @@ public struct SelectableColumn<Content: View>: View {
     public let isSelected: Bool
     public let cornerRadius: CGFloat
     public let lineWidth: CGFloat
-    public let bottomPadding: CGFloat  
+    public let contentPadding: CGFloat  
     public let content: () -> Content
 
     public init(
         isSelected: Bool,
         cornerRadius: CGFloat = 8,
         lineWidth: CGFloat = 2,
-        bottomPadding: CGFloat = 12,
+        contentPadding: CGFloat = 12,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.isSelected = isSelected
         self.cornerRadius = cornerRadius
         self.lineWidth = lineWidth
-        self.bottomPadding = bottomPadding
+        self.contentPadding = contentPadding
         self.content = content
     }
 
     public var body: some View {
         content()
-        .padding(4)
-        .padding(.bottom, bottomPadding)
+        .padding(contentPadding)
         .background(
             isSelected ? Color.accentColor.opacity(0.1) : Color(NSColor.windowBackgroundColor)
         )
