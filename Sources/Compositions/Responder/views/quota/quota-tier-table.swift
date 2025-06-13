@@ -19,7 +19,7 @@ public struct QuotaTableView: View {
             if let tiers = viewmodel.tiers {
                 HStack(alignment: .top, spacing: 4) {
                     LabelColumnView()
-                        .frame(width: 80)
+                        .frame(width: 100)
                     ForEach(tiers, id: \.tier) { t in
                         TierColumnView(
                           content: t,
@@ -46,26 +46,27 @@ public struct SelectableColumn<Content: View>: View {
     public let isSelected: Bool
     public let cornerRadius: CGFloat
     public let lineWidth: CGFloat
-    public let contentPadding: CGFloat   // ← new
+    public let bottomPadding: CGFloat  
     public let content: () -> Content
 
     public init(
         isSelected: Bool,
         cornerRadius: CGFloat = 8,
         lineWidth: CGFloat = 2,
-        contentPadding: CGFloat = 8,
+        bottomPadding: CGFloat = 12,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.isSelected = isSelected
         self.cornerRadius = cornerRadius
         self.lineWidth = lineWidth
-        self.contentPadding = contentPadding
+        self.bottomPadding = bottomPadding
         self.content = content
     }
 
     public var body: some View {
         content()
-        .padding(contentPadding)
+        .padding(4)
+        .padding(.bottom, bottomPadding)
         .background(
             isSelected ? Color.accentColor.opacity(0.1) : Color(NSColor.windowBackgroundColor)
         )
