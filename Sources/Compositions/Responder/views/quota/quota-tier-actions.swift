@@ -41,6 +41,13 @@ public struct QuotaTierActionsView: View {
                     //     }
                     // }
 
+                    if clientIdentifier.isEmpty {
+                        NotificationBanner(
+                            type: .info,
+                            message: "Select a contact for copyable string"
+                        )
+                    }
+
                     HStack {
                         BannerlessNotifyingButton(
                             type: .copy,
@@ -73,6 +80,7 @@ public struct QuotaTierActionsView: View {
                             },
                             notifier: notifier
                         )
+                        .disabled(viewmodel.selectedTierIsNil)
 
                         BannerlessNotifyingButton(
                             type: .execute,
