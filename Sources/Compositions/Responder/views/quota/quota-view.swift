@@ -54,6 +54,7 @@ public struct QuotaView: View {
                         }
                     )
                     .frame(maxWidth: 400)
+                    .frame(maxHeight: .infinity)
 
                     Spacer()
                 }
