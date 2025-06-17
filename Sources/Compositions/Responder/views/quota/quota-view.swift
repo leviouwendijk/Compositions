@@ -53,10 +53,12 @@ public struct QuotaView: View {
                             viewmodel.clearContact()
                         }
                     )
-                    .frame(maxWidth: 300)
+                    .frame(maxWidth: 400)
 
                     Spacer()
                 }
+                .padding(.top, 24)
+
             }
             .frame(minHeight: 420)
 
