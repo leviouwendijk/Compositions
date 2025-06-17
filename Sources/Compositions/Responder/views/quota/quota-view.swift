@@ -32,33 +32,33 @@ public struct QuotaView: View {
                     QuotaTableView(viewmodel: quotaVm)
                 }
 
-                // HStack {
-                //     ContactsListView(
-                //         viewmodel: viewmodel.contactsVm,
-                //         maxListHeight: 300,
-                //         onSelect: { contact in
-                //             viewmodel.clearContact()
-                //             viewmodel.selectedContact = contact
-                //             let split = try splitClientDog(from: contact.givenName)
-                //             viewmodel.client = split.name
-                //             viewmodel.dog    = split.dog
-                //             viewmodel.email  = contact.emailAddresses.first?.value as String? ?? ""
-                //             if let addr = contact.postalAddresses.first?.value {
-                //                 viewmodel.location = addr.city
-                //                 viewmodel.street   = addr.street
-                //                 viewmodel.areaCode = addr.postalCode
-                //             }
-                //         },
-                //         onDeselect: {
-                //             viewmodel.clearContact()
-                //         }
-                //     )
-                //     .frame(maxWidth: 400)
-                //     .frame(maxHeight: .infinity)
+                HStack {
+                    ContactsListView(
+                        viewmodel: viewmodel.contactsVm,
+                        maxListHeight: 300,
+                        onSelect: { contact in
+                            viewmodel.clearContact()
+                            viewmodel.selectedContact = contact
+                            let split = try splitClientDog(from: contact.givenName)
+                            viewmodel.client = split.name
+                            viewmodel.dog    = split.dog
+                            viewmodel.email  = contact.emailAddresses.first?.value as String? ?? ""
+                            if let addr = contact.postalAddresses.first?.value {
+                                viewmodel.location = addr.city
+                                viewmodel.street   = addr.street
+                                viewmodel.areaCode = addr.postalCode
+                            }
+                        },
+                        onDeselect: {
+                            viewmodel.clearContact()
+                        }
+                    )
+                    .frame(maxWidth: 400)
+                    .frame(maxHeight: .infinity)
 
-                //     Spacer()
-                // }
-                // .padding(.top, 24)
+                    Spacer()
+                }
+                .padding(.top, 24)
 
             }
             .frame(minHeight: 420)
