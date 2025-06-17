@@ -1,5 +1,6 @@
 import SwiftUI
 import plate
+import Interfaces
 import Economics
 import ViewComponents
 import Implementations
@@ -28,11 +29,33 @@ public struct QuotaView: View {
 
                     Spacer()
 
-                    // if let quota = quotaVm.loadedQuota {
-                        // QuotaTierListView(quota: quota)
-                        // QuotaTierListView(viewmodel: quotaVm)
-                        QuotaTableView(viewmodel: quotaVm)
-                    // }
+                    QuotaTableView(viewmodel: quotaVm)
+                }
+
+                HStack {
+                    ContactsListView(
+                        viewmodel: viewmodel.contactsVm,
+                        maxListHeight: 300,
+                        onSelect: { contact in
+                            viewmodel.clearContact()
+                            viewmodel.selectedContact = contact
+                            let split = try splitClientDog(from: contact.givenName)
+                            viewmodel.client = split.name
+                            viewmodel.dog    = split.dog
+                            viewmodel.email  = contact.emailAddresses.first?.value as String? ?? ""
+                            if let addr = contact.postalAddresses.first?.value {
+                                viewmodel.location = addr.city
+                                viewmodel.street   = addr.street
+                                viewmodel.areaCode = addr.postalCode
+                            }
+                        },
+                        onDeselect: {
+                            viewmodel.clearContact()
+                        }
+                    )
+                    .frame(maxWidth: 300)
+
+                    Spacer()
                 }
             }
             .frame(minHeight: 420)

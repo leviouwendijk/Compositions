@@ -44,7 +44,7 @@ public struct VariablesView: View {
             VStack(alignment: .leading) {
                 if !(viewmodel.apiPathVm.selectedRoute == .template || viewmodel.apiPathVm.selectedRoute == .invoice) {
                     ContactsListView(
-                        viewModel: viewmodel.contactsVm,
+                        viewmodel: viewmodel.contactsVm,
                         maxListHeight: 300,
                         onSelect: { contact in
                             viewmodel.clearContact()

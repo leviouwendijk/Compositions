@@ -7,20 +7,20 @@ import Implementations
 import Structures
 
 public struct ContactsListView: View {
-    @ObservedObject public var viewModel: ContactsListViewModel
+    @ObservedObject public var viewmodel: ContactsListViewModel
     public let maxListHeight: CGFloat
     public let onSelect: (CNContact) throws -> Void
     public let onDeselect: () -> Void
     public let autoScrollToTop: Bool
 
     public init(
-        viewModel: ContactsListViewModel,
+        viewmodel: ContactsListViewModel,
         maxListHeight: CGFloat = 200,
         onSelect: @escaping (CNContact) throws -> Void,
         onDeselect: @escaping () -> Void = {},
         autoScrollToTop: Bool = true
     ) {
-        self.viewModel = viewModel
+        self.viewmodel = viewmodel
         self.maxListHeight = maxListHeight
         self.onSelect = onSelect
         self.onDeselect = onDeselect
@@ -33,11 +33,11 @@ public struct ContactsListView: View {
         VStack(alignment: .leading, spacing: 8) {
             FuzzySearchField(
                 title: "Search contacts",
-                searchQuery: $viewModel.searchQuery,
-                searchStrictness:  $viewModel.searchStrictness
+                searchQuery: $viewmodel.searchQuery,
+                searchStrictness:  $viewmodel.searchStrictness
             )
 
-            if let msg = viewModel.errorMessage {
+            if let msg = viewmodel.errorMessage {
                 HStack {
                     Image(systemName: "exclamationmark.triangle.fill")
                     Text(msg)
@@ -49,7 +49,7 @@ public struct ContactsListView: View {
                 .padding(.horizontal)
             }
 
-            if viewModel.isLoading {
+            if viewmodel.isLoading {
                 HStack {
                     Spacer()
                     ProgressView("Loading…")
@@ -67,19 +67,19 @@ public struct ContactsListView: View {
         ZStack {
             VStack {
                 ScrollViewReader { proxy in
-                    List(viewModel.filteredContacts, id: \.identifier) { contact in
-                        let isSelected = (viewModel.selectedContactId == contact.identifier)
+                    List(viewmodel.filteredContacts, id: \.identifier) { contact in
+                        let isSelected = (viewmodel.selectedContactId == contact.identifier)
 
                         Button {
                             withAnimation(.easeInOut(duration: 0.2)) {
-                                if viewModel.selectedContactId == contact.identifier {
-                                    viewModel.selectedContactId = nil
+                                if viewmodel.selectedContactId == contact.identifier {
+                                    viewmodel.selectedContactId = nil
                                     onDeselect()
                                     withAnimation {
                                         showWarning = false
                                     }
                                 } else {
-                                    viewModel.selectedContactId = contact.identifier
+                                    viewmodel.selectedContactId = contact.identifier
 
                                     if showWarning {
                                         withAnimation {
@@ -107,7 +107,7 @@ public struct ContactsListView: View {
                         } label: {
                             HStack {
                                 VStack(alignment: .leading, spacing: 4) {
-                                    let tokens = viewModel.searchQuery.clientDogTokens
+                                    let tokens = viewmodel.searchQuery.clientDogTokens
                                     let fullName = "\(contact.givenName) \(contact.familyName)"
                                     Text(fullName.highlighted(tokens))
                                     
@@ -141,9 +141,9 @@ public struct ContactsListView: View {
                     .padding(.horizontal)
 
                     // REPLACED BY CONCURRENCY IMPLEMENATION
-                    // .onChange(of: viewModel.searchQuery) { _ in
+                    // .onChange(of: viewmodel.searchQuery) { _ in
                     //     guard autoScrollToTop,
-                    //         let firstID = viewModel.filteredContacts.first?.identifier
+                    //         let firstID = viewmodel.filteredContacts.first?.identifier
                     //     else { 
                     //         return
                     //     }
@@ -156,7 +156,7 @@ public struct ContactsListView: View {
                     // }
 
                     // CONCURRENCY IMPLEMENTATION
-                    .onReceive(viewModel.$scrollToFirstID.compactMap { $0 }) { firstID in
+                    .onReceive(viewmodel.$scrollToFirstID.compactMap { $0 }) { firstID in
                         guard autoScrollToTop else { return }
                         // Defer until after the table’s update pass
                         DispatchQueue.main.async {
@@ -176,11 +176,11 @@ public struct ContactsListView: View {
                     .zIndex(1)
                 }
             }
-            .opacity(viewModel.isFuzzyFiltering ? 0 : 1)
+            .opacity(viewmodel.isFuzzyFiltering ? 0 : 1)
 
             // .overlay(
             //     Group {
-            //         if viewModel.isFuzzyFiltering {
+            //         if viewmodel.isFuzzyFiltering {
             //             Color(NSColor.windowBackgroundColor)
             //             .opacity(0.9)
             //             .cornerRadius(6)
@@ -190,8 +190,8 @@ public struct ContactsListView: View {
 
             .overlay(
                 Group {
-                    if !(viewModel.searchQuery.isEmpty) && viewModel.isFuzzyFiltering {
-                        Text("“\(viewModel.searchQuery)”…")
+                    if !(viewmodel.searchQuery.isEmpty) && viewmodel.isFuzzyFiltering {
+                        Text("“\(viewmodel.searchQuery)”…")
                         .font(.title2)
                         .foregroundColor(.blue)
                         .padding(.vertical, 6)
@@ -201,7 +201,7 @@ public struct ContactsListView: View {
                         //     .fill(Color(NSColor.windowBackgroundColor))
                         // )
                         .zIndex(1)
-                    } else if !(viewModel.searchQuery.isEmpty) && !(viewModel.isFuzzyFiltering) && viewModel.filteredContacts.isEmpty {
+                    } else if !(viewmodel.searchQuery.isEmpty) && !(viewmodel.isFuzzyFiltering) && viewmodel.filteredContacts.isEmpty {
                         VStack {
                             HStack {
                                 Text("No results for")
@@ -211,7 +211,7 @@ public struct ContactsListView: View {
                                 // .padding(.horizontal)
                                 // .padding(.leading)
 
-                                Text("“\(viewModel.searchQuery)”")
+                                Text("“\(viewmodel.searchQuery)”")
                                 .font(.title2)
                                 .foregroundColor(Color.secondary)
                                 .padding(.vertical, 6)
@@ -234,6 +234,6 @@ public struct ContactsListView: View {
                 }
             )
         }
-        .animation(.easeInOut(duration: 0.35), value: viewModel.isFuzzyFiltering)
+        .animation(.easeInOut(duration: 0.35), value: viewmodel.isFuzzyFiltering)
     }
 }
