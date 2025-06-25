@@ -61,7 +61,14 @@ public struct VariablesWAMessageView: View {
                             }
                         }
                     },
-                    image: "message.fill"
+                    // image: "message.fill"
+                    appearance: ButtonAppearanceConfiguration(
+                        image: "message.fill",
+                        color: ColorStyleConfiguration(
+                            color: .green,
+                            foregroundColor: .white
+                        )
+                    )
                 )
                 .disabled(viewmodel.selectedWAMessageReplaced.containsRawTemplatePlaceholderSyntaxes())
 

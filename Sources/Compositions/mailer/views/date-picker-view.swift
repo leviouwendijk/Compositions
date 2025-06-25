@@ -216,7 +216,9 @@ public struct AppointmentsQueueView: View {
                     action: {
                         viewmodel.addToQueue()
                     },
-                    image: "plus.circle.fill"
+                    appearance: ButtonAppearanceConfiguration(
+                        image: "plus.circle.fill"
+                    )
                 )
 
                 StandardButton(
@@ -225,7 +227,9 @@ public struct AppointmentsQueueView: View {
                     action: {
                         viewmodel.clearQueue()
                     },
-                    image: "trash.fill"
+                    appearance: ButtonAppearanceConfiguration(
+                        image: "trash.fill"
+                    )
                 )
                 // Button(action: viewmodel.clearQueue) {
                 //     Label("Clear Queue", systemImage: "trash.fill")
