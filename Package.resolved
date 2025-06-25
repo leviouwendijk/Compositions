@@ -2,6 +2,15 @@
   "originHash" : "e6cc3fdaacc206f2545494a85e3177995354277ebc7aaa7040a5988b7e116fa2",
   "pins" : [
     {
+      "identity" : "commerce",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/leviouwendijk/Commerce.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "d01ddf153374cd7f174f8d31246e33192ae4becf"
+      }
+    },
+    {
       "identity" : "economics",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/leviouwendijk/Economics.git",
@@ -11,12 +20,21 @@
       }
     },
     {
+      "identity" : "extensions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/leviouwendijk/Extensions.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "184b8d8fdd4d1fc65910b97dcf1c788e68fd0418"
+      }
+    },
+    {
       "identity" : "implementations",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/leviouwendijk/Implementations.git",
       "state" : {
         "branch" : "master",
-        "revision" : "32c11076cfc5c7e228378d3a53693eeb0d985a00"
+        "revision" : "38a0559e5955badac0a3e02c721aeeab5e49332c"
       }
     },
     {
@@ -25,7 +43,7 @@
       "location" : "https://github.com/leviouwendijk/Interfaces.git",
       "state" : {
         "branch" : "master",
-        "revision" : "d21913ed6dfb22a87330f21d65962b51db62966a"
+        "revision" : "291f04b8fb3e291ed7c5da23249c82c1e17d2282"
       }
     },
     {
@@ -34,7 +52,7 @@
       "location" : "https://github.com/leviouwendijk/plate.git",
       "state" : {
         "branch" : "master",
-        "revision" : "bf2f9ab555ba997fa7720a12dd93526ee8ec5950"
+        "revision" : "ca9691c1f14f5221558e473ea98c5b3dd984a488"
       }
     },
     {
@@ -43,7 +61,7 @@
       "location" : "https://github.com/leviouwendijk/Structures.git",
       "state" : {
         "branch" : "master",
-        "revision" : "746c7cf1c02968dd5dc348ccc175186aa69f8d8a"
+        "revision" : "3cd74423f218095c22dff13f3569481e809434c5"
       }
     },
     {

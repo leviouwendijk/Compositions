@@ -30,37 +30,39 @@ public struct VariablesWAMessageView: View {
                 WAMessageDropdown(selected: $viewmodel.selectedWAMessage)
 
                 StandardButton(
-                    type: .execute, 
+                    type: .submit, 
                     title: "WA message", 
-                    subtitle: ""
-                ) {
-                    if !viewmodel.waMessageContainsRawPlaceholders {
-                        withAnimation {
-                            notifier.show = false
-                        }
-
-                        viewmodel.selectedWAMessageReplaced
-                            .clipboard()
-
-                        notifier.message = "WA message copied"
-                        notifier.style = .success
-                        withAnimation {
-                            notifier.show = true
-                        }
-
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                            withAnimation { 
+                    subtitle: "",
+                    action: {
+                        if !viewmodel.waMessageContainsRawPlaceholders {
+                            withAnimation {
                                 notifier.show = false
                             }
+
+                            viewmodel.selectedWAMessageReplaced
+                                .clipboard()
+
+                            notifier.message = "WA message copied"
+                            notifier.style = .success
+                            withAnimation {
+                                notifier.show = true
+                            }
+
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                withAnimation { 
+                                    notifier.show = false
+                                }
+                            }
+                        } else {
+                            notifier.style = .error
+                            notifier.message = "WA message contains raw placeholders"
+                            withAnimation {
+                                notifier.show = true
+                            }
                         }
-                    } else {
-                        notifier.style = .error
-                        notifier.message = "WA message contains raw placeholders"
-                        withAnimation {
-                            notifier.show = true
-                        }
-                    }
-                }
+                    },
+                    image: "message.fill"
+                )
                 .disabled(viewmodel.selectedWAMessageReplaced.containsRawTemplatePlaceholderSyntaxes())
 
                 Spacer()
