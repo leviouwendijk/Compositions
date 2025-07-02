@@ -20,12 +20,12 @@ public struct QuotaStatusView: View {
                     .padding(.top, 16)
             }
 
-            if viewmodel.inputsVm.inputsChanged {
-                NotificationBanner(
-                    type: .warning,
-                    message: "Inputs have changed since last render"
-                )
-            }
+            // if viewmodel.inputsVm.inputsChanged {
+            //     NotificationBanner(
+            //         type: .warning,
+            //         message: "Inputs have changed since last render"
+            //     )
+            // }
 
             if !(viewmodel.errorMessage.isEmpty) {
                 if viewmodel.hasEmptyInputs {
