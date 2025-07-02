@@ -128,54 +128,54 @@ public struct QuotaInputsView: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             KilometersField(
-                kilometers: $viewmodel.customQuotaInputs.travelCost.kilometers
+                kilometers: $viewmodel.inputsVm.customQuotaInputs.travelCost.kilometers
             )
 
             SessionPairField(
                 label: "prognosis",
-                count: $viewmodel.customQuotaInputs.prognosis.count,
-                local: $viewmodel.customQuotaInputs.prognosis.local,
+                count: $viewmodel.inputsVm.customQuotaInputs.prognosis.count,
+                local: $viewmodel.inputsVm.customQuotaInputs.prognosis.local,
                 countPlaceholder: "5",
                 localPlaceholder: "4"
             )
 
             SessionPairField(
                 label: "suggestion",
-                count: $viewmodel.customQuotaInputs.suggestion.count,
-                local: $viewmodel.customQuotaInputs.suggestion.local,
+                count: $viewmodel.inputsVm.customQuotaInputs.suggestion.count,
+                local: $viewmodel.inputsVm.customQuotaInputs.suggestion.local,
                 countPlaceholder: "3",
                 localPlaceholder: "2"
             )
 
             SessionPairField(
                 label: "singular",
-                count: $viewmodel.customQuotaInputs.singular.count,
-                local: $viewmodel.customQuotaInputs.singular.local,
+                count: $viewmodel.inputsVm.customQuotaInputs.singular.count,
+                local: $viewmodel.inputsVm.customQuotaInputs.singular.local,
                 countPlaceholder: "1",
                 localPlaceholder: "0"
             )
 
             BaseField(
-                base: $viewmodel.customQuotaInputs.base
+                base: $viewmodel.inputsVm.customQuotaInputs.base
             )
 
             TravelCostFields(
-                speed: $viewmodel.customQuotaInputs.travelCost.speed,
+                speed: $viewmodel.inputsVm.customQuotaInputs.travelCost.speed,
                 travelRate: Binding(
-                    get: { viewmodel.customQuotaInputs.travelCost.rates.travel },
-                    set: { viewmodel.customQuotaInputs.travelCost.rates.travel = $0 }
+                    get: { viewmodel.inputsVm.customQuotaInputs.travelCost.rates.travel },
+                    set: { viewmodel.inputsVm.customQuotaInputs.travelCost.rates.travel = $0 }
                 ),
                 timeRate: Binding(
-                    get: { viewmodel.customQuotaInputs.travelCost.rates.time },
-                    set: { viewmodel.customQuotaInputs.travelCost.rates.time = $0 }
+                    get: { viewmodel.inputsVm.customQuotaInputs.travelCost.rates.time },
+                    set: { viewmodel.inputsVm.customQuotaInputs.travelCost.rates.time = $0 }
                 )
             )
 
             ExpirationFields(
-                start: $viewmodel.customQuotaInputs.expiration.start,
-                unit: $viewmodel.customQuotaInputs.expiration.unit,
-                interval: $viewmodel.customQuotaInputs.expiration.interval,
-                resultText: viewmodel.customQuotaInputs.expiration.result?.dates.string()
+                start: $viewmodel.inputsVm.customQuotaInputs.expiration.start,
+                unit: $viewmodel.inputsVm.customQuotaInputs.expiration.unit,
+                interval: $viewmodel.inputsVm.customQuotaInputs.expiration.interval,
+                resultText: viewmodel.inputsVm.customQuotaInputs.expiration.result?.dates.string()
             )
         }
     }
