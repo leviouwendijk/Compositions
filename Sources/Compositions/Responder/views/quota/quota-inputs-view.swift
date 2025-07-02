@@ -6,150 +6,177 @@ import Implementations
 import Structures
 import Extensions
 
+struct KilometersField: View {
+    @Binding var kilometers: String
+    var body: some View {
+        StandardTextField(
+            "kilometers",
+            text: $kilometers,
+            placeholder: "45"
+        )
+    }
+}
+
+struct SessionPairField: View {
+    let label: String
+    @Binding var count: String
+    @Binding var local: String
+    var countPlaceholder: String
+    var localPlaceholder: String
+
+    var body: some View {
+        HStack {
+            StandardTextField(
+                label,
+                text: $count,
+                placeholder: countPlaceholder
+            )
+            StandardTextField(
+                "local",
+                text: $local,
+                placeholder: localPlaceholder
+            )
+        }
+    }
+}
+
+struct BaseField: View {
+    @Binding var base: String
+    var body: some View {
+        StandardTextField(
+            "base",
+            text: $base,
+            placeholder: "350"
+        )
+    }
+}
+
+struct TravelCostFields: View {
+    @Binding var speed: String
+    @Binding var travelRate: String
+    @Binding var timeRate: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                StandardTextField(
+                    "speed",
+                    text: $speed,
+                    placeholder: "80.0"
+                )
+                StandardTextField(
+                    "rate/travel",
+                    text: $travelRate,
+                    placeholder: "0.25"
+                )
+                StandardTextField(
+                    "rate/time",
+                    text: $timeRate,
+                    placeholder: "105"
+                )
+            }
+        }
+        .padding(.top, 8)
+    }
+}
+
+struct ExpirationFields: View {
+    @Binding var start: Date
+    @Binding var unit: DateDistanceUnit
+    @Binding var interval: String
+    var resultText: String?
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
+                DatePicker(
+                    "",
+                    selection: $start,
+                    displayedComponents: .date
+                )
+                .datePickerStyle(DefaultDatePickerStyle())
+
+                EnumDropdown<DateDistanceUnit>(
+                    selected: $unit,
+                    labelWidth: 100,
+                    maxListHeight: 150
+                )
+            }
+
+            StandardTextField(
+                "interval count",
+                text: $interval,
+                placeholder: "4"
+            )
+            .frame(width: 80)
+
+            if let rangeString = resultText {
+                Text(rangeString)
+            }
+        }
+        .padding(.top, 8)
+    }
+}
+
 public struct QuotaInputsView: View {
     @ObservedObject public var viewmodel: QuotaViewModel
-    
-    public init(
-        viewmodel: QuotaViewModel
-    ) {
+
+    public init(viewmodel: QuotaViewModel) {
         self.viewmodel = viewmodel
     }
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            // 1) “Kilometers” field
-            StandardTextField(
-                "kilometers",
-                text: $viewmodel.customQuotaInputs.travelCost.kilometers,
-                placeholder: "45"
+            KilometersField(
+                kilometers: $viewmodel.customQuotaInputs.travelCost.kilometers
             )
 
-            // 2) Prognosis / Local
-            HStack {
-                StandardTextField(
-                    "prognosis",
-                    text: $viewmodel.customQuotaInputs.prognosis.count,
-                    placeholder: "5"
-                )
-                StandardTextField(
-                    "local",
-                    text: $viewmodel.customQuotaInputs.prognosis.local,
-                    placeholder: "4"
-                )
-            }
-
-            // 3) Suggestion / Local
-            HStack {
-                StandardTextField(
-                    "suggestion",
-                    text: $viewmodel.customQuotaInputs.suggestion.count,
-                    placeholder: "3"
-                )
-                StandardTextField(
-                    "local",
-                    text: $viewmodel.customQuotaInputs.suggestion.local,
-                    placeholder: "2"
-                )
-            }
-
-            // Singular / Local
-            HStack {
-                StandardTextField(
-                    "singular",
-                    text: $viewmodel.customQuotaInputs.singular.count,
-                    placeholder: "1"
-                )
-                StandardTextField(
-                    "local",
-                    text: $viewmodel.customQuotaInputs.singular.local,
-                    placeholder: "0"
-                )
-            }
-
-
-            // 4) Base
-            StandardTextField(
-                "base",
-                text: $viewmodel.customQuotaInputs.base,
-                placeholder: "350"
+            SessionPairField(
+                label: "prognosis",
+                count: $viewmodel.customQuotaInputs.prognosis.count,
+                local: $viewmodel.customQuotaInputs.prognosis.local,
+                countPlaceholder: "5",
+                localPlaceholder: "4"
             )
 
-            // 5) Travel‐cost fields
-            VStack(alignment: .leading, spacing: 8) {
-                // Text("Travel Cost Inputs").bold()
-                HStack {
-                    StandardTextField(
-                        "speed",
-                        text: $viewmodel.customQuotaInputs.travelCost.speed,
-                        placeholder: "80.0"
-                    )
-                    StandardTextField(
-                        "rate/travel",
-                        text: Binding<String>(
-                            get:  { viewmodel.customQuotaInputs.travelCost.rates.travel },
-                            set:  { newValue in
-                                viewmodel.customQuotaInputs.travelCost.rates = TravelCostRatesInputs(
-                                    travel: newValue,
-                                    time: viewmodel.customQuotaInputs.travelCost.rates.time
-                                )
-                            }
-                        ),
-                        placeholder: "0.25"
-                    )
-                    StandardTextField(
-                        "rate/time",
-                        text: Binding<String>(
-                            get:  { viewmodel.customQuotaInputs.travelCost.rates.time },
-                            set:  { newValue in
-                                viewmodel.customQuotaInputs.travelCost.rates = TravelCostRatesInputs(
-                                    travel: viewmodel.customQuotaInputs.travelCost.rates.travel,
-                                    time: newValue
-                                )
-                            }
-                        ),
-                        placeholder: "105"
-                    )
-                }
-            }
-            .padding(.top, 8)
+            SessionPairField(
+                label: "suggestion",
+                count: $viewmodel.customQuotaInputs.suggestion.count,
+                local: $viewmodel.customQuotaInputs.suggestion.local,
+                countPlaceholder: "3",
+                localPlaceholder: "2"
+            )
 
-            VStack(alignment: .leading) {
-                HStack(alignment: .firstTextBaseline, spacing: 12) {
-                    DatePicker(
-                        "",
-                        selection: $viewmodel.customQuotaInputs.expiration.start,
-                        displayedComponents: .date
-                    )
-                    .datePickerStyle(DefaultDatePickerStyle())
+            SessionPairField(
+                label: "singular",
+                count: $viewmodel.customQuotaInputs.singular.count,
+                local: $viewmodel.customQuotaInputs.singular.local,
+                countPlaceholder: "1",
+                localPlaceholder: "0"
+            )
 
-                    EnumDropdown<DateDistanceUnit>(
-                        selected: $viewmodel.customQuotaInputs.expiration.unit,
-                        labelWidth: 100,
-                        maxListHeight: 150
-                    )
-                }
+            BaseField(
+                base: $viewmodel.customQuotaInputs.base
+            )
 
-                StandardTextField(
-                    "interval count",
-                    text: $viewmodel.customQuotaInputs.expiration.interval,
-                    placeholder: "4"
+            TravelCostFields(
+                speed: $viewmodel.customQuotaInputs.travelCost.speed,
+                travelRate: Binding(
+                    get: { viewmodel.customQuotaInputs.travelCost.rates.travel },
+                    set: { viewmodel.customQuotaInputs.travelCost.rates.travel = $0 }
+                ),
+                timeRate: Binding(
+                    get: { viewmodel.customQuotaInputs.travelCost.rates.time },
+                    set: { viewmodel.customQuotaInputs.travelCost.rates.time = $0 }
                 )
-                .frame(width: 80)
+            )
 
-                HStack(alignment: .center) {
-                    if let range = viewmodel
-                        .customQuotaInputs
-                        .expiration
-                        .result?
-                        .dates
-                        .string()
-                    {
-                        Text(range)
-                    }
-                }
-
-            }
-            .padding(.top, 8)
+            ExpirationFields(
+                start: $viewmodel.customQuotaInputs.expiration.start,
+                unit: $viewmodel.customQuotaInputs.expiration.unit,
+                interval: $viewmodel.customQuotaInputs.expiration.interval,
+                resultText: viewmodel.customQuotaInputs.expiration.result?.dates.string()
+            )
         }
     }
 }
