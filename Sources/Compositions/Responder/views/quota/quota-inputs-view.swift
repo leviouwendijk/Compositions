@@ -114,26 +114,24 @@ public struct QuotaInputsView: View {
 
             HStack(spacing: 12) {
                 DatePicker(
-                    "Start",
+                    "",
                     selection: $viewmodel.customQuotaInputs.expiration.start,
                     displayedComponents: .date
                 )
                 .datePickerStyle(DefaultDatePickerStyle())
-                .frame(maxWidth: 150)
 
                 EnumDropdown<DateDistanceUnit>(
                     selected: $viewmodel.customQuotaInputs.expiration.unit,
                     labelWidth: 100,
                     maxListHeight: 150
                 )
-                .frame(maxWidth: 120)
 
                 StandardTextField(
                     "interval",
                     text: $viewmodel.customQuotaInputs.expiration.interval,
                     placeholder: "4"
                 )
-                .frame(width: 60)
+                .frame(width: 65)
             }
             .padding(.top, 8)
 
