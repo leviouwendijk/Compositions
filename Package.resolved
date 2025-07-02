@@ -1,5 +1,5 @@
 {
-  "originHash" : "e6cc3fdaacc206f2545494a85e3177995354277ebc7aaa7040a5988b7e116fa2",
+  "originHash" : "832b4cc500e809254b202fafeb712de4e77ad8693703758c5674bebd26cf3c4e",
   "pins" : [
     {
       "identity" : "commerce",
@@ -16,7 +16,7 @@
       "location" : "https://github.com/leviouwendijk/Economics.git",
       "state" : {
         "branch" : "master",
-        "revision" : "d2bed9bd4f1f640c48007550d8a42bbd5b16b89f"
+        "revision" : "0fd4e05859b22cb85568ca5062aa865a4927f701"
       }
     },
     {
@@ -25,7 +25,7 @@
       "location" : "https://github.com/leviouwendijk/Extensions.git",
       "state" : {
         "branch" : "master",
-        "revision" : "7208ea73cee738c724343a8f6926c2f60cb5a377"
+        "revision" : "e6c609b2baad2e2716eb19de50740a912294d883"
       }
     },
     {
@@ -61,7 +61,7 @@
       "location" : "https://github.com/leviouwendijk/Structures.git",
       "state" : {
         "branch" : "master",
-        "revision" : "32d4d58c67715e29aa6c82f3d62d97ab8deabd33"
+        "revision" : "d070500e12fe160859fe73f1c79de142a3b816fd"
       }
     },
     {

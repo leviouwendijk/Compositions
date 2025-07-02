@@ -4,6 +4,7 @@ import Economics
 import ViewComponents
 import Implementations
 import Structures
+import Extensions
 
 public struct QuotaInputsView: View {
     @ObservedObject public var viewmodel: QuotaViewModel
@@ -141,7 +142,7 @@ public struct QuotaInputsView: View {
                         .expiration
                         .result?
                         .dates
-                        .string
+                        .string()
                     {
                         Text(range)
                     }
