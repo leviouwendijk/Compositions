@@ -3,6 +3,7 @@ import plate
 import Economics
 import ViewComponents
 import Implementations
+import Structures
 
 public struct QuotaInputsView: View {
     @ObservedObject public var viewmodel: QuotaViewModel
@@ -110,6 +111,32 @@ public struct QuotaInputsView: View {
                 }
             }
             .padding(.top, 8)
+
+            HStack(spacing: 12) {
+                DatePicker(
+                    "Start",
+                    selection: $viewmodel.customQuotaInputs.expiration.start,
+                    displayedComponents: .date
+                )
+                .datePickerStyle(DefaultDatePickerStyle())
+                .frame(maxWidth: 150)
+
+                EnumDropdown<DateDistanceUnit>(
+                    selected: $viewmodel.customQuotaInputs.expiration.unit,
+                    labelWidth: 100,
+                    maxListHeight: 150
+                )
+                .frame(maxWidth: 120)
+
+                StandardTextField(
+                    "interval",
+                    text: $viewmodel.customQuotaInputs.expiration.interval,
+                    placeholder: "4"
+                )
+                .frame(width: 60)
+            }
+            .padding(.top, 8)
+
         }
     }
 }
