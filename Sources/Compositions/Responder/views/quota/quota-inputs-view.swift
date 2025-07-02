@@ -112,7 +112,7 @@ public struct QuotaInputsView: View {
             }
             .padding(.top, 8)
 
-            VStack {
+            VStack(alignment: .leading) {
                 HStack(alignment: .firstTextBaseline, spacing: 12) {
                     DatePicker(
                         "",
@@ -135,14 +135,16 @@ public struct QuotaInputsView: View {
                 )
                 .frame(width: 80)
 
-                if let range = viewmodel
-                    .customQuotaInputs
-                    .expiration
-                    .result?
-                    .dates
-                    .string
-                {
-                    Text(range)
+                HStack(alignment: .center) {
+                    if let range = viewmodel
+                        .customQuotaInputs
+                        .expiration
+                        .result?
+                        .dates
+                        .string
+                    {
+                        Text(range)
+                    }
                 }
 
             }
