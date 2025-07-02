@@ -112,26 +112,39 @@ public struct QuotaInputsView: View {
             }
             .padding(.top, 8)
 
-            HStack(alignment: .firstTextBaseline, spacing: 12) {
-                DatePicker(
-                    "",
-                    selection: $viewmodel.customQuotaInputs.expiration.start,
-                    displayedComponents: .date
-                )
-                .datePickerStyle(DefaultDatePickerStyle())
+            VStack {
+                HStack(alignment: .firstTextBaseline, spacing: 12) {
+                    DatePicker(
+                        "",
+                        selection: $viewmodel.customQuotaInputs.expiration.start,
+                        displayedComponents: .date
+                    )
+                    .datePickerStyle(DefaultDatePickerStyle())
 
-                EnumDropdown<DateDistanceUnit>(
-                    selected: $viewmodel.customQuotaInputs.expiration.unit,
-                    labelWidth: 100,
-                    maxListHeight: 150
-                )
+                    EnumDropdown<DateDistanceUnit>(
+                        selected: $viewmodel.customQuotaInputs.expiration.unit,
+                        labelWidth: 100,
+                        maxListHeight: 150
+                    )
+                }
 
                 StandardTextField(
-                    "interval",
+                    "interval count",
                     text: $viewmodel.customQuotaInputs.expiration.interval,
                     placeholder: "4"
                 )
-                .frame(width: 65)
+                .frame(width: 80)
+
+                if let range = viewmodel
+                    .customQuotaInputs
+                    .expiration
+                    .result?
+                    .dates
+                    .string
+                {
+                    Text(range)
+                }
+
             }
             .padding(.top, 8)
 
