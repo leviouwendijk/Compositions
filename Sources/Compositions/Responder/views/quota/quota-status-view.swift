@@ -20,6 +20,13 @@ public struct QuotaStatusView: View {
                     .padding(.top, 16)
             }
 
+            if viewmodel.inputsChanged {
+                NotificationBanner(
+                    type: .info,
+                    message: "Inputs have changed, waiting for tier data to renew..."
+                )
+            }
+
             if !(viewmodel.errorMessage.isEmpty) {
                 if viewmodel.hasEmptyInputs {
                     NotificationBanner(
