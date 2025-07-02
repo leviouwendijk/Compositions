@@ -112,7 +112,7 @@ public struct QuotaInputsView: View {
             }
             .padding(.top, 8)
 
-            HStack(spacing: 12) {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
                 DatePicker(
                     "",
                     selection: $viewmodel.customQuotaInputs.expiration.start,
