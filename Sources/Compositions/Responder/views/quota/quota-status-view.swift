@@ -22,8 +22,8 @@ public struct QuotaStatusView: View {
 
             if viewmodel.inputsChanged {
                 NotificationBanner(
-                    type: .info,
-                    message: "Inputs have changed, waiting for tier data to renew..."
+                    type: .warning,
+                    message: "Inputs have changed since last render"
                 )
             }
 
