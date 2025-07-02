@@ -119,58 +119,122 @@ struct ExpirationFields: View {
 }
 
 public struct QuotaInputsView: View {
-    @ObservedObject public var viewmodel: QuotaViewModel
-
-    public init(viewmodel: QuotaViewModel) {
-        self.viewmodel = viewmodel
-    }
+    @ObservedObject var viewmodel: QuotaViewModel
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            KilometersField(
-                kilometers: $viewmodel.inputsVm.customQuotaInputs.travelCost.kilometers
-            )
+            // Kilometers
+            DebouncedField(
+                label: "kilometers",
+                text: viewmodel.inputsVm.customQuotaInputs.travelCost.kilometers,
+                placeholder: "45",
+                debounce: 150
+            ) { new in
+                viewmodel.inputsVm.customQuotaInputs.travelCost.kilometers = new
+            }
 
-            SessionPairField(
-                label: "prognosis",
-                count: $viewmodel.inputsVm.customQuotaInputs.prognosis.count,
-                local: $viewmodel.inputsVm.customQuotaInputs.prognosis.local,
-                countPlaceholder: "5",
-                localPlaceholder: "4"
-            )
+            // Prognosis / Local
+            HStack {
+                DebouncedField(
+                    label: "prognosis",
+                    text: viewmodel.inputsVm.customQuotaInputs.prognosis.count,
+                    placeholder: "5",
+                    debounce: 150
+                ) { new in
+                    viewmodel.inputsVm.customQuotaInputs.prognosis.count = new
+                }
+                DebouncedField(
+                    label: "local",
+                    text: viewmodel.inputsVm.customQuotaInputs.prognosis.local,
+                    placeholder: "4",
+                    debounce: 150
+                ) { new in
+                    viewmodel.inputsVm.customQuotaInputs.prognosis.local = new
+                }
+            }
 
-            SessionPairField(
-                label: "suggestion",
-                count: $viewmodel.inputsVm.customQuotaInputs.suggestion.count,
-                local: $viewmodel.inputsVm.customQuotaInputs.suggestion.local,
-                countPlaceholder: "3",
-                localPlaceholder: "2"
-            )
+            // suggestion / local
+            HStack {
+                DebouncedField(
+                    label: "suggestion",
+                    text: viewmodel.inputsVm.customQuotaInputs.suggestion.count,
+                    placeholder: "3",
+                    debounce: 150
+                ) { new in
+                    viewmodel.inputsVm.customQuotaInputs.suggestion.count = new
+                }
+                DebouncedField(
+                    label: "local",
+                    text: viewmodel.inputsVm.customQuotaInputs.suggestion.local,
+                    placeholder: "2",
+                    debounce: 150
+                ) { new in
+                    viewmodel.inputsVm.customQuotaInputs.suggestion.local = new
+                }
+            }
 
-            SessionPairField(
-                label: "singular",
-                count: $viewmodel.inputsVm.customQuotaInputs.singular.count,
-                local: $viewmodel.inputsVm.customQuotaInputs.singular.local,
-                countPlaceholder: "1",
-                localPlaceholder: "0"
-            )
+            // singular / local
+            HStack {
+                DebouncedField(
+                    label: "singular",
+                    text: viewmodel.inputsVm.customQuotaInputs.singular.count,
+                    placeholder: "1",
+                    debounce: 150
+                ) { new in
+                    viewmodel.inputsVm.customQuotaInputs.singular.count = new
+                }
+                DebouncedField(
+                    label: "local",
+                    text: viewmodel.inputsVm.customQuotaInputs.singular.local,
+                    placeholder: "0",
+                    debounce: 150
+                ) { new in
+                    viewmodel.inputsVm.customQuotaInputs.singular.local = new
+                }
+            }
 
-            BaseField(
-                base: $viewmodel.inputsVm.customQuotaInputs.base
-            )
+            // base
+            DebouncedField(
+                label: "base",
+                text: viewmodel.inputsVm.customQuotaInputs.base,
+                placeholder: "350",
+                debounce: 150
+            ) { new in
+                viewmodel.inputsVm.customQuotaInputs.base = new
+            }
 
-            TravelCostFields(
-                speed: $viewmodel.inputsVm.customQuotaInputs.travelCost.speed,
-                travelRate: Binding(
-                    get: { viewmodel.inputsVm.customQuotaInputs.travelCost.rates.travel },
-                    set: { viewmodel.inputsVm.customQuotaInputs.travelCost.rates.travel = $0 }
-                ),
-                timeRate: Binding(
-                    get: { viewmodel.inputsVm.customQuotaInputs.travelCost.rates.time },
-                    set: { viewmodel.inputsVm.customQuotaInputs.travelCost.rates.time = $0 }
-                )
-            )
+            // speed / rate fields
+            HStack(spacing: 12) {
+                DebouncedField(
+                    label: "speed",
+                    text: viewmodel.inputsVm.customQuotaInputs.travelCost.speed,
+                    placeholder: "80.0",
+                    debounce: 150
+                ) { new in
+                    viewmodel.inputsVm.customQuotaInputs.travelCost.speed = new
+                }
 
+                DebouncedField(
+                    label: "rate/travel",
+                    text: viewmodel.inputsVm.customQuotaInputs.travelCost.rates.travel,
+                    placeholder: "0.25",
+                    debounce: 150
+                ) { new in
+                    viewmodel.inputsVm.customQuotaInputs.travelCost.rates.travel = new
+                }
+
+                DebouncedField(
+                    label: "rate/time",
+                    text: viewmodel.inputsVm.customQuotaInputs.travelCost.rates.time,
+                    placeholder: "105",
+                    debounce: 150
+                ) { new in
+                    viewmodel.inputsVm.customQuotaInputs.travelCost.rates.time = new
+                }
+            }
+            .padding(.top, 8)
+
+            // expiration
             ExpirationFields(
                 start: $viewmodel.inputsVm.customQuotaInputs.expiration.start,
                 unit: $viewmodel.inputsVm.customQuotaInputs.expiration.unit,
@@ -178,5 +242,6 @@ public struct QuotaInputsView: View {
                 resultText: viewmodel.inputsVm.customQuotaInputs.expiration.result?.dates.string()
             )
         }
+        .padding()
     }
 }
