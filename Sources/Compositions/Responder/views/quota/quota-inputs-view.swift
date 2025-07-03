@@ -121,6 +121,8 @@ struct ExpirationFields: View {
 public struct QuotaInputsView: View {
     @ObservedObject var viewmodel: QuotaViewModel
 
+    private let debounce: Int = 250
+
     public var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             // Kilometers
@@ -128,7 +130,7 @@ public struct QuotaInputsView: View {
                 label: "kilometers",
                 text: viewmodel.inputsVm.customQuotaInputs.travelCost.kilometers,
                 placeholder: "45",
-                debounce: 150
+                debounce: debounce
             ) { new in
                 viewmodel.inputsVm.customQuotaInputs.travelCost.kilometers = new
             }
@@ -139,7 +141,7 @@ public struct QuotaInputsView: View {
                     label: "prognosis",
                     text: viewmodel.inputsVm.customQuotaInputs.prognosis.count,
                     placeholder: "5",
-                    debounce: 150
+                    debounce: debounce
                 ) { new in
                     viewmodel.inputsVm.customQuotaInputs.prognosis.count = new
                 }
@@ -147,7 +149,7 @@ public struct QuotaInputsView: View {
                     label: "local",
                     text: viewmodel.inputsVm.customQuotaInputs.prognosis.local,
                     placeholder: "4",
-                    debounce: 150
+                    debounce: debounce
                 ) { new in
                     viewmodel.inputsVm.customQuotaInputs.prognosis.local = new
                 }
@@ -159,7 +161,7 @@ public struct QuotaInputsView: View {
                     label: "suggestion",
                     text: viewmodel.inputsVm.customQuotaInputs.suggestion.count,
                     placeholder: "3",
-                    debounce: 150
+                    debounce: debounce
                 ) { new in
                     viewmodel.inputsVm.customQuotaInputs.suggestion.count = new
                 }
@@ -167,7 +169,7 @@ public struct QuotaInputsView: View {
                     label: "local",
                     text: viewmodel.inputsVm.customQuotaInputs.suggestion.local,
                     placeholder: "2",
-                    debounce: 150
+                    debounce: debounce
                 ) { new in
                     viewmodel.inputsVm.customQuotaInputs.suggestion.local = new
                 }
@@ -179,7 +181,7 @@ public struct QuotaInputsView: View {
                     label: "singular",
                     text: viewmodel.inputsVm.customQuotaInputs.singular.count,
                     placeholder: "1",
-                    debounce: 150
+                    debounce: debounce
                 ) { new in
                     viewmodel.inputsVm.customQuotaInputs.singular.count = new
                 }
@@ -187,7 +189,7 @@ public struct QuotaInputsView: View {
                     label: "local",
                     text: viewmodel.inputsVm.customQuotaInputs.singular.local,
                     placeholder: "0",
-                    debounce: 150
+                    debounce: debounce
                 ) { new in
                     viewmodel.inputsVm.customQuotaInputs.singular.local = new
                 }
@@ -198,7 +200,7 @@ public struct QuotaInputsView: View {
                 label: "base",
                 text: viewmodel.inputsVm.customQuotaInputs.base,
                 placeholder: "350",
-                debounce: 150
+                debounce: debounce
             ) { new in
                 viewmodel.inputsVm.customQuotaInputs.base = new
             }
@@ -209,7 +211,7 @@ public struct QuotaInputsView: View {
                     label: "speed",
                     text: viewmodel.inputsVm.customQuotaInputs.travelCost.speed,
                     placeholder: "80.0",
-                    debounce: 150
+                    debounce: debounce
                 ) { new in
                     viewmodel.inputsVm.customQuotaInputs.travelCost.speed = new
                 }
@@ -218,7 +220,7 @@ public struct QuotaInputsView: View {
                     label: "rate/travel",
                     text: viewmodel.inputsVm.customQuotaInputs.travelCost.rates.travel,
                     placeholder: "0.25",
-                    debounce: 150
+                    debounce: debounce
                 ) { new in
                     viewmodel.inputsVm.customQuotaInputs.travelCost.rates.travel = new
                 }
@@ -227,7 +229,7 @@ public struct QuotaInputsView: View {
                     label: "rate/time",
                     text: viewmodel.inputsVm.customQuotaInputs.travelCost.rates.time,
                     placeholder: "105",
-                    debounce: 150
+                    debounce: debounce
                 ) { new in
                     viewmodel.inputsVm.customQuotaInputs.travelCost.rates.time = new
                 }
