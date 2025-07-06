@@ -5,22 +5,22 @@ import ViewComponents
 import Extensions
 
 public struct TaskRowView: View {
-    @ObservedObject public var vm: TaskListViewModel
+    @ObservedObject public var viewmodel: TaskListViewModel
     @State public var task: TaskItem
 
     @State private var now   = Date()
     private let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 
     private var isOverdue: Bool {
-        return vm.isOverdue(task)
+        return viewmodel.isOverdue(task)
     }
 
     private var timeOpen: String {
-        return "\(vm.timeOpen(for: task))"
+        return "\(viewmodel.timeOpen(for: task))"
     }
 
     private var timeLeft: String {
-        return "\(vm.timeLeft(for: task))"
+        return "\(viewmodel.timeLeft(for: task))"
     }
 
     public var body: some View {
@@ -28,7 +28,7 @@ public struct TaskRowView: View {
 
             HStack(alignment: .top) {
                 Button {
-                    vm.toggleCompletion(of: task)
+                    viewmodel.toggleCompletion(of: task)
                     task.completion.toggle()
                 } label: {
                     Image(systemName: task.completion ? "checkmark.circle.fill" : "circle")
@@ -38,12 +38,12 @@ public struct TaskRowView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     EditableText(controller: EditableTextController(text: task.title))
                         .onChange(of: task.title) { newText in
-                            vm.updateTitle(of: task, to: newText)
+                            viewmodel.updateTitle(of: task, to: newText)
                             task.title = newText
                         }
                     EditableText(controller: EditableTextController(text: task.description))
                         .onChange(of: task.description) { newText in
-                            vm.updateDescription(of: task, to: newText)
+                            viewmodel.updateDescription(of: task, to: newText)
                             task.description = newText
                         }
                 }
@@ -56,7 +56,7 @@ public struct TaskRowView: View {
                     selection: Binding(
                         get: { task.deadline },
                         set: { newDate in
-                            vm.updateDeadline(of: task, to: newDate)
+                            viewmodel.updateDeadline(of: task, to: newDate)
                             task.deadline = newDate
                         }
                     ),
@@ -69,7 +69,7 @@ public struct TaskRowView: View {
                 Stepper("Urgency: \(task.urgency)", value: Binding(
                     get: { task.urgency },
                     set: { newLevel in
-                        vm.updateUrgency(of: task, to: newLevel)
+                        viewmodel.updateUrgency(of: task, to: newLevel)
                         task.urgency = newLevel
                     }
                 ), in: 1...5)
@@ -77,7 +77,7 @@ public struct TaskRowView: View {
                 Stepper("Importance: \(task.importance)", value: Binding(
                     get: { task.importance },
                     set: { newLevel in
-                        vm.updateImportance(of: task, to: newLevel)
+                        viewmodel.updateImportance(of: task, to: newLevel)
                         task.importance = newLevel
                     }
                 ), in: 1...5)
@@ -87,11 +87,11 @@ public struct TaskRowView: View {
                 Picker("Project", selection: Binding(
                     get: { task.project },
                     set: { newProj in
-                        vm.updateTaskProject(of: task, to: newProj)
+                        viewmodel.updateTaskProject(of: task, to: newProj)
                         task.project = newProj
                     }
                 )) {
-                    ForEach(vm.projects) { proj in
+                    ForEach(viewmodel.projects) { proj in
                         Text(proj.name).tag(proj)
                     }
                 }
@@ -100,7 +100,7 @@ public struct TaskRowView: View {
                 Picker("Dept", selection: Binding(
                     get: { task.department },
                     set: { newDept in
-                        vm.updateDepartment(of: task, to: newDept)
+                        viewmodel.updateDepartment(of: task, to: newDept)
                         task.department = newDept
                     }
                 )) {

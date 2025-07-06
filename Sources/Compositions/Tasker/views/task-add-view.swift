@@ -6,7 +6,7 @@ import Extensions
 
 public struct AddTaskView: View {
     @Environment(\.presentationMode) private var presentation
-    @ObservedObject public var vm: TaskListViewModel
+    @ObservedObject public var viewmodel: TaskListViewModel
 
     @State private var title       = ""
     @State private var description = ""
@@ -16,9 +16,9 @@ public struct AddTaskView: View {
     @State private var project: TaskProject
     @State private var department  = TaskDepartment.marketing
 
-    public init(vm: TaskListViewModel) {
-        self.vm = vm
-        let firstProj = vm.projects.first ?? TaskProject(name: "Default Project")
+    public init(viewmodel: TaskListViewModel) {
+        self.viewmodel = viewmodel
+        let firstProj = viewmodel.projects.first ?? TaskProject(name: "Default Project")
         _project = State(initialValue: firstProj)
     }
 
@@ -41,7 +41,7 @@ public struct AddTaskView: View {
 
                 Section("Context") {
                     Picker("Project", selection: $project) {
-                        ForEach(vm.projects) { proj in
+                        ForEach(viewmodel.projects) { proj in
                             Text(proj.name).tag(proj)
                         }
                     }
@@ -65,7 +65,7 @@ public struct AddTaskView: View {
                             project:     project,
                             department:  department
                         )
-                        vm.add(newTask)
+                        viewmodel.add(newTask)
                         presentation.wrappedValue.dismiss()
                     }
                     .disabled(title.isEmpty)
