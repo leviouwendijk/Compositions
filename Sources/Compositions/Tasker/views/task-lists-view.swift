@@ -6,6 +6,12 @@ public struct TaskListView: View {
     @ObservedObject public var viewmodel: TaskListViewModel
     @State private var showingAdd = false
 
+    public init(
+        viewmodel: TaskListViewModel
+    ) {
+        self.viewmodel = viewmodel
+    }
+
     public var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {

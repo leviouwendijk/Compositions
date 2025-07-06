@@ -11,6 +11,14 @@ public struct TaskRowView: View {
     @State private var now   = Date()
     private let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 
+    public init(
+        viewmodel: TaskListViewModel,
+        task: TaskItem
+    ) {
+        self.viewmodel = viewmodel
+        self.task = task
+    }
+
     private var isOverdue: Bool {
         return viewmodel.isOverdue(task)
     }
