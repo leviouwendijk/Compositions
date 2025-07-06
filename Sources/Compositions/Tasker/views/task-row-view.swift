@@ -11,6 +11,8 @@ public struct TaskRowView: View {
     @State private var now   = Date()
     private let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 
+    @State private var showingNewProject = false
+
     public init(
         viewmodel: TaskListViewModel,
         task: TaskItem
@@ -35,6 +37,14 @@ public struct TaskRowView: View {
         VStack(alignment: .leading, spacing: 8) {
 
             HStack(alignment: .top) {
+                Button(action: {
+                    viewmodel.delete(task)
+                }) {
+                    Image(systemName: "xmark.circle")
+                        .foregroundColor(.secondary)
+                }
+                .buttonStyle(BorderlessButtonStyle())
+
                 Button {
                     viewmodel.toggleCompletion(of: task)
                     task.completion.toggle()
@@ -103,18 +113,29 @@ public struct TaskRowView: View {
             }
 
             HStack(spacing: 16) {
-                Picker("Project", selection: Binding(
-                    get: { task.project },
-                    set: { newProj in
-                        viewmodel.updateTaskProject(of: task, to: newProj)
-                        task.project = newProj
-                    }
-                )) {
-                    ForEach(viewmodel.projects) { proj in
-                        Text(proj.name).tag(proj)
+                VStack(alignment: .leading) {
+                    Text("Project")
+                    HStack {
+                        Picker("", selection: Binding(
+                            get: { task.project },
+                            set: { newProj in
+                                viewmodel.updateTaskProject(of: task, to: newProj)
+                                task.project = newProj
+                            }
+                        )) {
+                            ForEach(viewmodel.projects) { proj in
+                                Text(proj.name).tag(proj)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+
+                        Button(action: { showingNewProject = true }) {
+                            Image(systemName: "plus.circle")
+                        }
+                        .buttonStyle(BorderlessButtonStyle())
+                        .help("New Project")
                     }
                 }
-                .pickerStyle(MenuPickerStyle())
 
                 Picker("Dept", selection: Binding(
                     get: { task.department },
@@ -150,5 +171,8 @@ public struct TaskRowView: View {
                 )
         )
         .onReceive(timer) { _ in now = Date() }
+        .sheet(isPresented: $showingNewProject) {
+            AddProjectView(viewmodel: viewmodel)
+        }
     }
 }
