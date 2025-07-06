@@ -74,21 +74,25 @@ public struct TaskRowView: View {
             }
 
             HStack(spacing: 16) {
-                Stepper("Urgency: \(task.urgency)", value: Binding(
-                    get: { task.urgency },
-                    set: { newLevel in
-                        viewmodel.updateUrgency(of: task, to: newLevel)
-                        task.urgency = newLevel
-                    }
-                ), in: 1...5)
+                LevelSelector(
+                    level: Binding(
+                      get: { task.urgency },
+                      set: { new in viewmodel.updateUrgency(of: task, to: new); task.urgency = new }
+                    ),
+                    maxLevel: 5,
+                    activeColor: .red,
+                    inactiveColor: .red.opacity(0.2)
+                )
 
-                Stepper("Importance: \(task.importance)", value: Binding(
-                    get: { task.importance },
-                    set: { newLevel in
-                        viewmodel.updateImportance(of: task, to: newLevel)
-                        task.importance = newLevel
-                    }
-                ), in: 1...5)
+                LevelSelector(
+                    level: Binding(
+                      get: { task.importance },
+                      set: { new in viewmodel.updateImportance(of: task, to: new); task.importance = new }
+                    ),
+                    maxLevel: 5,
+                    activeColor: .yellow,
+                    inactiveColor: .yellow.opacity(0.2)
+                )
             }
 
             HStack(spacing: 16) {
