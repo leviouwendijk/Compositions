@@ -16,13 +16,20 @@ public struct TaskRowView: View {
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     TaskRowHeaderView(viewmodel: viewmodel, task: $task)
+
                     Spacer()
-                    TaskProjectDeptView(viewmodel: viewmodel, task: $task)
-                    .frame(maxWidth: 400)
+
+                    TaskDeadlineView(viewmodel: viewmodel, task: $task)
+
+                    VStack {
+                        TaskPriorityView(viewmodel: viewmodel, task: $task)
+
+                        TaskProjectDeptView(viewmodel: viewmodel, task: $task)
+                        .frame(maxWidth: 350)
+                    }
                 }
-                TaskDeadlineView(viewmodel: viewmodel, task: $task)
-                TaskPriorityView(viewmodel: viewmodel, task: $task)
                 TaskTimerView(viewmodel: viewmodel, task: $task, now: now)
+                .frame(maxWidth: 200)
             }
 
             Button {
