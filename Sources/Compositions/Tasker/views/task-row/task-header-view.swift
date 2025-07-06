@@ -10,14 +10,6 @@ public struct TaskRowHeaderView: View {
     public var body: some View {
         HStack(alignment: .top) {
             Button {
-                viewmodel.delete(task)
-            } label: {
-                Image(systemName: "xmark.circle")
-                    .foregroundColor(.secondary)
-            }
-            .buttonStyle(BorderlessButtonStyle())
-
-            Button {
                 viewmodel.toggleCompletion(of: task)
                 task.completion.toggle()
             } label: {

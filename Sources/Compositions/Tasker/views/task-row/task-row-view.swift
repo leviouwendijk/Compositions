@@ -12,12 +12,22 @@ public struct TaskRowView: View {
     private let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            TaskRowHeaderView(viewmodel: viewmodel, task: $task)
-            TaskDeadlineView(viewmodel: viewmodel, task: $task)
-            TaskPriorityView(viewmodel: viewmodel, task: $task)
-            TaskProjectDeptView(viewmodel: viewmodel, task: $task)
-            TaskTimerView(viewmodel: viewmodel, task: $task, now: now)
+        HStack {
+            VStack(alignment: .leading, spacing: 8) {
+                TaskRowHeaderView(viewmodel: viewmodel, task: $task)
+                TaskDeadlineView(viewmodel: viewmodel, task: $task)
+                TaskPriorityView(viewmodel: viewmodel, task: $task)
+                TaskProjectDeptView(viewmodel: viewmodel, task: $task)
+                TaskTimerView(viewmodel: viewmodel, task: $task, now: now)
+            }
+
+            Button {
+                viewmodel.delete(task)
+            } label: {
+                Image(systemName: "xmark.circle")
+                    .foregroundColor(.secondary)
+            }
+            .buttonStyle(BorderlessButtonStyle())
         }
         .padding(8)
         .background(
