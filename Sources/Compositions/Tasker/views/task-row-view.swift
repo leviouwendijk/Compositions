@@ -74,25 +74,32 @@ public struct TaskRowView: View {
             }
 
             HStack(spacing: 16) {
-                LevelSelector(
-                    level: Binding(
-                      get: { task.urgency },
-                      set: { new in viewmodel.updateUrgency(of: task, to: new); task.urgency = new }
-                    ),
-                    maxLevel: 5,
-                    activeColor: .red,
-                    inactiveColor: .red.opacity(0.2)
-                )
+                VStack {
+                    Text("Urgency")
+                    LevelSelector(
+                        level: Binding(
+                          get: { task.urgency },
+                          set: { new in viewmodel.updateUrgency(of: task, to: new); task.urgency = new }
+                        ),
+                        maxLevel: 5,
+                        activeColor: .red,
+                        inactiveColor: .red.opacity(0.2)
+                    )
+                }
 
-                LevelSelector(
-                    level: Binding(
-                      get: { task.importance },
-                      set: { new in viewmodel.updateImportance(of: task, to: new); task.importance = new }
-                    ),
-                    maxLevel: 5,
-                    activeColor: .yellow,
-                    inactiveColor: .yellow.opacity(0.2)
-                )
+
+                VStack {
+                    Text("Importance")
+                    LevelSelector(
+                        level: Binding(
+                          get: { task.importance },
+                          set: { new in viewmodel.updateImportance(of: task, to: new); task.importance = new }
+                        ),
+                        maxLevel: 5,
+                        activeColor: .yellow,
+                        inactiveColor: .yellow.opacity(0.2)
+                    )
+                }
             }
 
             HStack(spacing: 16) {
