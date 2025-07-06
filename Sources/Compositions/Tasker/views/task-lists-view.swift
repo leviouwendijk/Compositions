@@ -39,6 +39,9 @@ public struct TaskListView: View {
                 }
                 .onDelete(perform: viewmodel.remove)
             }
+            .listStyle(PlainListStyle())
+            .scrollContentBackground(.hidden)
+            .background(Color.clear)
         }
         .sheet(isPresented: $showingAdd) {
             AddTaskView(viewmodel: viewmodel)
