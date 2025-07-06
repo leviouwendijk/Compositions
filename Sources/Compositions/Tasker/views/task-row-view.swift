@@ -122,7 +122,7 @@ public struct TaskRowView: View {
             HStack {
                 Text("Open: \(self.timeOpen)")
                 Spacer()
-                Text("Open: \(self.timeLeft)")
+                Text("Left: \(self.timeLeft)")
                     .foregroundColor(self.isOverdue ? .red : .primary)
             }
             .font(.caption2)
