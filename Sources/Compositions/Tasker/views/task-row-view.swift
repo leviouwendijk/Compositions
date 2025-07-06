@@ -141,8 +141,8 @@ public struct TaskRowView: View {
         .padding(8)
         .background(
             RoundedRectangle(cornerRadius: 6)
-                // .fill(Color.gray.opacity(0.3))
-                .fill(Color(NSColor.controlBackgroundColor))
+                .fill(Color.gray.opacity(0.1))
+                // .fill(Color(NSColor.controlBackgroundColor))
                 .overlay(
                     RoundedRectangle(cornerRadius: 6)
                     .stroke(Color.gray.opacity(0.3), lineWidth: 1)
