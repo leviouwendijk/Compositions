@@ -141,7 +141,7 @@ public struct TaskRowView: View {
         .padding(8)
         .background(
             RoundedRectangle(cornerRadius: 6)
-                .stroke(Color.gray.opacity(0.3))
+                .stroke(Color.gray.opacity(0.4))
         )
         .onReceive(timer) { _ in now = Date() }
     }
