@@ -28,6 +28,7 @@ public struct TaskRowHeaderView: View {
                     viewmodel.updateDescription(of: task, to: $0)
                     task.description = $0
                 }
+                .foregroundStyle(.secondary)
             }
         }
     }
