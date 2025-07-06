@@ -14,6 +14,9 @@ public struct TaskRowView: View {
     public var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
+                TaskTimerView(viewmodel: viewmodel, task: $task, now: now)
+                .frame(maxWidth: 200)
+
                 VStack {
                     HStack(alignment: .center) {
                         TaskRowHeaderView(viewmodel: viewmodel, task: $task)
@@ -33,8 +36,6 @@ public struct TaskRowView: View {
                         .frame(maxWidth: 350)
                     }
                 }
-                TaskTimerView(viewmodel: viewmodel, task: $task, now: now)
-                .frame(maxWidth: 200)
             }
 
             Button {
