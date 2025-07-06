@@ -14,7 +14,7 @@ public struct TaskRowView: View {
     public var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
-                HStack(alignment: .firstTextBaseline) {
+                HStack(alignment: .center) {
                     TaskRowHeaderView(viewmodel: viewmodel, task: $task)
 
                     Spacer()
