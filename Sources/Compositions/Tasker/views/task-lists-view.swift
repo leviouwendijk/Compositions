@@ -42,7 +42,6 @@ public struct TaskListView: View {
         }
         .sheet(isPresented: $showingAdd) {
             AddTaskView(viewmodel: viewmodel)
-            .frame(minWidth: 600, minHeight: 500)
         }
     }
 }

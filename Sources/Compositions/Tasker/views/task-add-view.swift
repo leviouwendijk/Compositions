@@ -77,5 +77,6 @@ public struct AddTaskView: View {
                 }
             }
         }
+        .frame(minWidth: 600, minHeight: 500)
     }
 }
