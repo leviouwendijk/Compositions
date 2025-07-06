@@ -14,15 +14,20 @@ public struct TaskRowView: View {
     public var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 8) {
-                HStack(alignment: .center) {
-                    TaskRowHeaderView(viewmodel: viewmodel, task: $task)
+                VStack {
+                    HStack(alignment: .center) {
+                        TaskRowHeaderView(viewmodel: viewmodel, task: $task)
 
-                    Spacer()
+                        Spacer()
 
-                    TaskDeadlineView(viewmodel: viewmodel, task: $task)
-
-                    VStack {
+                        TaskDeadlineView(viewmodel: viewmodel, task: $task)
                         TaskPriorityView(viewmodel: viewmodel, task: $task)
+
+
+                    }
+
+                    HStack {
+                        Spacer()
 
                         TaskProjectDeptView(viewmodel: viewmodel, task: $task)
                         .frame(maxWidth: 350)
