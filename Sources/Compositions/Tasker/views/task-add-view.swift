@@ -16,6 +16,8 @@ public struct AddTaskView: View {
     @State private var project: TaskProject
     @State private var department  = TaskDepartment.marketing
 
+    @State private var showingNewProject = false
+
     public init(viewmodel: TaskListViewModel) {
         self.viewmodel = viewmodel
         let firstProj = viewmodel.projects.first ?? TaskProject(name: "Default Project")
@@ -86,17 +88,24 @@ public struct AddTaskView: View {
                         }
                     }
 
-                    // Context
                     SectionHeader("Context")
                     HStack(spacing: 16) {
                         VStack(alignment: .leading) {
                             Text("Project")
-                            Picker("", selection: $project) {
-                                ForEach(viewmodel.projects) { proj in
-                                    Text(proj.name).tag(proj)
+                            HStack {
+                                Picker("", selection: $project) {
+                                    ForEach(viewmodel.projects) { proj in
+                                        Text(proj.name).tag(proj)
+                                    }
                                 }
+                                .pickerStyle(MenuPickerStyle())
+
+                                Button(action: { showingNewProject = true }) {
+                                    Image(systemName: "plus.circle")
+                                }
+                                .buttonStyle(BorderlessButtonStyle())
+                                .help("New Project")
                             }
-                            .pickerStyle(MenuPickerStyle())
                         }
                         VStack(alignment: .leading) {
                             Text("Department")
@@ -113,6 +122,9 @@ public struct AddTaskView: View {
             }
         }
         .frame(minWidth: 600, minHeight: 500)
+        .sheet(isPresented: $showingNewProject) {
+            AddProjectView(viewmodel: viewmodel)
+        }
     }
 
     private func SectionHeader(_ title: String) -> some View {
