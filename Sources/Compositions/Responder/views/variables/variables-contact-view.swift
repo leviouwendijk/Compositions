@@ -50,6 +50,43 @@ public struct VariablesContactView: View {
                     placeholder: "Bella",
                 )
 
+                if viewmodel.selectedWAMessage == .contract {
+                    StandardTextField(
+                        "Deliverable",
+                        text: $viewmodel.deliverable,
+                        placeholder: "Geadviseerde sessie-aantal, Puppy-pakket",
+                    )
+
+                    StandardTextField(
+                        "Session Count",
+                        text: $viewmodel.sessions,
+                        placeholder: "3, 5, 7",
+                    )
+
+                    VStack {
+                        Text("Duration")
+                        HStack {
+                            StandardTextField(
+                                "from",
+                                text: $viewmodel.fromMinutes,
+                                placeholder: "60",
+                            )
+
+                            StandardTextField(
+                                "to",
+                                text: $viewmodel.toMinutes,
+                                placeholder: "120",
+                            )
+                        }
+                    }
+
+                    StandardTextField(
+                        "Price",
+                        text: $viewmodel.price,
+                        placeholder: "1245",
+                    )
+                }
+
                 StandardTextField(
                     "Location",
                     text: Binding(
