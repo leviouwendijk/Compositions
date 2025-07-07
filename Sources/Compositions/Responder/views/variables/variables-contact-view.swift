@@ -50,7 +50,7 @@ public struct VariablesContactView: View {
                     placeholder: "Bella",
                 )
 
-                if viewmodel.apiPathVm.selectedRoute == .appointment && viewmodel.apiPathVm.selectedEndpoint == .availability {
+                if viewmodel.apiPathVm.selectedRoute == .appointment && viewmodel.apiPathVm.selectedEndpoint == .availabilityRequest {
                     StandardTextField(
                         "Sessions",
                         text: $viewmodel.sessionCount,
