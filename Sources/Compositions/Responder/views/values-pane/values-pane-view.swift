@@ -17,7 +17,7 @@ public struct ValuesPaneView: View {
             if viewmodel.apiPathVm.selectedRoute == .custom {
                 CustomMessagePaneView()
                 // .environmentObject(viewmodel)
-            } else if viewmodel.apiPathVm.selectedRoute == .appointment {
+            } else if viewmodel.apiPathVm.selectedRoute == .appointment && !(viewmodel.apiPathVm.selectedEndpoint == .availability) {
                 DatePickerView()
                 // .environmentObject(viewmodel)
             } else {
