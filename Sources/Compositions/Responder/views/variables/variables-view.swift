@@ -93,7 +93,8 @@ public struct VariablesView: View {
                                 }
 
                                 do {
-                                    try viewmodel.sendMailerEmail()
+                                    // try viewmodel.sendMailerEmail()
+                                    try viewmodel.send()
                                 } catch {
                                     print(error)
                                 }

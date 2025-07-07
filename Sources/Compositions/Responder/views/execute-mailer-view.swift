@@ -66,6 +66,24 @@ public struct ExecuteMailerView: View {
                     .disabled(viewmodel.isSendingEmail)
                     .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
                     // .disabled(viewmodel.noContactSelectedButIsRequired)
+
+
+                    StandardEscapableButton(
+                        type: .submit,
+                        title: "Send",
+                        cancelTitle: "Abort sending",
+                        subtitle: "Direct API"
+                    ) {
+                        do {
+                            try viewmodel.send()
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    .disabled(viewmodel.isSendingEmail)
+                    .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
+                    // .disabled(viewmodel.noContactSelectedButIsRequired)
+
                 }
                 .padding(.top, 10)
             }
