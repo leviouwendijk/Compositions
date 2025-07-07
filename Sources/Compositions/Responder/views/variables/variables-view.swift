@@ -134,6 +134,14 @@ public struct VariablesView: View {
                             }
 
                             Spacer()
+
+                            StandardButton(
+                                type: .load, 
+                                title: "reload", 
+                                subtitle: "reloads contacts"
+                            ) {
+                                viewmodel.contactsVm.reloadContacts()
+                            }
                         }
                         .frame(maxWidth: 300)
 
