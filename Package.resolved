@@ -34,7 +34,7 @@
       "location" : "https://github.com/leviouwendijk/Implementations.git",
       "state" : {
         "branch" : "master",
-        "revision" : "c6a6a076619f83c7dd974cc43339cfd2a006a617"
+        "revision" : "80b86787a0a05a42246470d48e4a661950519d74"
       }
     },
     {
@@ -43,7 +43,7 @@
       "location" : "https://github.com/leviouwendijk/Interfaces.git",
       "state" : {
         "branch" : "master",
-        "revision" : "1e718f4fe0b75c31942663528f420079fad7ca9b"
+        "revision" : "dfb2da47a7d3fe1f4255a2e70cb60e4d48586732"
       }
     },
     {
@@ -61,7 +61,7 @@
       "location" : "https://github.com/leviouwendijk/Structures.git",
       "state" : {
         "branch" : "master",
-        "revision" : "b173c577e19647674e84c793ce8a249cc8602c66"
+        "revision" : "95c649f0b656375528f71d2234f7314d5de54697"
       }
     },
     {

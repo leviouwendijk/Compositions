@@ -73,10 +73,10 @@ public struct VariablesView: View {
                     .frame(maxWidth: 300)
                 }
 
-                Text("Mailer Arguments")
-                .padding(.top, 12)
-                .padding(.bottom, 12)
-                .opacity(0.8)
+                // Text("Mailer Arguments")
+                // .padding(.top, 12)
+                // .padding(.bottom, 12)
+                // .opacity(0.8)
                 
                 if viewmodel.apiPathVm.selectedRoute == .template {
                     HStack {

@@ -50,6 +50,14 @@ public struct VariablesContactView: View {
                     placeholder: "Bella",
                 )
 
+                if viewmodel.apiPathVm.selectedRoute == .appointment && viewmodel.apiPathVm.selectedEndpoint == .availability {
+                    StandardTextField(
+                        "Sessions",
+                        text: $viewmodel.sessionCount,
+                        placeholder: "1, 3, 4 schedulable sessions",
+                    )
+                }
+
                 if viewmodel.selectedWAMessage == .contract {
                     StandardTextField(
                         "Deliverable",
