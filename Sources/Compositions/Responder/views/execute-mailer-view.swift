@@ -66,7 +66,7 @@ public struct ExecuteMailerView: View {
                     .disabled(viewmodel.isSendingEmail)
                     .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
                     // .disabled(viewmodel.noContactSelectedButIsRequired)
-
+                    .disabled(!(viewmodel.apiPathVm.selectedRoute == .invoice)) // enable for only invoicing
 
                     StandardEscapableButton(
                         type: .submit,
@@ -83,7 +83,7 @@ public struct ExecuteMailerView: View {
                     .disabled(viewmodel.isSendingEmail)
                     .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
                     // .disabled(viewmodel.noContactSelectedButIsRequired)
-
+                    .disabled(viewmodel.apiPathVm.selectedRoute == .invoice) // disable until db invoicing
                 }
                 .padding(.top, 10)
             }
