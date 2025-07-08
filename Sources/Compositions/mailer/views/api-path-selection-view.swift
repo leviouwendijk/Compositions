@@ -19,7 +19,6 @@ public struct MailerAPIPathSelectionView: View {
     public var body: some View {
         VStack {
             VStack {
-
                 HStack {
                     // ─── ROUTES COLUMN ─────────────────────────────
                     VStack {
@@ -55,7 +54,7 @@ public struct MailerAPIPathSelectionView: View {
 
                         ScrollView {
                             VStack(spacing: 5) {
-                                ForEach(viewModel.validEndpoints, id: \.self) { endpoint in
+                                ForEach(viewModel.validEndpoints.filter { $0.isFrontEndVisible }, id: \.self) { endpoint in
                                     SelectableRow(
                                         // title: endpoint.rawValue.capitalized,
                                         title: endpoint.viewableString(),
