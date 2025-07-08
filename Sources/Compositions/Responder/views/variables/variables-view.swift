@@ -12,7 +12,6 @@ public struct VariablesView: View {
     @StateObject public var waMessageNotifier: NotificationBannerController = NotificationBannerController()
 
     public init() {}
-
     
     // public init(
     //     viewmodel: ResponderViewModel
@@ -95,8 +94,10 @@ public struct VariablesView: View {
                                 do {
                                     // try viewmodel.sendMailerEmail()
                                     try viewmodel.send()
+                                    viewmodel.errorMessage = ""
                                 } catch {
                                     print(error)
+                                    viewmodel.errorMessage = error.localizedDescription
                                 }
                             }
                     }

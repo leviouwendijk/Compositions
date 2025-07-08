@@ -50,42 +50,54 @@ public struct ExecuteMailerView: View {
                     .animation(.easeInOut(duration: 0.3), value: viewmodel.isSendingEmail)
                 }
 
-                HStack {
-                    StandardEscapableButton(
-                        type: .execute,
-                        title: "Run mailer",
-                        cancelTitle: "Do not run mailer yet",
-                        subtitle: "Starts mailer background process"
-                    ) {
-                        do {
-                            try viewmodel.sendMailerEmail()
-                        } catch {
-                            print(error)
-                        }
-                    }
-                    .disabled(viewmodel.isSendingEmail)
-                    .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
-                    // .disabled(viewmodel.noContactSelectedButIsRequired)
-                    .disabled(!(viewmodel.apiPathVm.selectedRoute == .invoice)) // enable for only invoicing
+                VStack {
+                    NotificationBanner(
+                        type: .error,
+                        message: viewmodel.errorMessage
+                    )
+                    .hide(when: viewmodel.errorMessage.isEmpty)
 
-                    StandardEscapableButton(
-                        type: .submit,
-                        title: "Send",
-                        cancelTitle: "Abort sending",
-                        subtitle: "Direct API"
-                    ) {
-                        do {
-                            try viewmodel.send()
-                        } catch {
-                            print(error)
+                    HStack {
+                        StandardEscapableButton(
+                            type: .execute,
+                            title: "Run mailer",
+                            cancelTitle: "Do not run mailer yet",
+                            subtitle: "Starts mailer background process"
+                        ) {
+                            do {
+                                try viewmodel.sendMailerEmail()
+                                viewmodel.errorMessage = ""
+                            } catch {
+                                viewmodel.errorMessage = error.localizedDescription
+                                print(error)
+                            }
                         }
+                        .disabled(viewmodel.isSendingEmail)
+                        .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
+                        // .disabled(viewmodel.noContactSelectedButIsRequired)
+                        .disabled(!(viewmodel.apiPathVm.selectedRoute == .invoice)) // enable for only invoicing
+
+                        StandardEscapableButton(
+                            type: .submit,
+                            title: "Send",
+                            cancelTitle: "Abort sending",
+                            subtitle: "Direct API"
+                        ) {
+                            do {
+                                try viewmodel.send()
+                                viewmodel.errorMessage = ""
+                            } catch {
+                                viewmodel.errorMessage = error.localizedDescription
+                                print(error)
+                            }
+                        }
+                        .disabled(viewmodel.isSendingEmail)
+                        .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
+                        // .disabled(viewmodel.noContactSelectedButIsRequired)
+                        .disabled(viewmodel.apiPathVm.selectedRoute == .invoice) // disable until db invoicing
                     }
-                    .disabled(viewmodel.isSendingEmail)
-                    .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
-                    // .disabled(viewmodel.noContactSelectedButIsRequired)
-                    .disabled(viewmodel.apiPathVm.selectedRoute == .invoice) // disable until db invoicing
+                    .padding(.top, 10)
                 }
-                .padding(.top, 10)
             }
         }
         .frame(maxWidth: .infinity)
