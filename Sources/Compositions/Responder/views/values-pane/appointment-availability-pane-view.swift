@@ -12,9 +12,9 @@ public struct AppointmentAvailabilityPaneView: View {
     public var body: some View {
         VStack(alignment: .leading) {
             StandardTextField(
-                "Sessions",
+                "Sessions left to schedule",
                 text: $viewmodel.sessionCount,
-                placeholder: "1, 3, 4 schedulable sessions",
+                placeholder: "e.g., 1, 3, 4",
             )
 
             StandardToggle(
