@@ -54,7 +54,8 @@ public struct MailerAPIPathSelectionView: View {
 
                         ScrollView {
                             VStack(spacing: 5) {
-                                ForEach(viewModel.validEndpoints.filter { $0.isFrontEndVisible }, id: \.self) { endpoint in
+                                // ForEach(viewModel.validEndpoints.filter { $0.isFrontEndVisible }, id: \.self) { endpoint in
+                                ForEach(viewModel.validEndpoints, id: \.self) { endpoint in
                                     SelectableRow(
                                         // title: endpoint.rawValue.capitalized,
                                         title: endpoint.viewableString(),
@@ -67,6 +68,7 @@ public struct MailerAPIPathSelectionView: View {
                                         }
                                     }
                                     .frame(maxWidth: .infinity)
+                                    .disabled(endpoint.isFrontEndVisible)
                                 }
                             }
                             .padding(.horizontal)
