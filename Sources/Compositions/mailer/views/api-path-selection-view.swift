@@ -59,7 +59,8 @@ public struct MailerAPIPathSelectionView: View {
                                     SelectableRow(
                                         // title: endpoint.rawValue.capitalized,
                                         title: endpoint.viewableString(),
-                                        isSelected: viewModel.selectedEndpoint == endpoint
+                                        isSelected: viewModel.selectedEndpoint == endpoint,
+                                        isDisabled: !endpoint.isFrontEndVisible
                                     ) {
                                         if viewModel.selectedEndpoint == endpoint {
                                             viewModel.selectedEndpoint = nil
@@ -68,7 +69,6 @@ public struct MailerAPIPathSelectionView: View {
                                         }
                                     }
                                     .frame(maxWidth: .infinity)
-                                    .disabled(!(endpoint.isFrontEndVisible))
                                 }
                             }
                             .padding(.horizontal)
