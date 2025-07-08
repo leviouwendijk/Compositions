@@ -23,6 +23,9 @@ public struct ValuesPaneView: View {
             } else if viewmodel.apiPathVm.selectedRoute == .appointment && viewmodel.apiPathVm.selectedEndpoint == .availabilityRequest {
                 AppointmentAvailabilityPaneView()
                 .frame(maxWidth: 350)
+            } else  if (viewmodel.apiPathVm.selectedRoute == .quote && viewmodel.apiPathVm.selectedEndpoint?.base == .agreement) {
+                QuoteAgreementPaneView()
+                .frame(maxWidth: 350)
             } else {
                 if viewmodel.apiPathVm.endpointNeedsAvailabilityVariable {
                     VStack(alignment: .leading, spacing: 8) {

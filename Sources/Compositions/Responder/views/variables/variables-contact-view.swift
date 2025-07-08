@@ -50,6 +50,7 @@ public struct VariablesContactView: View {
                     placeholder: "Bella",
                 )
 
+                // keeping it around for WA message template, but is bound to same as endpoint quote/agreement/request
                 if viewmodel.selectedWAMessage == .contract {
                     StandardTextField(
                         "Deliverable",
