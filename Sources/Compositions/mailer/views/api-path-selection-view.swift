@@ -68,7 +68,7 @@ public struct MailerAPIPathSelectionView: View {
                                         }
                                     }
                                     .frame(maxWidth: .infinity)
-                                    .disabled(endpoint.isFrontEndVisible)
+                                    .disabled(!(endpoint.isFrontEndVisible))
                                 }
                             }
                             .padding(.horizontal)
