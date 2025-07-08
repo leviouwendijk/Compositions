@@ -68,8 +68,8 @@ public struct ExecuteMailerView: View {
                                 try viewmodel.sendMailerEmail()
                                 viewmodel.errorMessage = ""
                             } catch {
-                                viewmodel.errorMessage = error.localizedDescription
                                 print(error)
+                                viewmodel.errorMessage = error.localizedDescription
                             }
                         }
                         .disabled(viewmodel.isSendingEmail)
