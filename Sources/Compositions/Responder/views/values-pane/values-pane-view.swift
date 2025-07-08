@@ -20,6 +20,8 @@ public struct ValuesPaneView: View {
             } else if viewmodel.apiPathVm.selectedRoute == .appointment && !(viewmodel.apiPathVm.selectedEndpoint == .availabilityRequest) {
                 DatePickerView()
                 // .environmentObject(viewmodel)
+            } else if viewmodel.apiPathVm.selectedRoute == .appointment && viewmodel.apiPathVm.selectedEndpoint == .availabilityRequest {
+                AppointmentAvailabilityPaneView()
             } else {
                 if viewmodel.apiPathVm.endpointNeedsAvailabilityVariable {
                     VStack(alignment: .leading, spacing: 8) {
