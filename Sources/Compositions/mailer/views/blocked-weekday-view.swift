@@ -35,8 +35,15 @@ public struct BlockedWeekdaysView: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Blocked days")
+            HStack {
+                Text("Blocked days")
                 .font(.headline)
+                
+                Spacer()
+
+                Text("limit")
+                .font(.subheadline)
+            }
 
             ForEach(viewmodel.items.indices, id: \.self) { idx in
                 BlockedWeekdayRow(item: self.$viewmodel.items[idx])
