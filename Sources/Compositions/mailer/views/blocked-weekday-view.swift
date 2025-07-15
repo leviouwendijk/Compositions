@@ -14,9 +14,10 @@ struct BlockedWeekdayRow: View {
                 action: { item.isOn.toggle() }
             )
             if item.isOn {
-                StandardTextField(
+                SimpleTextField(
                     "limit",
-                    text: $item.limitText
+                    text: $item.limitText,
+                    hideLabel: true
                 )
                 .frame(width: 60)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -34,7 +35,7 @@ public struct BlockedWeekdaysView: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Blokkeer dagen")
+            Text("Blocked days")
                 .font(.headline)
 
             ForEach(viewmodel.items.indices, id: \.self) { idx in
