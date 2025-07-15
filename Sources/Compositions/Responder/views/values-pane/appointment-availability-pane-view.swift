@@ -21,6 +21,8 @@ public struct AppointmentAvailabilityPaneView: View {
                 isOn: $viewmodel.includeReflection,
                 title: "Including reflection"
             )
+            
+            BlockedWeekdaysView(viewmodel: viewmodel.blockedWeekdaysVm)
         }
     }
 }
