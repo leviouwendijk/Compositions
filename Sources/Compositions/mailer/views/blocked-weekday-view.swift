@@ -14,7 +14,7 @@ struct BlockedWeekdayRow: View {
                 action: { item.isOn.toggle() }
             )
             if item.isOn {
-                TextField(
+                StandardTextField(
                     "Aantal (nil=allemaal)",
                     text: $item.limitText
                 )
