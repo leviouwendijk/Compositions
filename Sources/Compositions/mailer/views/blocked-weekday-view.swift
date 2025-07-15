@@ -15,7 +15,7 @@ struct BlockedWeekdayRow: View {
             )
             if item.isOn {
                 StandardTextField(
-                    "Aantal (nil=allemaal)",
+                    "limit",
                     text: $item.limitText
                 )
                 .frame(width: 60)
@@ -37,8 +37,8 @@ public struct BlockedWeekdaysView: View {
             Text("Blokkeer dagen")
                 .font(.headline)
 
-            ForEach($viewmodel.items) { $item in
-                BlockedWeekdayRow(item: $item)
+            ForEach(viewmodel.items.indices, id: \.self) { idx in
+                BlockedWeekdayRow(item: self.$viewmodel.items[idx])
             }
         }
         .padding()
