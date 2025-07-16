@@ -19,7 +19,7 @@ public struct AppointmentAvailabilityPaneView: View {
 
             StandardToggle(
                 isOn: $viewmodel.includeReflection,
-                title: "Including reflection"
+                title: "Start message with 'hopefully last session was to your liking' remark"
             )
             
             BlockedWeekdaysView(viewmodel: viewmodel.blockedWeekdaysVm)
