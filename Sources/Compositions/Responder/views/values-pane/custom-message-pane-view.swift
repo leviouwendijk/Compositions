@@ -46,7 +46,7 @@ public struct CustomMessagePaneView: View {
                 if viewmodel.apiPathVm.selectedRoute == .custom {
                     StandardToggle(
                         style: .switch,
-                        isOn: $viewmodel.includeQuoteInCustomMessage,
+                        isOn: $viewmodel.includeQuoteOverride,
                         title: "Include quote",
                         subtitle: nil,
                         width: 150

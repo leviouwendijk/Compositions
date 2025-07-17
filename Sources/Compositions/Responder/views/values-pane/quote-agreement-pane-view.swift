@@ -23,6 +23,14 @@ public struct QuoteAgreementPaneView: View {
                 placeholder: "3, 5, 7",
             )
 
+            StandardToggle(
+                style: .switch,
+                isOn: $viewmodel.includeQuoteOverride,
+                title: "Include last generated quote",
+                subtitle: nil,
+                // width: 150
+            )
+
             VStack {
                 Text("Duration")
                 HStack {
