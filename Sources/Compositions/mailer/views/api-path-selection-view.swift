@@ -19,6 +19,15 @@ public struct MailerAPIPathSelectionView: View {
     public var body: some View {
         VStack {
             VStack {
+
+                Picker("Stage", selection: $viewModel.selectedStage) {
+                    ForEach(StageTab.allCases) { tab in
+                        Text(tab.rawValue).tag(tab)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal)
+
                 HStack {
                     // ─── ROUTES COLUMN ─────────────────────────────
                     VStack {
@@ -26,7 +35,8 @@ public struct MailerAPIPathSelectionView: View {
 
                         ScrollView {
                             VStack(spacing: 5) {
-                                ForEach(MailerAPIRoute.allCases, id: \.self) { route in
+                                // ForEach(MailerAPIRoute.allCases, id: \.self) { route in
+                                ForEach(viewModel.filteredRoutes, id: \.self) { route in
                                     SelectableRow(
                                         // title: route.rawValue.capitalized,
                                         title: route.viewableString(),
