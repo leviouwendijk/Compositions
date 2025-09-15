@@ -20,7 +20,14 @@ public struct MailerAPIPathSelectionView: View {
         VStack {
             VStack {
 
-                Picker("Stage", selection: $viewModel.selectedStage) {
+                Picker("", selection: Binding(
+                    get: { viewModel.selectedStage },
+                    set: { newValue in
+                        withAnimation(.easeInOut(duration: 0.15)) {
+                            viewModel.selectedStage = newValue
+                        }
+                    }
+                )) {
                     ForEach(StageTab.allCases) { tab in
                         Text(tab.rawValue).tag(tab)
                     }
