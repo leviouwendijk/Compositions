@@ -21,7 +21,7 @@ public struct VariablesView: View {
 
     public var body: some View {
         VStack {
-            ScrollView {
+            // ScrollView {
                 VStack {
                     if !(viewmodel.apiPathVm.selectedRoute == .template || viewmodel.apiPathVm.selectedRoute == .invoice) {
                         HStack {
@@ -154,10 +154,10 @@ public struct VariablesView: View {
                         }
                     }
                 }
-                .frame(minHeight: 600)
+                // .frame(minHeight: 600)
                 .padding()
 
-            }
+            // }
         }
         .frame(width: 300)
     }
