@@ -22,14 +22,18 @@ public struct QuotaView: View {
         VStack {
             VStack {
                 HStack {
-                    QuotaInputsView(viewmodel: quotaVm)
-                    .frame(maxWidth: 300)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 20)
+                    ScrollView {
+                        QuotaInputsView(viewmodel: quotaVm)
+                        .frame(maxWidth: 300)
+                        .padding(.leading, 20)
+                        .padding(.trailing, 20)
+                    }
 
                     Spacer()
 
-                    QuotaTableView(viewmodel: quotaVm)
+                    ScrollView {
+                        QuotaTableView(viewmodel: quotaVm)
+                    }
                 }
 
                 // HStack {
