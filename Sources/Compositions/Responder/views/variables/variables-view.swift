@@ -153,7 +153,7 @@ public struct VariablesView: View {
                     }
                 }
             }
-            .frame(minHeight: 600)
+            // .frame(minHeight: 600)
             .padding()
         }
         .frame(width: 300)
