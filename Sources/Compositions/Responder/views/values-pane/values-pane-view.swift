@@ -13,25 +13,27 @@ public struct ValuesPaneView: View {
     public init() {}
 
     public var body: some View {
-        VStack {
-            if viewmodel.apiPathVm.selectedRoute == .custom {
-                CustomMessagePaneView()
-                // .environmentObject(viewmodel)
-            } else if viewmodel.apiPathVm.selectedRoute == .appointment && !(viewmodel.apiPathVm.selectedEndpoint == .availabilityRequest) {
-                DatePickerView()
-                // .environmentObject(viewmodel)
-            } else if viewmodel.apiPathVm.selectedRoute == .appointment && viewmodel.apiPathVm.selectedEndpoint == .availabilityRequest {
-                AppointmentAvailabilityPaneView()
-                .frame(maxWidth: 350)
-            } else  if (viewmodel.apiPathVm.selectedRoute == .quote && viewmodel.apiPathVm.selectedEndpoint?.base == .agreement) {
-                QuoteAgreementPaneView()
-                .frame(maxWidth: 350)
-            } else {
-                if viewmodel.apiPathVm.endpointNeedsAvailabilityVariable {
-                    VStack(alignment: .leading, spacing: 8) {
-                        WeeklyScheduleView(viewModel: viewmodel.weeklyScheduleVm)
+        ScrollView {
+            VStack {
+                if viewmodel.apiPathVm.selectedRoute == .custom {
+                    CustomMessagePaneView()
+                    // .environmentObject(viewmodel)
+                } else if viewmodel.apiPathVm.selectedRoute == .appointment && !(viewmodel.apiPathVm.selectedEndpoint == .availabilityRequest) {
+                    DatePickerView()
+                    // .environmentObject(viewmodel)
+                } else if viewmodel.apiPathVm.selectedRoute == .appointment && viewmodel.apiPathVm.selectedEndpoint == .availabilityRequest {
+                    AppointmentAvailabilityPaneView()
+                    .frame(maxWidth: 350)
+                } else  if (viewmodel.apiPathVm.selectedRoute == .quote && viewmodel.apiPathVm.selectedEndpoint?.base == .agreement) {
+                    QuoteAgreementPaneView()
+                    .frame(maxWidth: 350)
+                } else {
+                    if viewmodel.apiPathVm.endpointNeedsAvailabilityVariable {
+                        VStack(alignment: .leading, spacing: 8) {
+                            WeeklyScheduleView(viewModel: viewmodel.weeklyScheduleVm)
+                        }
+                        .padding(.vertical, 8)
                     }
-                    .padding(.vertical, 8)
                 }
             }
         }

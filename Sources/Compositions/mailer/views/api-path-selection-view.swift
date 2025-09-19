@@ -18,81 +18,82 @@ public struct MailerAPIPathSelectionView: View {
 
     public var body: some View {
         VStack {
-            VStack {
-
-                Picker("", selection: Binding(
-                    get: { viewModel.selectedStage },
-                    set: { newValue in
-                        withAnimation(.easeInOut(duration: 0.15)) {
-                            viewModel.selectedStage = newValue
-                        }
-                    }
-                )) {
-                    ForEach(StageTab.allCases) { tab in
-                        Text(tab.rawValue).tag(tab)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-
-                HStack {
-                    // ─── ROUTES COLUMN ─────────────────────────────
-                    VStack {
-                        SectionTitle(title: "Route", width: 150, fontSize: 14)
-
-                        ScrollView {
-                            VStack(spacing: 5) {
-                                // ForEach(MailerAPIRoute.allCases, id: \.self) { route in
-                                ForEach(viewModel.filteredRoutes, id: \.self) { route in
-                                    SelectableRow(
-                                        // title: route.rawValue.capitalized,
-                                        title: route.viewableString(),
-                                        isSelected: viewModel.selectedRoute == route,
-                                        animationDuration: 0.3
-                                    ) {
-                                        if viewModel.selectedRoute == route {
-                                            viewModel.selectedRoute = nil
-                                        } else {
-                                            viewModel.selectedRoute = route
-                                        }
-                                    }
-                                    .frame(maxWidth: .infinity)
-                                }
+            ScrollView {
+                VStack {
+                    Picker("", selection: Binding(
+                        get: { viewModel.selectedStage },
+                        set: { newValue in
+                            withAnimation(.easeInOut(duration: 0.15)) {
+                                viewModel.selectedStage = newValue
                             }
-                            .padding(.horizontal)
-                            .padding(.vertical, 8)
+                        }
+                    )) {
+                        ForEach(StageTab.allCases) { tab in
+                            Text(tab.rawValue).tag(tab)
                         }
                     }
-                    .frame(width: 160)
+                    .pickerStyle(.segmented)
+                    .padding(.horizontal)
 
-                    // ─── ENDPOINTS COLUMN ───────────────────────────
-                    VStack {
-                        SectionTitle(title: "Endpoint", width: 150, fontSize: 14)
+                    HStack {
+                        // ─── ROUTES COLUMN ─────────────────────────────
+                        VStack {
+                            SectionTitle(title: "Route", width: 150, fontSize: 14)
 
-                        ScrollView {
-                            VStack(spacing: 5) {
-                                // ForEach(viewModel.validEndpoints.filter { $0.isFrontEndVisible }, id: \.self) { endpoint in
-                                ForEach(viewModel.validEndpoints, id: \.self) { endpoint in
-                                    SelectableRow(
-                                        // title: endpoint.rawValue.capitalized,
-                                        title: endpoint.viewableString(),
-                                        isSelected: viewModel.selectedEndpoint == endpoint,
-                                        isDisabled: !endpoint.isFrontEndVisible
-                                    ) {
-                                        if viewModel.selectedEndpoint == endpoint {
-                                            viewModel.selectedEndpoint = nil
-                                        } else {
-                                            viewModel.selectedEndpoint = endpoint
+                            ScrollView {
+                                VStack(spacing: 5) {
+                                    // ForEach(MailerAPIRoute.allCases, id: \.self) { route in
+                                    ForEach(viewModel.filteredRoutes, id: \.self) { route in
+                                        SelectableRow(
+                                            // title: route.rawValue.capitalized,
+                                            title: route.viewableString(),
+                                            isSelected: viewModel.selectedRoute == route,
+                                            animationDuration: 0.3
+                                        ) {
+                                            if viewModel.selectedRoute == route {
+                                                viewModel.selectedRoute = nil
+                                            } else {
+                                                viewModel.selectedRoute = route
+                                            }
                                         }
+                                        .frame(maxWidth: .infinity)
                                     }
-                                    .frame(maxWidth: .infinity)
                                 }
+                                .padding(.horizontal)
+                                .padding(.vertical, 8)
                             }
-                            .padding(.horizontal)
-                            .padding(.vertical, 8)
                         }
+                        .frame(width: 160)
+
+                        // ─── ENDPOINTS COLUMN ───────────────────────────
+                        VStack {
+                            SectionTitle(title: "Endpoint", width: 150, fontSize: 14)
+
+                            ScrollView {
+                                VStack(spacing: 5) {
+                                    // ForEach(viewModel.validEndpoints.filter { $0.isFrontEndVisible }, id: \.self) { endpoint in
+                                    ForEach(viewModel.validEndpoints, id: \.self) { endpoint in
+                                        SelectableRow(
+                                            // title: endpoint.rawValue.capitalized,
+                                            title: endpoint.viewableString(),
+                                            isSelected: viewModel.selectedEndpoint == endpoint,
+                                            isDisabled: !endpoint.isFrontEndVisible
+                                        ) {
+                                            if viewModel.selectedEndpoint == endpoint {
+                                                viewModel.selectedEndpoint = nil
+                                            } else {
+                                                viewModel.selectedEndpoint = endpoint
+                                            }
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                    }
+                                }
+                                .padding(.horizontal)
+                                .padding(.vertical, 8)
+                            }
+                        }
+                        .frame(width: 160)
                     }
-                    .frame(width: 160)
                 }
             }
 
