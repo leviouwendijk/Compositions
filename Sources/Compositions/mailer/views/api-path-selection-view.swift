@@ -18,23 +18,24 @@ public struct MailerAPIPathSelectionView: View {
 
     public var body: some View {
         VStack {
+            Picker("", selection: Binding(
+                get: { viewModel.selectedStage },
+                set: { newValue in
+                    withAnimation(.easeInOut(duration: 0.15)) {
+                        viewModel.selectedStage = newValue
+                    }
+                }
+            )) {
+                ForEach(StageTab.allCases) { tab in
+                    Text(tab.rawValue).tag(tab)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(.horizontal)
+
             ScrollView {
                 VStack {
-                    Picker("", selection: Binding(
-                        get: { viewModel.selectedStage },
-                        set: { newValue in
-                            withAnimation(.easeInOut(duration: 0.15)) {
-                                viewModel.selectedStage = newValue
-                            }
-                        }
-                    )) {
-                        ForEach(StageTab.allCases) { tab in
-                            Text(tab.rawValue).tag(tab)
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    .padding(.horizontal)
-
+                    // picker moved outside scrollable list area
                     HStack {
                         // ─── ROUTES COLUMN ─────────────────────────────
                         VStack {
