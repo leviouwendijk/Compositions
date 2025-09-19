@@ -33,7 +33,7 @@ public struct MailerAPIPathSelectionView: View {
             .pickerStyle(.segmented)
             .padding(.horizontal)
 
-            ScrollView {
+            // ScrollView {
                 VStack {
                     // picker moved outside scrollable list area
                     HStack {
@@ -96,7 +96,7 @@ public struct MailerAPIPathSelectionView: View {
                         .frame(width: 160)
                     }
                 }
-            }
+            // }
 
             if !(viewModel.viewableURL().viewableURLString().isEmpty) {
                 SectionTitle(title: viewModel.viewableURL().viewableURLString(), width: 400, fontSize: 10)
