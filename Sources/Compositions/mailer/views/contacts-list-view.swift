@@ -30,7 +30,8 @@ public struct ContactsListView: View {
     @State private var showWarning: Bool = false
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        // VStack(alignment: .leading, spacing: 8) {
+        VStack(spacing: 8) {
             FuzzySearchField(
                 title: "Search contacts",
                 searchQuery: $viewmodel.searchQuery,
