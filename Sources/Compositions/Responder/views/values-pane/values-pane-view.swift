@@ -13,7 +13,7 @@ public struct ValuesPaneView: View {
     public init() {}
 
     public var body: some View {
-        ScrollView {
+        // ScrollView {
             VStack {
                 if viewmodel.apiPathVm.selectedRoute == .custom {
                     CustomMessagePaneView()
@@ -36,6 +36,6 @@ public struct ValuesPaneView: View {
                     }
                 }
             }
-        }
+        // }
     }
 }
