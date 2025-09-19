@@ -34,21 +34,23 @@ public struct BlockedWeekdaysView: View {
     }
 
     public var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                Text("Blocked days")
-                .font(.headline)
-                
-                Spacer()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Text("Blocked days")
+                    .font(.headline)
+                    
+                    Spacer()
 
-                Text("limit")
-                .font(.subheadline)
-            }
+                    Text("limit")
+                    .font(.subheadline)
+                }
 
-            ForEach(viewmodel.items.indices, id: \.self) { idx in
-                BlockedWeekdayRow(item: self.$viewmodel.items[idx])
+                ForEach(viewmodel.items.indices, id: \.self) { idx in
+                    BlockedWeekdayRow(item: self.$viewmodel.items[idx])
+                }
             }
+            .padding()
         }
-        .padding()
     }
 }
