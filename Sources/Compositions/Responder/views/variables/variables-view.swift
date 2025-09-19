@@ -41,7 +41,8 @@ public struct VariablesView: View {
 
                 Divider()
 
-                VStack(alignment: .leading) {
+                // VStack(alignment: .leading) {
+                VStack {
                     if !(viewmodel.apiPathVm.selectedRoute == .template || viewmodel.apiPathVm.selectedRoute == .invoice) {
                         ContactsListView(
                             viewmodel: viewmodel.contactsVm,
