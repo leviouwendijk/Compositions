@@ -65,7 +65,9 @@ public struct QuotaView: View {
                 // .padding(.top, 24)
 
             }
-            .frame(minHeight: 420)
+            // .frame(minHeight: 420)
+            // .frame(height: 420)
+            // attempt without forcing any height? -- leave to window
 
             Spacer()
 
