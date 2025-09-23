@@ -66,10 +66,10 @@ public struct ExecuteMailerView: View {
                         ) {
                             do {
                                 try viewmodel.sendMailerEmail()
-                                viewmodel.errorMessage = ""
+                                // viewmodel.errorMessage = ""
                             } catch {
                                 print(error)
-                                viewmodel.errorMessage = error.localizedDescription
+                                // viewmodel.errorMessage = error.localizedDescription
                             }
                         }
                         .disabled(viewmodel.isSendingEmail)
@@ -85,10 +85,10 @@ public struct ExecuteMailerView: View {
                         ) {
                             do {
                                 try viewmodel.send()
-                                viewmodel.errorMessage = ""
+                                // viewmodel.errorMessage = ""
                             } catch {
-                                viewmodel.errorMessage = error.localizedDescription
                                 print(error)
+                                // viewmodel.errorMessage = error.localizedDescription
                             }
                         }
                         .disabled(viewmodel.isSendingEmail)
