@@ -96,7 +96,7 @@ public struct MailerAPIPathSelectionView: View {
                                 .padding(.vertical, 8)
                             }
                         }
-                        .frame(width: 170)
+                        .frame(width: 185)
                     }
                 }
             // }
