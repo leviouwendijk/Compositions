@@ -26,7 +26,7 @@ public struct MailerAPIPathSelectionView: View {
                     }
                 }
             )) {
-                ForEach(StageTab.allCases) { tab in
+                ForEach(Implementations.StageTab.allCases) { tab in
                     Text(tab.rawValue).tag(tab)
                 }
             }
