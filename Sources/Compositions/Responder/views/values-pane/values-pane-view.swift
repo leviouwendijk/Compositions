@@ -19,7 +19,8 @@ public struct ValuesPaneView: View {
                     CustomMessagePaneView()
                     // .environmentObject(viewmodel)
                 } else if viewmodel.apiPathVm.selectedRoute == .appointment && !(viewmodel.apiPathVm.selectedEndpoint == .availabilityRequest) {
-                    DatePickerView()
+                    // DatePickerView()
+                    DateAppointmentPickerView()
                     // .environmentObject(viewmodel)
                 } else if viewmodel.apiPathVm.selectedRoute == .appointment && viewmodel.apiPathVm.selectedEndpoint == .availabilityRequest {
                     AppointmentAvailabilityPaneView()
