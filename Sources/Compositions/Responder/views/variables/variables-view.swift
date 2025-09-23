@@ -69,7 +69,8 @@ public struct VariablesView: View {
                             },
                             onDeselect: {
                                 viewmodel.clearContact()
-                            }
+                            },
+                            hideSearchStrictness: viewmodel.pickerMode
                         )
                         .frame(maxWidth: 300)
                     }
