@@ -18,7 +18,7 @@ public struct MailerAPIPathSelectionView: View {
 
     public var body: some View {
         VStack {
-            ScrollView(.horizontal, showsIndicators: true) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 Picker("", selection: Binding(
                     get: { viewModel.selectedStage },
                     set: { newValue in
