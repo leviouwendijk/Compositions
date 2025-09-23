@@ -11,7 +11,10 @@ public struct VariablesView: View {
     @EnvironmentObject var viewmodel: ResponderViewModel
     @StateObject public var waMessageNotifier: NotificationBannerController = NotificationBannerController()
 
-    public init() {}
+    public let picker: Bool 
+
+    public init(picker: Bool = false) {self.picker = picker}
+    // public init() {}
     
     // public init(
     //     viewmodel: ResponderViewModel
@@ -149,9 +152,11 @@ public struct VariablesView: View {
                             }
                             .frame(maxWidth: 300)
 
-                            // VariablesWAMessageView(viewmodel: viewmodel, notifier: waMessageNotifier)
-                            VariablesWAMessageView(notifier: waMessageNotifier)
-                            .environmentObject(viewmodel)
+                            if !picker {
+                                // VariablesWAMessageView(viewmodel: viewmodel, notifier: waMessageNotifier)
+                                VariablesWAMessageView(notifier: waMessageNotifier)
+                                .environmentObject(viewmodel)
+                            }
                         }
                     }
                 }
