@@ -79,6 +79,7 @@ public struct MailerAPIPathSelectionView: View {
                                         SelectableRow(
                                             // title: endpoint.rawValue.capitalized,
                                             title: endpoint.viewableString(),
+                                            subtitle: endpoint.method?.rawValue.uppercased() ?? nil,
                                             isSelected: viewModel.selectedEndpoint == endpoint,
                                             isDisabled: !endpoint.isFrontEndVisible
                                         ) {
