@@ -13,18 +13,22 @@ public struct ContactsListView: View {
     public let onDeselect: () -> Void
     public let autoScrollToTop: Bool
 
+    public var hideSearchStrictness: Bool
+
     public init(
         viewmodel: ContactsListViewModel,
         maxListHeight: CGFloat = 200,
         onSelect: @escaping (CNContact) throws -> Void,
         onDeselect: @escaping () -> Void = {},
-        autoScrollToTop: Bool = true
+        autoScrollToTop: Bool = true,
+        hideSearchStrictness: Bool = false
     ) {
         self.viewmodel = viewmodel
         self.maxListHeight = maxListHeight
         self.onSelect = onSelect
         self.onDeselect = onDeselect
         self.autoScrollToTop = autoScrollToTop
+        self.hideSearchStrictness = hideSearchStrictness
     }
 
     @State private var showWarning: Bool = false
@@ -35,7 +39,8 @@ public struct ContactsListView: View {
             FuzzySearchField(
                 title: "Search contacts",
                 searchQuery: $viewmodel.searchQuery,
-                searchStrictness:  $viewmodel.searchStrictness
+                searchStrictness:  $viewmodel.searchStrictness,
+                hideStrictness: hideSearchStrictness
             )
 
             if let msg = viewmodel.errorMessage {
