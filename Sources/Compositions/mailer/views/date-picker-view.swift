@@ -13,13 +13,24 @@ public struct DatePickerView: View {
 
     public var body: some View {
         HStack {
-            DateComponentSelectionView()
+            if viewmodel.pickerMode {
+                HStack {
+                    DateComponentSelectionView()
+                }
+                // .frame(width: 260)
+            } else {
+                VStack {
+                    DateComponentSelectionView()
+                }
+                // .frame(width: 260)
+            }
             // DateOutputFormatSelectionView()
 
             Divider()
 
             AppointmentsQueueView()
-            .frame(width: 240)
+            // .frame(width: 240)
+            // DEPRECATE FORCED WIDTH
         }
         .padding()
     }
@@ -31,25 +42,23 @@ public struct DateComponentSelectionView: View {
     public init() { }
 
     public var body: some View {
-        VStack {
-            HStack {
-                MonthSelectionView()
-                .frame(width: 150)
+        HStack {
+            MonthSelectionView()
+            // .frame(width: 150)
 
-                DaySelectionView()
-                // .frame(width: 100)
-            }
-            .frame(width: 260)
-
-            HStack {
-                HourSelectionView()
-                // .frame(width: 100)
-
-                MinuteSelectionView()
-                // .frame(width: 100)
-            }
-            .frame(width: 260)
+            DaySelectionView()
+            // .frame(width: 100)
         }
+        // .frame(width: 260)
+
+        HStack {
+            HourSelectionView()
+            // .frame(width: 100)
+
+            MinuteSelectionView()
+            // .frame(width: 100)
+        }
+        // .frame(width: 260)
     }
 }
 
