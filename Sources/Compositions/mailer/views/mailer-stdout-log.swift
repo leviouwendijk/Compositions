@@ -16,23 +16,6 @@ public struct MailerStandardOutput: View {
     public var body: some View {
         VStack {
             VStack {
-                SectionTitle(title: "mailer command", width: 150)
-
-                Button(action: {
-                    NSPasteboard.general.clearContents()
-                    NSPasteboard.general.setString(vm.sharedMailerCommandCopy, forType: .string)
-                }) {
-                    Text(vm.sharedMailerCommandCopy)
-                    .bold()
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(5)
-                }
-                .buttonStyle(PlainButtonStyle())
-                .frame(maxWidth: 800, alignment: .center)
-            } 
-
-            VStack {
                 SectionTitle(title: "stdout log", width: 150)
 
                 ScrollView {
@@ -49,7 +32,7 @@ public struct MailerStandardOutput: View {
                 HStack {
                     StandardButton(
                         type: .copy, 
-                        title: "Copy stdout"
+                        title: "copy stdout"
                     ) {
                         copyToClipboard(vm.mailerOutput)
                     }
@@ -57,6 +40,25 @@ public struct MailerStandardOutput: View {
                 // .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.top, 10)
             }
+
+            if !vm.sharedMailerCommandCopy.isEmpty {
+                VStack {
+                    SectionTitle(title: "mailer command", width: 150)
+
+                    Button(action: {
+                        NSPasteboard.general.clearContents()
+                        NSPasteboard.general.setString(vm.sharedMailerCommandCopy, forType: .string)
+                    }) {
+                        Text(vm.sharedMailerCommandCopy)
+                        .bold()
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(5)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .frame(maxWidth: 800, alignment: .center)
+                }
+            } 
         }
     }
 }
