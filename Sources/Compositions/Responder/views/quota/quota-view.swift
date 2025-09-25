@@ -27,12 +27,14 @@ public struct QuotaView: View {
                         .frame(maxWidth: 300)
                         .padding(.leading, 20)
                         .padding(.trailing, 20)
+                        .frame(height: .infinity)
                     }
 
                     Spacer()
 
                     ScrollView {
                         QuotaTableView(viewmodel: quotaVm)
+                        .frame(height: .infinity)
                     }
                 }
 
