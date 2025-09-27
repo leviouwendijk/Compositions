@@ -5,11 +5,12 @@ import Structures
 import ViewComponents
 import Implementations
 
+@MainActor
 public struct BuildInformationSwitch: View {
     @StateObject public var viewmodel: BuildInformationViewModel
 
     public init(
-        viewmodel: BuildInformationViewModel,
+        viewmodel: BuildInformationViewModel = BuildInformationViewModel()
     ) {
         _viewmodel = StateObject(wrappedValue: viewmodel)
     }
