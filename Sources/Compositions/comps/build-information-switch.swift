@@ -10,9 +10,18 @@ public struct BuildInformationSwitch: View {
     @StateObject public var viewmodel: BuildInformationViewModel
 
     public init(
-        viewmodel: BuildInformationViewModel = BuildInformationViewModel()
+        viewmodel: BuildInformationViewModel? = nil,
+
+        alignment: AlignmentStyle = .center,
+        display: [[BuildInformationDisplayComponents]] = [[.version], [.latestVersion], [.name], [.author]],
+        prefixStyle: VersionPrefixStyle = .long
     ) {
-        _viewmodel = StateObject(wrappedValue: viewmodel)
+        let vm = viewmodel ?? BuildInformationViewModel(
+            alignment: alignment,
+            display: display,
+            prefixStyle: prefixStyle
+        )
+        _viewmodel = StateObject(wrappedValue: vm)
     }
 
     public var body: some View {
