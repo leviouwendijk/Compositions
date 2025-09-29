@@ -27,7 +27,10 @@ public struct VariablesWAMessageView: View {
             Divider()
 
             HStack {
-                WAMessageDropdown(selected: $viewmodel.selectedWAMessage)
+                // WAMessageDropdown(selected: $viewmodel.selectedWAMessage)
+                // WAMessageDropdown(selected: $viewmodel.messagesStore)
+                SelectableMessageDropdown()
+                .environmentObject(viewmodel)
 
                 StandardButton(
                     type: .submit, 
@@ -39,8 +42,9 @@ public struct VariablesWAMessageView: View {
                                 notifier.show = false
                             }
 
-                            viewmodel.selectedWAMessageReplaced
-                                .clipboard()
+                            if let msg = viewmodel.selectedWAMessageReplaced {
+                                msg.clipboard()
+                            }
 
                             notifier.message = "WA message copied"
                             notifier.style = .success
@@ -70,7 +74,7 @@ public struct VariablesWAMessageView: View {
                         )
                     )
                 )
-                .disabled(viewmodel.selectedWAMessageReplaced.containsRawTemplatePlaceholderSyntaxes())
+                .disabled(viewmodel.selectedWAMessageReplaced?.containsRawTemplatePlaceholderSyntaxes() ?? false)
 
                 Spacer()
             }

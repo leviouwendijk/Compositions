@@ -61,7 +61,7 @@ public struct VariablesView: View {
                                 }
 
                                 // extra clearance logic, wa related:
-                                if !viewmodel.selectedWAMessageReplaced.containsRawTemplatePlaceholderSyntaxes() {
+                                if !(viewmodel.selectedWAMessageReplaced?.containsRawTemplatePlaceholderSyntaxes() ?? false) {
                                     // showWAMessageNotification = false
                                     waMessageNotifier.show = false
                                 }
