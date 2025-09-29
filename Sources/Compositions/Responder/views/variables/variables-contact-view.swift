@@ -51,7 +51,7 @@ public struct VariablesContactView: View {
                 )
 
                 // if viewmodel.selectedWAMessage == .contract {
-                if viewmodel.selectedMessageKey == "contract" {
+                if viewmodel.selectedMessageKey == Optional("contract") {
                     StandardTextField(
                         "Deliverable",
                         text: $viewmodel.deliverable,

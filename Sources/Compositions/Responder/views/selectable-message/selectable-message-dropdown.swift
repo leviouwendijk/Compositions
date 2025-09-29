@@ -84,7 +84,8 @@ public struct SelectableMessageDropdown: View {
                                     SelectableMessageRow(message: msg)
                                 }
                                 .padding(.vertical, 2)
-                                .disabled(msg.key == viewmodel.selectedMessageKey)
+                                // .disabled(msg.key == viewmodel.selectedMessageKey)
+                                .disabled(viewmodel.selectedMessageKey == Optional(msg.key))
                             }
                         }
                         .padding(.vertical, 6)
