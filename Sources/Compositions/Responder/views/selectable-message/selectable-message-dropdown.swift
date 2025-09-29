@@ -22,9 +22,10 @@ public struct SelectableMessageDropdown: View {
         self.maxListHeight = maxListHeight
     }
 
-    private var selectedMessage: ReusableTextMessageObject? {
+    // private var selectedMessage: ReusableTextMessageObject? {
+    private var selectedMessage: ReusableTextMessage? {
         guard let key = viewmodel.selectedMessageKey else { return nil }
-        return viewmodel.messagesStore.messages.first { $0.key == key }
+        return viewmodel.messagesStore.message(forKey: key)
     }
 
     public var body: some View {
@@ -37,11 +38,11 @@ public struct SelectableMessageDropdown: View {
                 HStack(spacing: 0) {
                     VStack(alignment: .leading, spacing: 2) {
                         if let msg = selectedMessage {
-                            Text(msg.object.title)
+                            Text(msg.title)
                                 .lineLimit(1)
                                 .truncationMode(.tail)
 
-                            Text(msg.object.details)
+                            Text(msg.details)
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                                 .lineLimit(1)
@@ -74,14 +75,15 @@ public struct SelectableMessageDropdown: View {
                 VStack(spacing: 0) {
                     ScrollView {
                         VStack(spacing: 0) {
-                            ForEach(viewmodel.messagesStore.messages, id: \.key) { msg in
+                            // ForEach(viewmodel.messagesStore.messages, id: \.key) { msg in
+                            ForEach(viewmodel.messagesStore.collection, id: \.key) { msg in
                                 Button(action: {
                                     withAnimation(.easeInOut(duration: 0.2)) {
                                         viewmodel.selectedMessageKey = msg.key
                                         isExpanded = false
                                     }
                                 }) {
-                                    SelectableMessageRow(message: msg)
+                                    SelectableMessageRow(message: msg.value)
                                 }
                                 .padding(.vertical, 2)
                                 // .disabled(msg.key == viewmodel.selectedMessageKey)
