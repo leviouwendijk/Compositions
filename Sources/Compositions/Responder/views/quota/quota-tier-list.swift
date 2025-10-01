@@ -18,7 +18,8 @@ public struct QuotaTierListView: View {
         VStack {
             if let t = viewmodel.tiers {
                 QuotaTierListSubView(
-                    tiers: t
+                    tiers: t,
+                    displayPolicy: viewmodel.displayPolicy
                 )
                 .frame(maxHeight: 420)
             }
@@ -28,11 +29,14 @@ public struct QuotaTierListView: View {
 
 public struct QuotaTierListSubView: View {
     public let tiers: [QuotaTierContent]
+    public let displayPolicy: QuotaPriceDisplayPolicy
 
     public init(
         tiers: [QuotaTierContent],
+        displayPolicy: QuotaPriceDisplayPolicy
     ) {
         self.tiers = tiers
+        self.displayPolicy = displayPolicy
     }
 
     public var body: some View {
@@ -71,7 +75,7 @@ public struct QuotaTierListSubView: View {
                             rowLabelWidth: 80,
                             tiers: tiers,
                             valuesFor: { content in
-                                content.levels.viewableTuples(of: .price)
+                                content.levels.viewableTuples(of: .price, displayPolicy: displayPolicy)
                             },
                             textColor: .primary
                         )
@@ -94,7 +98,7 @@ public struct QuotaTierListSubView: View {
                             rowLabelWidth: 80,
                             tiers: tiers,
                             valuesFor: { content in
-                                content.levels.viewableTuples(of: .cost)
+                                content.levels.viewableTuples(of: .cost, displayPolicy: displayPolicy)
                             },
                             textColor: .secondary
                         )
@@ -117,7 +121,7 @@ public struct QuotaTierListSubView: View {
                             rowLabelWidth: 80,
                             tiers: tiers,
                             valuesFor: { content in
-                                content.levels.viewableTuples(of: .base)
+                                content.levels.viewableTuples(of: .base, displayPolicy: displayPolicy)
                             },
                             textColor: .secondary
                         )
