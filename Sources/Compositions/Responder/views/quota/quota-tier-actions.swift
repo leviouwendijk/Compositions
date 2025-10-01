@@ -17,7 +17,7 @@ public struct QuotaTierActionsView: View {
 
     @ObservedObject public var viewmodel: QuotaViewModel
     public let clientIdentifier: String
-    
+
     public init(
         viewmodel: QuotaViewModel,
         clientIdentifier: String
@@ -115,6 +115,47 @@ public struct QuotaTierActionsView: View {
                             notifier: notifier
                         )
                         .disabled(viewmodel.selectedTierIsNil)
+
+                        BannerlessNotifyingButton(
+                            type: .load,
+                            title: "pdf open",
+                            action: {
+                                do {
+                                    withAnimation {
+                                        notifier.show = false
+                                    }
+                                    let path = try ResourcesEnvironment.require(.quote_default_output)
+
+                                    let url = URL(fileURLWithPath: path)
+
+                                    guard FileManager.default.fileExists(atPath: url.path) else {
+                                        notifier.message = "file not found: \(url.path)"
+                                        notifier.style = .warning
+                                        notifier.notify()
+                                        return
+                                    }
+
+                                    NSWorkspace.shared.activateFileViewerSelecting([url])
+
+                                    // --- OR, to open the file with the default app instead of revealing:
+                                    // NSWorkspace.shared.open(fileURL)
+
+                                    notifier.message = "Opened in Finder"
+                                    notifier.style = .success
+                                    notifier.notify()
+                                } catch {
+                                    withAnimation {
+                                        notifier.show = false
+                                    }
+
+                                    notifier.message = "open failed: \(error)"
+                                    notifier.style = .error
+                                    notifier.notify()
+                                }
+                            },
+                            notifier: notifier
+                        )
+                        // .disabled(viewmodel.selectedTierIsNil)
                     }
                     ControlledNotificationBanner(controller: notifier)
                 }
