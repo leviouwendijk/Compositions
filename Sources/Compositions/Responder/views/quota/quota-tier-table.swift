@@ -24,7 +24,8 @@ public struct QuotaTableView: View {
                     ForEach(tiers, id: \.tier) { t in
                         TierColumnView(
                             content: t,
-                            isSelected: (viewmodel.selectedTier == t.tier)
+                            isSelected: (viewmodel.selectedTier == t.tier),
+                            displayPolicy: viewmodel.displayPolicy
                         )
                         .onTapGesture { 
                             withAnimation {
@@ -83,15 +84,18 @@ public struct TierColumnView: View {
     public let content: QuotaTierContent
     public var isSelected: Bool
     public let showLabels: Bool
+    public let displayPolicy: QuotaPriceDisplayPolicy
     
     public init(
         content: QuotaTierContent,
         isSelected: Bool,
-        showLabels: Bool = false
+        showLabels: Bool = false,
+        displayPolicy: QuotaPriceDisplayPolicy
     ) {
         self.content = content
         self.isSelected = isSelected
         self.showLabels = showLabels
+        self.displayPolicy = displayPolicy
     }
 
     public var body: some View {
@@ -138,7 +142,12 @@ public struct TierColumnView: View {
                 Divider()
 
                 // — Price rows —
-                ForEach(content.levels.viewableTuples(of: .price), id: \.0) { label, value in
+                ForEach(content.levels.viewableTuples(
+                        of: .price,
+                        displayPolicy: displayPolicy
+                    ), 
+                    id: \.0
+                ) { label, value in
                     HStack {
                         if showLabels {
                             Text(label)
@@ -154,7 +163,12 @@ public struct TierColumnView: View {
                 Divider()
 
                 // — Cost rows —
-                ForEach(content.levels.viewableTuples(of: .cost), id: \.0) { label, value in
+                ForEach(content.levels.viewableTuples(
+                        of: .cost,
+                        displayPolicy: displayPolicy
+                    ), 
+                    id: \.0
+                ) { label, value in
                     HStack {
                         if showLabels {
                             Text(label)
@@ -172,7 +186,12 @@ public struct TierColumnView: View {
                 Divider()
 
                 // — Base rows —
-                ForEach(content.levels.viewableTuples(of: .base), id: \.0) { label, value in
+                ForEach(content.levels.viewableTuples(
+                        of: .base,
+                        displayPolicy: displayPolicy
+                    ), 
+                    id: \.0
+                ) { label, value in
                     HStack {
                         if showLabels {
                             Text(label)
