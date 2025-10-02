@@ -8,9 +8,16 @@ import Implementations
 public struct QuotaView: View {
     @EnvironmentObject var viewmodel: ResponderViewModel
 
-    public init() {}
+    @StateObject public var quotaVm: QuotaViewModel
+
+    public init(
+        quotaVm: QuotaViewModel = QuotaViewModel()
+    ) {
+        _quotaVm = StateObject(wrappedValue: quotaVm)
+    }
+
+    // public init() {}
     // @ObservedObject public var viewmodel: ResponderViewModel
-    @StateObject public var quotaVm: QuotaViewModel = QuotaViewModel()
 
     // public init(
     //     viewmodel: ResponderViewModel

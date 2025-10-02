@@ -3,9 +3,13 @@ import SwiftUI
 import Implementations
 
 public struct PostcodeLookupView: View {
-    @StateObject public var vm = PostcodeLookupViewModel()
+    @StateObject public var vm: PostcodeLookupViewModel
 
-    public init() {}
+    public init(
+        viewmodel: PostcodeLookupViewModel = PostcodeLookupViewModel()
+    ) {
+        _vm = StateObject(wrappedValue: viewmodel)
+    }
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 12) {
