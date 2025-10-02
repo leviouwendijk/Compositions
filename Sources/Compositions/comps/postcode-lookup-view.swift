@@ -3,7 +3,7 @@ import SwiftUI
 import Implementations
 
 public struct PostcodeLookupView: View {
-    @StateObject public var vm: PostcodeLookupViewModel
+    @ObservableObject public var vm: PostcodeLookupViewModel
 
     public init(
         viewmodel: PostcodeLookupViewModel = PostcodeLookupViewModel()
