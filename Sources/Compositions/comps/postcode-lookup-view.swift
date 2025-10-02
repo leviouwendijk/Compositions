@@ -15,11 +15,17 @@ public struct PostcodeLookupView: View {
                     .frame(minWidth: 160)
                     // .textInputAutocapitalization(.characters)
                     .disableAutocorrection(true)
+                    .onSubmit {
+                        Task { await vm.lookup() }
+                    }
 
                 TextField("Huisnummer", text: $vm.huisnummer)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 120)
                     // .keyboardType(.numbersAndPunctuation)
+                    .onSubmit {
+                        Task { await vm.lookup() }
+                    }
 
                 Button {
                     Task { await vm.lookup() }
@@ -53,11 +59,11 @@ public struct PostcodeLookupView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
 
-            GroupBox(label: Text("Ruwe JSON-respons")) {
+            GroupBox(label: Text("Raw JSON-response")) {
                 ScrollView {
                     Text(vm.rawJSON.isEmpty ? "—" : vm.rawJSON)
                         .font(.system(.footnote, design: .monospaced))
-                        .textSelection(.enabled) // allow copy, but not editing
+                        .textSelection(.enabled)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 4)
                 }
