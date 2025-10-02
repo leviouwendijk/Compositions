@@ -66,7 +66,7 @@ public struct PostcodeLookupView: View {
             GroupBox(label: Text("Raw JSON-response")) {
                 TextEditor(text: .constant(vm.rawJSON.isEmpty ? "—" : vm.rawJSON))
                     .font(.system(.footnote, design: .monospaced))
-                    .disabled(true)               // read-only feel
+                    // .disabled(true)               // this disabled scrolling behavior
                     .frame(minHeight: 160, maxHeight: 280)
                     .overlay(
                         RoundedRectangle(cornerRadius: 4)
