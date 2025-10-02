@@ -64,14 +64,14 @@ public struct PostcodeLookupView: View {
             }
 
             GroupBox(label: Text("Raw JSON-response")) {
-                ScrollView {
-                    Text(vm.rawJSON.isEmpty ? "—" : vm.rawJSON)
-                        .font(.system(.footnote, design: .monospaced))
-                        .textSelection(.enabled)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.vertical, 4)
-                }
-                .frame(minHeight: 160, maxHeight: 280)
+                TextEditor(text: .constant(vm.rawJSON.isEmpty ? "—" : vm.rawJSON))
+                    .font(.system(.footnote, design: .monospaced))
+                    .disabled(true)               // read-only feel
+                    .frame(minHeight: 160, maxHeight: 280)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4)
+                            .stroke(Color.gray.opacity(0.15), lineWidth: 1)
+                    )
             }
 
             Spacer()
