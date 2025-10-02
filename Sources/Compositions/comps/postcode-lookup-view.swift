@@ -3,12 +3,12 @@ import SwiftUI
 import Implementations
 
 public struct PostcodeLookupView: View {
-    @ObservableObject public var vm: PostcodeLookupViewModel
+    @ObservedObject public var vm: PostcodeLookupViewModel
 
     public init(
         viewmodel: PostcodeLookupViewModel = PostcodeLookupViewModel()
     ) {
-        _vm = StateObject(wrappedValue: viewmodel)
+        self.vm = viewmodel
     }
 
     public var body: some View {
