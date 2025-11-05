@@ -74,7 +74,6 @@ public struct ExecuteMailerView: View {
                         }
                         .disabled(viewmodel.isSendingEmail)
                         .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
-                        // .disabled(viewmodel.noContactSelectedButIsRequired)
                         .disabled(!(viewmodel.apiPathVm.selectedRoute == .invoice)) // enable for only invoicing
 
                         StandardEscapableButton(
@@ -87,14 +86,13 @@ public struct ExecuteMailerView: View {
                                 try viewmodel.send()
                                 // viewmodel.errorMessage = ""
                             } catch {
-                                print(error)
+                                print(error.localizedDescription)
                                 // viewmodel.errorMessage = error.localizedDescription
                             }
                         }
                         .disabled(viewmodel.isSendingEmail)
                         .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
-                        // .disabled(viewmodel.noContactSelectedButIsRequired)
-                        .disabled(viewmodel.apiPathVm.selectedRoute == .invoice) // disable until db invoicing
+                        // .disabled(viewmodel.apiPathVm.selectedRoute == .invoice) // disable until db invoicing
                     }
                     .padding(.top, 10)
                 }

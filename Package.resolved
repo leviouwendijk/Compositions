@@ -25,7 +25,7 @@
       "location" : "https://github.com/leviouwendijk/Extensions.git",
       "state" : {
         "branch" : "master",
-        "revision" : "3310d463b1bc509cccd8e75f0acc221e153f5dff"
+        "revision" : "2670525e08c06638511e3b6a58093efbcc0d78f3"
       }
     },
     {
@@ -34,7 +34,7 @@
       "location" : "https://github.com/leviouwendijk/Implementations.git",
       "state" : {
         "branch" : "master",
-        "revision" : "7ebe83ad55effbec810a327a5fb703c52a36347e"
+        "revision" : "086645eb47f108213ecd14e833c70751da5cde65"
       }
     },
     {
@@ -43,7 +43,7 @@
       "location" : "https://github.com/leviouwendijk/Interfaces.git",
       "state" : {
         "branch" : "master",
-        "revision" : "fb512296e3c3c67fe6f9b73d8ac9a16e1d7828f4"
+        "revision" : "7e024e99655423c822f5affe2425a29e377c050e"
       }
     },
     {
@@ -52,7 +52,7 @@
       "location" : "https://github.com/leviouwendijk/plate.git",
       "state" : {
         "branch" : "master",
-        "revision" : "4c5bc54c40f9ed0f7f2c58c7c0b43cf884d266ca"
+        "revision" : "5241d0b9aeb573e40f5c3eccbeb6a6e604089937"
       }
     },
     {
@@ -61,7 +61,7 @@
       "location" : "https://github.com/leviouwendijk/Structures.git",
       "state" : {
         "branch" : "master",
-        "revision" : "869e217c4d7b4aaf4a40e5f1fd22a9d0a0f01f70"
+        "revision" : "73223257c9055cf49b516a17bb2e45ff7f2f170d"
       }
     },
     {
