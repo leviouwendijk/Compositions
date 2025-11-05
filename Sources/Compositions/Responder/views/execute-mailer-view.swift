@@ -58,23 +58,23 @@ public struct ExecuteMailerView: View {
                     .hide(when: viewmodel.errorMessage.isEmpty)
 
                     HStack {
-                        StandardEscapableButton(
-                            type: .execute,
-                            title: "Run mailer",
-                            cancelTitle: "Do not run mailer yet",
-                            subtitle: "Starts mailer background process"
-                        ) {
-                            do {
-                                try viewmodel.sendMailerEmail()
-                                // viewmodel.errorMessage = ""
-                            } catch {
-                                print(error)
-                                // viewmodel.errorMessage = error.localizedDescription
-                            }
-                        }
-                        .disabled(viewmodel.isSendingEmail)
-                        .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
-                        .disabled(!(viewmodel.apiPathVm.selectedRoute == .invoice)) // enable for only invoicing
+                        // StandardEscapableButton(
+                        //     type: .execute,
+                        //     title: "Run mailer",
+                        //     cancelTitle: "Do not run mailer yet",
+                        //     subtitle: "Starts mailer background process"
+                        // ) {
+                        //     do {
+                        //         try viewmodel.sendMailerEmail()
+                        //         // viewmodel.errorMessage = ""
+                        //     } catch {
+                        //         print(error)
+                        //         // viewmodel.errorMessage = error.localizedDescription
+                        //     }
+                        // }
+                        // .disabled(viewmodel.isSendingEmail)
+                        // .disabled(viewmodel.apiPathVm.routeOrEndpointIsNil)
+                        // .disabled(!(viewmodel.apiPathVm.selectedRoute == .invoice)) // enable for only invoicing
 
                         StandardEscapableButton(
                             type: .submit,
