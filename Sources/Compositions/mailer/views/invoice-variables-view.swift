@@ -37,7 +37,7 @@ public struct MailerAPIInvoiceVariablesView: View {
             StandardToggle(
                 style: .switch,
                 isOn: $viewmodel.invoiceVariables.include_invoice_document,
-                title: "Include quote",
+                title: "Include invoice document (latest pdf)",
                 subtitle: nil,
                 width: 150
             )
