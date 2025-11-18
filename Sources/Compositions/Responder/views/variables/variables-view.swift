@@ -122,7 +122,7 @@ public struct VariablesView: View {
 
                             }
 
-                            MailerAPIInvoiceVariablesView(viewModel: viewmodel.invoiceVm)
+                            MailerAPIInvoiceVariablesView(viewmodel: viewmodel.invoiceVm)
                         }
                     } else {
                         // VariablesContactView(viewmodel: viewmodel)
