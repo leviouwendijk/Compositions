@@ -79,45 +79,48 @@ public struct ContactsListView: View {
 
         var body: some View {
             Button {
-                let contactCopy = contact
-                let wasSelected = (viewmodel.selectedContactId == contactCopy.identifier)
 
-                // Run all mutations and side-effects in an async main-actor task
-                Task { @MainActor in
-                    if wasSelected {
-                        // Deselect path
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            viewmodel.selectedContactId = nil
-                            showWarning = false
-                        }
-                        onDeselect()
-                        return
-                    }
+                print("Tapped contact: \(contact.identifier)")
 
-                    // Select path
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        viewmodel.selectedContactId = contactCopy.identifier
-                        if showWarning {
-                            showWarning = false
-                        }
-                    }
+                // let contactCopy = contact
+                // let wasSelected = (viewmodel.selectedContactId == contactCopy.identifier)
 
-                    do {
-                        try onSelect(contactCopy)
-                    } catch {
-                        print("onSelect action error:", error)
+                // // Run all mutations and side-effects in an async main-actor task
+                // Task { @MainActor in
+                //     if wasSelected {
+                //         // Deselect path
+                //         withAnimation(.easeInOut(duration: 0.2)) {
+                //             viewmodel.selectedContactId = nil
+                //             showWarning = false
+                //         }
+                //         onDeselect()
+                //         return
+                //     }
 
-                        withAnimation {
-                            showWarning = true
-                        }
+                //     // Select path
+                //     withAnimation(.easeInOut(duration: 0.2)) {
+                //         viewmodel.selectedContactId = contactCopy.identifier
+                //         if showWarning {
+                //             showWarning = false
+                //         }
+                //     }
 
-                        // DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        //     withAnimation {
-                        //         showWarning = false
-                        //     }
-                        // }
-                    }
-                }
+                //     do {
+                //         try onSelect(contactCopy)
+                //     } catch {
+                //         print("onSelect action error:", error)
+
+                //         withAnimation {
+                //             showWarning = true
+                //         }
+
+                //         // DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                //         //     withAnimation {
+                //         //         showWarning = false
+                //         //     }
+                //         // }
+                //     }
+                // }
             } label: {
             // Button {
             //     withAnimation(.easeInOut(duration: 0.2)) {
