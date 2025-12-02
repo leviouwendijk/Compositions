@@ -192,8 +192,89 @@ public struct ContactsListView: View {
 
     @ViewBuilder
     public func contactsList() -> some View {
-        Text("Contacts loaded: \(viewmodel.filteredContacts.count)")
-            .padding()
+        ZStack {
+            VStack {
+                ScrollViewReader { proxy in
+                    ScrollView(.vertical) {
+                        LazyVStack(spacing: 0) {
+                            ForEach(viewmodel.filteredContacts, id: \.identifier) { contact in
+                                let isSelected = (viewmodel.selectedContactId == contact.identifier)
+
+                                ContactRowButton(
+                                    contact: contact,
+                                    isSelected: isSelected,
+                                    viewmodel: viewmodel,
+                                    showWarning: $showWarning,
+                                    onSelect: onSelect,
+                                    onDeselect: onDeselect
+                                )
+                                .id(contact.identifier)
+                            }
+                        }
+                    }
+                    .frame(maxHeight: maxListHeight)
+                    .padding(.horizontal)
+
+                    // CONCURRENCY IMPLEMENTATION (unchanged, but now scrolls the ScrollView)
+                    .onReceive(viewmodel.$scrollToFirstID.compactMap { $0 }) { firstID in
+                        guard autoScrollToTop else { return }
+                        // Defer until after the view update pass
+                        DispatchQueue.main.async {
+                            withAnimation(.linear(duration: 0.05)) {
+                                proxy.scrollTo(firstID, anchor: .top)
+                            }
+                        }
+                    }
+                }
+
+                if showWarning {
+                    NotificationBanner(
+                        type: .warning,
+                        message: "Cannot extract client and dog names"
+                    )
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .zIndex(1)
+                }
+            }
+            .opacity(viewmodel.isFuzzyFiltering ? 0 : 1)
+
+            .overlay(
+                Group {
+                    if !(viewmodel.searchQuery.isEmpty) && viewmodel.isFuzzyFiltering {
+                        Text("“\(viewmodel.searchQuery)”…")
+                        .font(.title2)
+                        .foregroundColor(.blue)
+                        .padding(.vertical, 6)
+                        .padding(.horizontal)
+                        .zIndex(1)
+                    } else if !(viewmodel.searchQuery.isEmpty)
+                                && !(viewmodel.isFuzzyFiltering)
+                                && viewmodel.filteredContacts.isEmpty {
+                        VStack {
+                            HStack {
+                                Text("No results for")
+                                .font(.title2)
+                                .foregroundColor(Color.secondary)
+                                .padding(.vertical, 6)
+
+                                Text("“\(viewmodel.searchQuery)”")
+                                .font(.title2)
+                                .foregroundColor(Color.secondary)
+                                .padding(.vertical, 6)
+                            }
+                            .padding(.horizontal)
+
+                            Text("Adjust your query or loosen the strictness level")
+                            .font(.caption)
+                            .foregroundColor(Color.secondary)
+                            .padding(.vertical, 6)
+                            .padding(.horizontal)
+                        }
+                    }
+                }
+            )
+        }
+        .animation(.easeInOut(duration: 0.35), value: viewmodel.isFuzzyFiltering)
     }
 
     // @ViewBuilder
