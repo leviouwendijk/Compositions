@@ -67,6 +67,7 @@ public struct ContactsListView: View {
             }
         }
         .task {
+            viewmodel.startFiltering()
             await viewmodel.loadAllContacts()
         }
     }
