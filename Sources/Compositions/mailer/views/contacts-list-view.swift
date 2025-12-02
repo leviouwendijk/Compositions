@@ -223,16 +223,16 @@ public struct ContactsListView: View {
                     //     }
                     // }
 
-                    // // CONCURRENCY IMPLEMENTATION
-                    // .onReceive(viewmodel.$scrollToFirstID.compactMap { $0 }) { firstID in
-                    //     guard autoScrollToTop else { return }
-                    //     // Defer until after the table’s update pass
-                    //     DispatchQueue.main.async {
-                    //         withAnimation(.linear(duration: 0.05)) {
-                    //             proxy.scrollTo(firstID, anchor: .top)
-                    //         }
-                    //     }
-                    // }
+                    // CONCURRENCY IMPLEMENTATION
+                    .onReceive(viewmodel.$scrollToFirstID.compactMap { $0 }) { firstID in
+                        guard autoScrollToTop else { return }
+                        // Defer until after the table’s update pass
+                        DispatchQueue.main.async {
+                            withAnimation(.linear(duration: 0.05)) {
+                                proxy.scrollTo(firstID, anchor: .top)
+                            }
+                        }
+                    }
                 }
 
                 if showWarning {
