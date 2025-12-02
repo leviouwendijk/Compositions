@@ -79,48 +79,45 @@ public struct ContactsListView: View {
 
         var body: some View {
             Button {
+                let contactCopy = contact
+                let wasSelected = (viewmodel.selectedContactId == contactCopy.identifier)
 
-                print("Tapped contact: \(contact.identifier)")
+                // Run all mutations and side-effects in an async main-actor task
+                Task { @MainActor in
+                    if wasSelected {
+                        // Deselect path
+                        withAnimation(.easeInOut(duration: 0.2)) {
+                            viewmodel.selectedContactId = nil
+                            showWarning = false
+                        }
+                        onDeselect()
+                        return
+                    }
 
-                // let contactCopy = contact
-                // let wasSelected = (viewmodel.selectedContactId == contactCopy.identifier)
+                    // Select path
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        viewmodel.selectedContactId = contactCopy.identifier
+                        if showWarning {
+                            showWarning = false
+                        }
+                    }
 
-                // // Run all mutations and side-effects in an async main-actor task
-                // Task { @MainActor in
-                //     if wasSelected {
-                //         // Deselect path
-                //         withAnimation(.easeInOut(duration: 0.2)) {
-                //             viewmodel.selectedContactId = nil
-                //             showWarning = false
-                //         }
-                //         onDeselect()
-                //         return
-                //     }
+                    do {
+                        try onSelect(contactCopy)
+                    } catch {
+                        print("onSelect action error:", error)
 
-                //     // Select path
-                //     withAnimation(.easeInOut(duration: 0.2)) {
-                //         viewmodel.selectedContactId = contactCopy.identifier
-                //         if showWarning {
-                //             showWarning = false
-                //         }
-                //     }
+                        withAnimation {
+                            showWarning = true
+                        }
 
-                //     do {
-                //         try onSelect(contactCopy)
-                //     } catch {
-                //         print("onSelect action error:", error)
-
-                //         withAnimation {
-                //             showWarning = true
-                //         }
-
-                //         // DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                //         //     withAnimation {
-                //         //         showWarning = false
-                //         //     }
-                //         // }
-                //     }
-                // }
+                        // DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                        //     withAnimation {
+                        //         showWarning = false
+                        //     }
+                        // }
+                    }
+                }
             } label: {
             // Button {
             //     withAnimation(.easeInOut(duration: 0.2)) {
@@ -226,16 +223,16 @@ public struct ContactsListView: View {
                     //     }
                     // }
 
-                    // CONCURRENCY IMPLEMENTATION
-                    .onReceive(viewmodel.$scrollToFirstID.compactMap { $0 }) { firstID in
-                        guard autoScrollToTop else { return }
-                        // Defer until after the table’s update pass
-                        DispatchQueue.main.async {
-                            withAnimation(.linear(duration: 0.05)) {
-                                proxy.scrollTo(firstID, anchor: .top)
-                            }
-                        }
-                    }
+                    // // CONCURRENCY IMPLEMENTATION
+                    // .onReceive(viewmodel.$scrollToFirstID.compactMap { $0 }) { firstID in
+                    //     guard autoScrollToTop else { return }
+                    //     // Defer until after the table’s update pass
+                    //     DispatchQueue.main.async {
+                    //         withAnimation(.linear(duration: 0.05)) {
+                    //             proxy.scrollTo(firstID, anchor: .top)
+                    //         }
+                    //     }
+                    // }
                 }
 
                 if showWarning {
