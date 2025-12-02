@@ -66,8 +66,10 @@ public struct ContactsListView: View {
                 contactsList()
             }
         }
+        .task {
+            await viewmodel.loadAllContacts()
+        }
     }
-
 
     private struct ContactRowButton: View {
         let contact: CNContact
