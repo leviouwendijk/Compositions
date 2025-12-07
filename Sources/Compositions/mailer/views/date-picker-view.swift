@@ -32,6 +32,8 @@ public struct DateComponentSelectionView: View {
     public init() { }
 
     public var body: some View {
+        YearSelectionView()
+
         HStack {
             MonthSelectionView()
             // .frame(width: 150)
@@ -52,6 +54,37 @@ public struct DateComponentSelectionView: View {
     }
 }
 
+public struct YearSelectionView: View {
+    @EnvironmentObject public var viewmodel: ResponderViewModel
+
+    public init() { }
+
+    public var body: some View {
+        VStack(spacing: 0) {
+            SectionTitle(title: "Year", fontSize: 14)
+                .padding(.horizontal)
+
+            HStack {
+                Button {
+                    viewmodel.year -= 1
+                } label: {
+                    Image(systemName: "chevron.left")
+                }
+
+                Text("\(viewmodel.year)")
+                    .frame(minWidth: 60)
+
+                Button {
+                    viewmodel.year += 1
+                } label: {
+                    Image(systemName: "chevron.right")
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 8)
+        }
+    }
+}
 
 public struct MonthSelectionView: View {
     @EnvironmentObject public var viewmodel: ResponderViewModel
