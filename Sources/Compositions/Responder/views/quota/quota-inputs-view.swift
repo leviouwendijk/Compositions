@@ -241,7 +241,8 @@ public struct QuotaInputsView: View {
                 start: $viewmodel.inputsVm.customQuotaInputs.expiration.start,
                 unit: $viewmodel.inputsVm.customQuotaInputs.expiration.unit,
                 interval: $viewmodel.inputsVm.customQuotaInputs.expiration.interval,
-                resultText: viewmodel.inputsVm.customQuotaInputs.expiration.result?.dates.string()
+                // resultText: viewmodel.inputsVm.customQuotaInputs.expiration.result?.dates.string()
+                resultText: viewmodel.inputsVm.customQuotaInputs.expiration.result?.string()
             )
         }
         .padding()
