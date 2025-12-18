@@ -4,6 +4,7 @@ import Interfaces
 import Structures
 import ViewComponents
 import Implementations
+import Version
 
 @MainActor
 public struct BuildInformationSwitch: View {
