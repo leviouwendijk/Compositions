@@ -6,6 +6,7 @@ import ViewComponents
 import Contacts
 import Economics
 import Implementations
+import Clipboard
 
 public struct QuotaTierActionsView: View {
     @StateObject public var notifier: NotificationBannerController = NotificationBannerController(

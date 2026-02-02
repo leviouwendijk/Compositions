@@ -1,6 +1,15 @@
 {
-  "originHash" : "1f656c2f3daed3981d9298adefba643c63ceaec07fa3e3d2cfe383b39b25102f",
+  "originHash" : "0a01963c51749abf9ca2a68b3a6df2d3fe4385c5ba870306780fe1164fe1693c",
   "pins" : [
+    {
+      "identity" : "clipboard",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/leviouwendijk/Clipboard.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "25d4edb471b4b19a854b0bf4f35beb47f1aca421"
+      }
+    },
     {
       "identity" : "commerce",
       "kind" : "remoteSourceControl",
@@ -34,7 +43,7 @@
       "location" : "https://github.com/leviouwendijk/Implementations.git",
       "state" : {
         "branch" : "master",
-        "revision" : "d91cc4f00709e2b7274b22fda76255d8155cc41a"
+        "revision" : "662e8457ceaf62479ebb6e599f7a685d3e097aaa"
       }
     },
     {
@@ -61,7 +70,7 @@
       "location" : "https://github.com/leviouwendijk/Path.git",
       "state" : {
         "branch" : "master",
-        "revision" : "b18278a4832ef11e4d6c8051e1ff1c03363c03a5"
+        "revision" : "72c11a9132f5b30aa4ef477060cf39142df8b117"
       }
     },
     {
@@ -70,7 +79,7 @@
       "location" : "https://github.com/leviouwendijk/plate.git",
       "state" : {
         "branch" : "master",
-        "revision" : "8602767890efcba15289aaa64f6cfe5a2f608b19"
+        "revision" : "b83a19b7d494bffd85d36da5733520c2b475ef80"
       }
     },
     {
@@ -79,7 +88,16 @@
       "location" : "https://github.com/leviouwendijk/Primitives.git",
       "state" : {
         "branch" : "master",
-        "revision" : "5a595a4da45183ce9b7d41ba34fb8486017312ef"
+        "revision" : "f7c2d22952ba235c3078b590ccf695ac783e87fe"
+      }
+    },
+    {
+      "identity" : "strings",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/leviouwendijk/Strings.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "86a939d7bbb3e25808f88fbcedcee4069a5a5ae1"
       }
     },
     {
@@ -88,7 +106,7 @@
       "location" : "https://github.com/leviouwendijk/Structures.git",
       "state" : {
         "branch" : "master",
-        "revision" : "640ecf20394cd49d1947d9eff424e877986e5b41"
+        "revision" : "48b826ed371ddfaaa800e3ceb57797e29fd9b59b"
       }
     },
     {
@@ -97,7 +115,7 @@
       "location" : "https://github.com/leviouwendijk/Terminal.git",
       "state" : {
         "branch" : "master",
-        "revision" : "f71bcf025c0f480c775d9a4fdb6d3ea3db4b33cf"
+        "revision" : "972943a2d925f8ba4bebf99c1af590de8fe896e0"
       }
     },
     {
