@@ -37,7 +37,7 @@ public struct QuoteAgreementPaneView: View {
                     StandardTextField(
                         "from",
                         text: $viewmodel.fromMinutes,
-                        placeholder: "30, 45, 60"
+                        placeholder: "30, 45, 60 (default: \(AgreementDeliverableSessionDurationRange().fromMinutes))"
                         // placeholder: "\(viewmodel.fromMinutes)"
                         // placeholder: "\(viewmodel.fromMinutes)"
                     )
@@ -45,7 +45,7 @@ public struct QuoteAgreementPaneView: View {
                     StandardTextField(
                         "to",
                         text: $viewmodel.toMinutes,
-                        placeholder: "60, 90, 120"
+                        placeholder: "60, 90, 120 (default: \(AgreementDeliverableSessionDurationRange().toMinutes))"
                         // placeholder: "\(viewmodel.toMinutes)"
                     )
                 }
