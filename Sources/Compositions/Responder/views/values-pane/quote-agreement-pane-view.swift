@@ -38,14 +38,14 @@ public struct QuoteAgreementPaneView: View {
                         "from",
                         text: $viewmodel.fromMinutes,
                         // placeholder: "60",
-                        placeholder: "\($viewmodel.fromMinutes)"
+                        placeholder: "\(viewmodel.fromMinutes)"
                     )
 
                     StandardTextField(
                         "to",
                         text: $viewmodel.toMinutes,
                         // placeholder: "120",
-                        placeholder: "\($viewmodel.toMinutes)"
+                        placeholder: "\(viewmodel.toMinutes)"
                     )
                 }
             }
