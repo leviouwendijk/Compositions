@@ -76,6 +76,16 @@ public struct IncomeAllocatorAccountsView: View {
                     .opacity(0.6)
                     .padding(.bottom, 20)
 
+                    Picker(
+                        "Preset",
+                        selection: $viewmodel.selectedPreset
+                    ) {
+                        ForEach(IncomeAllocationPreset.allCases, id: \.self) { preset in
+                            Text(preset.rawValue).tag(preset)
+                        }
+                    }
+                    .pickerStyle(MenuPickerStyle())
+
                     if viewmodel.allocationResults.isEmpty {
                         Text("No allocations configured")
                             .foregroundColor(.secondary)
