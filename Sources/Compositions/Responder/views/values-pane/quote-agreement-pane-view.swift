@@ -26,9 +26,16 @@ public struct QuoteAgreementPaneView: View {
             StandardToggle(
                 style: .switch,
                 isOn: $viewmodel.includeQuoteOverride,
-                title: "Include last generated quote",
+                title: "(Old): Include last generated quote",
                 subtitle: nil,
                 // width: 150
+            )
+
+            StandardToggle(
+                style: .switch,
+                isOn: $viewmodel.includeProgramOverride,
+                title: "Include last generated program",
+                subtitle: nil
             )
 
             VStack {
