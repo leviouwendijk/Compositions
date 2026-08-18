@@ -83,7 +83,7 @@ public struct ExecuteMailerView: View {
                             subtitle: "Direct API"
                         ) {
                             do {
-                                try viewmodel.send()
+                                try await viewmodel.send()
                                 // viewmodel.errorMessage = ""
                             } catch {
                                 print(error.localizedDescription)

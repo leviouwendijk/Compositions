@@ -93,7 +93,7 @@ public struct QuotaTierActionsView: View {
                                     }
 
                                     if let tier = viewmodel.selectedTier {
-                                        try renderTier(quota: quota, for: tier)
+                                        try await renderTier(quota: quota, for: tier)
 
                                         notifier.message = "quota pdf rendered"
                                         notifier.style = .success
