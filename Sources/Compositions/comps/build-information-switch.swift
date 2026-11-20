@@ -36,7 +36,7 @@ public struct BuildInformationSwitch: View {
                     if viewmodel.alignment == .trailing { Spacer() }
                     VStack {
                         if viewmodel.display[viewmodel.current].contains(.name) {
-                            Text(viewmodel.build_object?.name ?? "")
+                            Text(viewmodel.name)
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
                         }
@@ -91,7 +91,7 @@ public struct BuildInformationSwitch: View {
                         }
 
                         if viewmodel.display[viewmodel.current].contains(.author) {
-                            Text(viewmodel.build_object?.author ?? "")
+                            Text(viewmodel.author)
                             .font(.footnote)
                             .foregroundColor(.secondary)
                         }
